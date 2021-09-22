@@ -1,3 +1,4 @@
+/*
 package View;
 
 import Model.TableObject;
@@ -10,8 +11,6 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static View.View.constraints;
-import static View.View.gridType;
 
 public class JTables extends JFrame {
 
@@ -91,3 +90,4 @@ public class JTables extends JFrame {
         this.setmJTablePane = mJTableContainer;
     }
 }
+*/

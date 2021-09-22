@@ -12,8 +12,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static View.View.constraints;
-import static View.View.gridType;
 
 public class addComponents extends JFrame {
 
@@ -49,16 +47,33 @@ public class addComponents extends JFrame {
             pane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         }
 
-        //    button;
-//        textField;
-        //pane.setLayout(new GridBagLayout());
-        pane.setLayout(gridType);
+        pane.setLayout(new GridBagLayout());
+        //pane.setLayout(gridType);
+        GridBagConstraints constraints = new GridBagConstraints();
+
+
+
+        textField = new TextField("Escriba");
+
+        textField.setSize(new Dimension(100, 20));
+        if (shouldWeightX) {
+            constraints.weightx = 0.5;
+        }
+
+
+        constraints.fill = GridBagConstraints.CENTER;
+        constraints.insets = new Insets(15, 15, 15, 15);
+        constraints.ipadx = 60;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.gridwidth = 1;
+        pane.add(textField, constraints);
 
         if (shouldFill) {
             constraints.fill = GridBagConstraints.HORIZONTAL;
         }
 
-         //c.fill = GridBagConstraints.HORIZONTAL;
+        //c.fill = GridBagConstraints.HORIZONTAL;
         constraints.fill = GridBagConstraints.EAST;
         constraints.ipadx = 50;
         constraints.weightx = 0.5;
@@ -69,21 +84,6 @@ public class addComponents extends JFrame {
 
         Seekbutton = new JButton("Buscar");
         pane.add(Seekbutton, constraints);
-
-        textField = new TextField("Escriba");
-
-        textField.setSize(new Dimension(100, 20));
-        if (shouldWeightX) {
-            constraints.weightx = 0.5;
-        }
-
-        constraints.fill = GridBagConstraints.CENTER;
-        constraints.insets = new Insets(15, 15, 15, 15);
-        constraints.ipadx = 60;
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        constraints.gridwidth = 1;
-        pane.add(textField, constraints);
 
 
         int row = 1;
