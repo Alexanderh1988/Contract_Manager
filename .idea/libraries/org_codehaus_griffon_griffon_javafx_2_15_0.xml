@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="org.codehaus.griffon:griffon-javafx:2.15.0" type="repository">
+    <properties maven-id="org.codehaus.griffon:griffon-javafx:2.15.0" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/griffon/griffon-javafx/2.15.0/griffon-javafx-2.15.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/codehaus/griffon/griffon-core/2.15.0/griffon-core-2.15.0.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/javax/inject/javax.inject/1/javax.inject-1.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/slf4j/slf4j-api/1.7.25/slf4j-api-1.7.25.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
