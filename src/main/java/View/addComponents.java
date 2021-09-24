@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class addComponents extends JFrame {
+public class addComponents extends JFrame implements ActionListener{
 
     final static boolean shouldFill = false;
     final static boolean shouldWeightX = true;
@@ -21,8 +21,8 @@ public class addComponents extends JFrame {
     Container componentsContainer;
 
     TextField textField;
-    String SoughtWord;
     public static JButton Seekbutton;
+    DefaultTableModel model;
 
     public static void main(String[] args) {
         new addComponents();
@@ -43,63 +43,65 @@ public class addComponents extends JFrame {
 
     public Container addComponentsToPane(Container pane) {
 
-        if (RIGHT_TO_LEFT) {
-            pane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        }
-
+        //ROW #1
         pane.setLayout(new GridBagLayout());
-        //pane.setLayout(gridType);
         GridBagConstraints constraints = new GridBagConstraints();
 
+        JLabel mJLabel = new JLabel("Palabra a buscar:");
 
+        mJLabel.setSize(new Dimension(100, 20));
 
-        textField = new TextField("Escriba");
-
-        textField.setSize(new Dimension(100, 20));
-        if (shouldWeightX) {
-            constraints.weightx = 0.5;
-        }
-
-
-        constraints.fill = GridBagConstraints.CENTER;
-        constraints.insets = new Insets(15, 15, 15, 15);
-        constraints.ipadx = 60;
+        // constraints.weightx = 0.3;
+        constraints.ipadx = 120;
+        constraints.anchor = GridBagConstraints.LAST_LINE_END;
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.gridwidth = 1;
+        pane.add(mJLabel, constraints);
+
+        //ROW #2
+
+        textField = new TextField(" ");
+
+        constraints.fill = GridBagConstraints.LAST_LINE_END;
+        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.ipadx = 180;
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.gridwidth = 1;
+        constraints.insets = new Insets(5, 5, 5, 5);
         pane.add(textField, constraints);
 
-        if (shouldFill) {
-            constraints.fill = GridBagConstraints.HORIZONTAL;
-        }
 
-        //c.fill = GridBagConstraints.HORIZONTAL;
-        constraints.fill = GridBagConstraints.EAST;
+        constraints.fill = GridBagConstraints.CENTER;
         constraints.ipadx = 50;
-        constraints.weightx = 0.5;
-        constraints.gridx = 1;
-        constraints.gridy = 0;
+        // constraints.weightx = 0.5;
+        constraints.gridx = 2;
+        constraints.gridy = 1;
         constraints.gridwidth = 1;
-        constraints.insets = new Insets(10, 10, 10, 10);
+        constraints.insets = new Insets(5, 5, 5, 5);
 
         Seekbutton = new JButton("Buscar");
         pane.add(Seekbutton, constraints);
 
+        JButton btn = new JButton("?");
+        constraints.gridy = 1;
+        constraints.gridx = 3;
+        constraints.gridwidth = 1;
+        constraints.ipadx = 1;
+        pane.add(btn, constraints);
+        btn.addActionListener(this);
 
-        int row = 1;
-        constraints.gridy = row;
-        constraints.fill = GridBagConstraints.CENTER;
+        constraints.gridy = 2;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(15, 15, 15, 15);
-        constraints.ipadx = 2;
+        constraints.ipadx = 0;
         constraints.gridx = 0;
-        constraints.gridwidth = 2;
-
-        ArrayList data = new ArrayList<TableObject>(Arrays.asList(new TableObject("asd", "Amit", "670000"),
-                new TableObject("123", "Jai", "  Raku"), new TableObject("123", "Sachin", "700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000")));
+        constraints.gridwidth = 4;
 
         String column[] = {"ID", "NAME", "SALARY"};
 
-        DefaultTableModel model = new DefaultTableModel(column, 0);
+        model = new DefaultTableModel(column, 0);
 
         JTable jt = new JTable(model) {
 
@@ -133,37 +135,9 @@ public class addComponents extends JFrame {
 
         jt.setBounds(30, 40, 200, 300);
 
-        model.addRow(new String[]{"2412", "XXX", "60500"});
-
-        model.addRow(new String[]{"4121", "YYYYYY", "60, 700, 800, 200, 800, 1200, 400, 123, 600, 670, 130, 540"});
-
         JScrollPane sp = new JScrollPane(jt);
         pane.add(sp, constraints);
 
-    /*    for (int column = 1; column <= 4; column++) {
-
-            //new old.elements().addTextArea(pane, column);
-
-            constraints.gridx = 0;
-            constraints.gridy = column;
-            constraints.ipadx = 0;
-            constraints.ipady = 0;
-            constraints.gridwidth = 2;
-            constraints.weightx = 1;
-
-            JTextArea textArea3 = new JTextArea(3, 20);
-
-            Border border = BorderFactory.createLineBorder(Color.BLACK);
-
-            textArea3.setBorder(BorderFactory.createCompoundBorder(border,
-                    BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-
-            JPanel areaPane = new JPanel();
-            areaPane.add(textArea3, constraints);
-            textArea3.setEditable(false);
-            pane.add(areaPane, constraints);
-
-        }*/
         //pane.add(scrollPane);
         return pane;
     }
@@ -201,7 +175,31 @@ public class addComponents extends JFrame {
     }
 
 
-  public void setListenerOnAddComponents(ActionListener mListener) {
+    public void setListenerOnAddComponents(ActionListener mListener) {
         Seekbutton.addActionListener(mListener);
+    }
+
+    public void addColumnToJtable(ArrayList<TableObject> data) {
+
+        //primero borra todas las tablas
+        model.setRowCount(0);
+        for (int i = 0; i < data.size(); i++) {
+
+            TableObject row = new TableObject(data.get(i).getId(), data.get(i).getName(), data.get(i).getSalary());
+            model.addRow(new String[]{row.getId(), row.getName(), row.getSalary()});
+        }
+
+/*        ArrayList data = new ArrayList<TableObject>(Arrays.asList(new TableObject("asd", "Amit", "670000"),
+                new TableObject("123", "Jai", "  Raku"), new TableObject("123", "Sachin", "700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000")));*/
+    }
+
+
+    public TextField getTextField() {
+        return textField;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        JOptionPane.showMessageDialog(null, "Agrega ',' entre palabras para buscar ambas al mismo tiempo ");
     }
 }

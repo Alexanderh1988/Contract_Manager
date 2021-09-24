@@ -2,19 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a4f73bf1-938b-43cf-94b2-1e1d62f7246d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JefeDptoPrevRiesgos.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/articles-97403_Teatro.docx" beforeDir="false" afterPath="$PROJECT_DIR$/articles-97403_Teatro.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ContractMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ContractMaster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/CalculatorMaster.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/ControllerSample.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/ModelSample.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MVC/ViewSample.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/View/JTables.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/JTables.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/ListadoDirectorio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/ListadoDirectorio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/OpenDocExample.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/OpenDocExample.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Model/wordSeekerInWord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Model/wordSeekerInWord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/View.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/View/addComponents.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/View/addComponents.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/JTables$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/View/JTables.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ContractMaster.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ContractMaster.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller$ListenerClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller$ListenerClass.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MVC/CalculatorMaster.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MVC/ControllerSample$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MVC/ControllerSample$CalculationListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MVC/ControllerSample.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MVC/ModelSample.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/MVC/ViewSample.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/ListadoDirectorio.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/ListadoDirectorio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/Model.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/Model.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/OpenDocExample.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/OpenDocExample.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Model/wordSeekerInWord.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Model/wordSeekerInWord.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/View$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/View$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/View/View.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/View.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/View/addComponents$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/addComponents$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/View/addComponents.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/View/addComponents.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -30,11 +44,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Model/Model.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Model/ListadoDirectorio.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="101">
+              <caret line="27" selection-start-line="27" selection-end-line="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -42,8 +59,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ContractMaster.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="29">
-              <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+            <state relative-caret-position="136">
+              <caret line="8" column="62" lean-forward="true" selection-start-line="8" selection-start-column="62" selection-end-line="8" selection-end-column="62" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -51,14 +71,31 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="255">
+              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#260#261#0" expanded="true" />
-                <element signature="e#291#292#0" expanded="true" />
-                <element signature="e#424#425#0" expanded="true" />
-                <element signature="e#471#472#0" expanded="true" />
+                <element signature="e#1110#1111#0" expanded="true" />
+                <element signature="e#1154#1155#0" expanded="true" />
+                <element signature="e#1242#1243#0" expanded="true" />
+                <element signature="e#1286#1287#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Model/Model.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="155">
+              <caret line="46" column="65" selection-start-line="46" selection-start-column="65" selection-end-line="46" selection-end-column="65" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#187#463#0" />
+                <element signature="e#817#818#0" expanded="true" />
+                <element signature="e#844#845#0" expanded="true" />
+                <element signature="e#906#907#0" expanded="true" />
+                <element signature="e#938#939#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,11 +104,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/View/View.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
+            <state relative-caret-position="137">
+              <caret line="71" selection-start-line="71" selection-end-line="71" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#main#0;class#View#0" />
+                <element signature="e#1658#1659#0" expanded="true" />
+                <element signature="e#1721#1722#0" expanded="true" />
+                <element signature="e#1710#1711#0" expanded="true" />
+                <element signature="e#1760#1761#0" expanded="true" />
+                <element signature="e#1926#1927#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -80,13 +121,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/View/addComponents.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="48" selection-start-line="48" selection-end-line="48" />
+            <state relative-caret-position="137">
+              <caret line="83" column="26" lean-forward="true" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#addComponents#0;class#addComponents#0" />
+                <element signature="e#857#1010#0" />
+                <element signature="method#createAndShowGUI#0;class#addComponents#0" />
+                <element signature="method#getPreferredHeight#0;class#addComponents#0" />
                 <element signature="e#6943#6944#0" expanded="true" />
                 <element signature="e#6998#6999#0" expanded="true" />
+                <element signature="e#6584#6585#0" expanded="true" />
+                <element signature="e#6616#6617#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -103,8 +148,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>frame</find>
-      <find>getTableCellRendererComponent</find>
       <find>getTableCellEditorComponent</find>
       <find>JTextPaneCellEditor</find>
       <find>jtable</find>
@@ -130,7 +173,11 @@
       <find>list2</find>
       <find>Seekbutton</find>
       <find>resi</find>
+      <find>TEXTFIELD</find>
+      <find>default</find>
+      <find>textfield</find>
       <find>button</find>
+      <find>weight</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -139,8 +186,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/form/form1.form" />
-        <option value="$PROJECT_DIR$/src/main/java/elements.java" />
         <option value="$PROJECT_DIR$/src/main/java/scrol.java" />
         <option value="$PROJECT_DIR$/src/main/java/Scroller.java" />
         <option value="$PROJECT_DIR$/src/main/java/scrollert2.java" />
@@ -170,25 +215,28 @@
         <option value="$PROJECT_DIR$/src/main/java/View/Table.java" />
         <option value="$PROJECT_DIR$/src/main/java/View/TableConJareaIncorporado2.java" />
         <option value="$PROJECT_DIR$/src/main/java/View/TextAreaCellRenderer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Model/ListadoDirectorio.java" />
         <option value="$PROJECT_DIR$/src/main/java/Model/word.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Model/wordSeekerInWord.java" />
         <option value="$PROJECT_DIR$/src/main/java/View/JTable.java" />
         <option value="$PROJECT_DIR$/src/main/java/View/MainGridbaglayout.java" />
         <option value="$PROJECT_DIR$/src/main/java/MainClass.java" />
         <option value="$PROJECT_DIR$/src/main/java/View/SeekBars.java" />
         <option value="$PROJECT_DIR$/src/main/java/Controller/Controller.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Model/Model.java" />
         <option value="$PROJECT_DIR$/src/main/java/MVC/Controller.java" />
         <option value="$PROJECT_DIR$/src/main/java/MVC/ViewSample.java" />
         <option value="$PROJECT_DIR$/src/main/java/MVC/ModelSample.java" />
         <option value="$PROJECT_DIR$/src/main/java/MVC/ControllerSample.java" />
         <option value="$PROJECT_DIR$/src/main/java/MVC/CalculatorMaster.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ContractMaster.java" />
-        <option value="$PROJECT_DIR$/src/main/java/View/addComponents.java" />
         <option value="$PROJECT_DIR$/src/main/java/View/JTables.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Controller.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Model/ListadoDirectorio.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Model/OpenDocExample.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ContractMaster.java" />
+        <option value="$PROJECT_DIR$/src/main/java/View/hightlighttext.java" />
+        <option value="$PROJECT_DIR$/src/main/java/View/LineHighlightPainter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Model/wordSeekerInWord.java" />
         <option value="$PROJECT_DIR$/src/main/java/View/View.java" />
+        <option value="$PROJECT_DIR$/src/main/java/View/addComponents.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Controller.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Model/Model.java" />
       </list>
     </option>
   </component>
@@ -250,14 +298,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="old" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Contract Manager" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Contract_Manager" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="View" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -307,19 +347,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.ContractMaster">
-    <configuration name="CalculatorMaster" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MVC.CalculatorMaster" />
-      <module name="Contract Manager" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="MVC.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="ContractMaster" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ContractMaster" />
       <module name="Contract Manager" />
@@ -327,19 +354,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Controller" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Controller" />
-      <module name="Contract Manager" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ControllerSample" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="MVC.ControllerSample" />
+    <configuration name="LineHighlightPainter" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="View.LineHighlightPainter" />
       <module name="Contract Manager" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="MVC.*" />
+          <option name="PATTERN" value="View.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -360,13 +380,39 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="addComponents" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="View.addComponents" />
+      <module name="Contract Manager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="View.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="wordSeekerInWord" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Model.wordSeekerInWord" />
+      <module name="Contract Manager" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.ContractMaster" />
-        <item itemvalue="Application.Controller" />
-        <item itemvalue="Application.CalculatorMaster" />
-        <item itemvalue="Application.ControllerSample" />
+        <item itemvalue="Application.addComponents" />
         <item itemvalue="Application.View" />
+        <item itemvalue="Application.LineHighlightPainter" />
+        <item itemvalue="Application.wordSeekerInWord" />
       </list>
     </recent_temporary>
   </component>
@@ -403,17 +449,18 @@
       <workItem from="1632228129409" duration="15039000" />
       <workItem from="1632269345516" duration="12109000" />
       <workItem from="1632318315709" duration="6087000" />
-      <workItem from="1632344794455" duration="3370000" />
+      <workItem from="1632344794455" duration="29789000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="127893000" />
+    <option name="totallyTimeSpent" value="154312000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22163388" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22163388" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -422,7 +469,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33060557" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33060557" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3764321" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -487,58 +534,85 @@
           <properties />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Model/Model.java</url>
+          <line>51</line>
+          <properties />
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Model/Model.java</url>
+          <line>52</line>
+          <properties />
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller.java</url>
+          <line>34</line>
+          <properties />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Controller.java</url>
+          <line>35</line>
+          <properties />
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/Model/Model.java</url>
+          <line>46</line>
+          <properties class="Model.Model" method="searchingInDocument">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
       <expression>
-        <expression-string>view</expression-string>
+        <expression-string>!textToFind.isEmpty()</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>getmJTableContainer()</expression-string>
+        <expression-string>textToFind</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>c</expression-string>
+        <expression-string>extToFind</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>sp</expression-string>
+        <expression-string>textToFind.isEmpty()</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>jt</expression-string>
+        <expression-string>textToFind != &quot;  &quot;</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>pane</expression-string>
+        <expression-string>textToFind != &quot;&quot;</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>getParentJFrame()</expression-string>
+        <expression-string>textToFind != &quot; &quot;</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>frame</expression-string>
+        <expression-string>textToFind!=&quot;&quot;</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>view.getNumber1().getText()</expression-string>
-        <language-id>JAVA</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>view.getNumber1()</expression-string>
+        <expression-string>textToFind!=&quot; &quot;</expression-string>
         <language-id>JAVA</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
@@ -716,16 +790,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/View.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/Model.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/Model/OpenDocExample.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/View/TableConJareaIncorporado2.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -733,35 +797,6 @@
           <folding>
             <element signature="method#createAndShowGUI#0;class#TableConJareaIncorporado2#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Model/ListadoDirectorio.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="34" column="9" lean-forward="true" selection-start-line="34" selection-start-column="9" selection-end-line="34" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1023#1024#0" expanded="true" />
-            <element signature="e#1051#1052#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Model/wordSeekerInWord.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="23" column="66" lean-forward="true" selection-start-line="23" selection-start-column="66" selection-end-line="23" selection-end-column="66" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Model/TableObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="28" column="8" selection-start-line="28" selection-start-column="8" selection-end-line="28" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -859,55 +894,133 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/View/addComponents.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/Model/TableObject.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="48" selection-start-line="48" selection-end-line="48" />
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Model/ListadoDirectorio.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="27" selection-start-line="27" selection-end-line="27" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#addComponents#0;class#addComponents#0" />
-            <element signature="e#6943#6944#0" expanded="true" />
-            <element signature="e#6998#6999#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Model/OpenDocExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-26">
+          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files (x86)/Java/jdk-12.0.1/lib/src.zip!/java.base/java/io/IOException.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="38" column="6" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/View/LineHighlightPainter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-118">
+          <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#991#1143#0" expanded="true" />
+            <element signature="e#1142#1143#0" expanded="true" />
+            <element signature="e#4582#4583#0" expanded="true" />
+            <element signature="e#4626#4627#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ContractMaster.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        <state relative-caret-position="136">
+          <caret line="8" column="62" lean-forward="true" selection-start-line="8" selection-start-column="62" selection-end-line="8" selection-end-column="62" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Model/wordSeekerInWord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="49" column="47" lean-forward="true" selection-start-line="49" selection-start-column="47" selection-end-line="49" selection-end-column="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2465#2466#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/View/View.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="65" column="44" selection-start-line="65" selection-start-column="44" selection-end-line="65" selection-end-column="44" />
+        <state relative-caret-position="137">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#main#0;class#View#0" />
+            <element signature="e#1658#1659#0" expanded="true" />
+            <element signature="e#1721#1722#0" expanded="true" />
+            <element signature="e#1710#1711#0" expanded="true" />
+            <element signature="e#1760#1761#0" expanded="true" />
+            <element signature="e#1926#1927#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/View/addComponents.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="83" column="26" lean-forward="true" selection-start-line="83" selection-start-column="26" selection-end-line="83" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#857#1010#0" />
+            <element signature="method#createAndShowGUI#0;class#addComponents#0" />
+            <element signature="method#getPreferredHeight#0;class#addComponents#0" />
+            <element signature="e#6943#6944#0" expanded="true" />
+            <element signature="e#6998#6999#0" expanded="true" />
+            <element signature="e#6584#6585#0" expanded="true" />
+            <element signature="e#6616#6617#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="255">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#260#261#0" expanded="true" />
-            <element signature="e#291#292#0" expanded="true" />
-            <element signature="e#424#425#0" expanded="true" />
-            <element signature="e#471#472#0" expanded="true" />
+            <element signature="e#1110#1111#0" expanded="true" />
+            <element signature="e#1154#1155#0" expanded="true" />
+            <element signature="e#1242#1243#0" expanded="true" />
+            <element signature="e#1286#1287#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Model/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="155">
+          <caret line="46" column="65" selection-start-line="46" selection-start-column="65" selection-end-line="46" selection-end-column="65" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#187#463#0" />
+            <element signature="e#817#818#0" expanded="true" />
+            <element signature="e#844#845#0" expanded="true" />
+            <element signature="e#906#907#0" expanded="true" />
+            <element signature="e#938#939#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -9,14 +9,16 @@ public class ListadoDirectorio {
 
     public static void main(String[] args) {
 
-        new ListadoDirectorio("D:\\Software_hstech\\Contract_Manager");
+        // new ListadoDirectorio("D:\\Software_hstech\\Contract_Manager");
     }
 
-    public ListadoDirectorio(String path) {
+    //  public ListadoDirectorio(String path) {
+    public ListadoDirectorio() {
 
         //https://stackabuse.com/java-list-files-in-a-directory/
 
         String[] pathnames;
+        String path = "D:\\Software_hstech\\Contract_Manager";
 
         // Creates a new File instance by converting the given pathname string
         // into an abstract pathname

@@ -13,6 +13,7 @@ public class View extends JFrame {
     //static ArrayList<TableObject> data;
     //public static GridBagConstraints constraints;
     //public static GridBagLayout gridType;
+    addComponents component = new addComponents();
 
     public static void main(String[] args) {
 
@@ -36,24 +37,18 @@ public class View extends JFrame {
             }
         });
 
-
     }
 
     private void createAndShowGUI() {
 
         JFrame frame = new JFrame("Contract Master");
-        frame.setSize(new Dimension(600, 600));
-        frame.setMinimumSize(new Dimension(400,600));
+        frame.setSize(new Dimension(650, 600));
+        frame.setMinimumSize(new Dimension(400, 600));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Container pane = new Container();
-        // gridType = new GridBagLayout();
-        //constraints = new GridBagConstraints();
+
         frame.add(pane);
-
-        //new addComponents().getSeekbutton().addActionListener(this);
-
-        addComponents component = new addComponents();
 
         frame.add(component.getComponentsContainer());
 
@@ -62,20 +57,22 @@ public class View extends JFrame {
         frame.setResizable(true);
         // frame.pack();
         frame.setVisible(true);
-        //this.addComponents = addComponents;
-        //  component.setOnClickListener(new CalculationListener1());
-
-        //  component.setOnClickListener(new CalculationListener1());
-
-        //  JButton seekerView = component.getSeekbutton();
-        //  seekerView.addActionListener(new CalculationListener1());
-
-
     }
 
     public void setListenerOnButton(ActionListener mListener) {
-        new addComponents().setListenerOnAddComponents(mListener);
+        component.setListenerOnAddComponents(mListener);
     }
 
+    public void addNewRow(ArrayList<TableObject> data) {
+        component.addColumnToJtable(data);
+    }
+
+    public String getTextFieldFromComponents() {
+        return component.getTextField().getText();
+    }
+
+    public void noWordsFound() {
+        JOptionPane.showMessageDialog(null, "No se encontró nada ");
+    }
 
 }

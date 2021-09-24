@@ -1,10 +1,12 @@
-import MVC.ControllerSample;
+
 import Model.Model;
 import View.View;
 
+import java.io.IOException;
+
 public class ContractMaster {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
 
         //Model model = new Model();
@@ -14,6 +16,6 @@ public class ContractMaster {
         //Controller mController = new Controller(new View());
         // ControllerSample cntr = new ControllerSample();
 
-        new Controller(new View());
+        new Controller(new View(), new Model());
     }
 }

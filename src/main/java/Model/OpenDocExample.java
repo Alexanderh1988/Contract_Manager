@@ -9,6 +9,10 @@ import java.io.IOException;
 public class OpenDocExample {
 
     public static void main(String[] args) throws AWTException {
+        new OpenDocExample();
+    }
+
+    public OpenDocExample() {
 
         File file = new File("D:\\Software_hstech\\Contract_Manager\\articles-97403_Teatro.docx");
 
@@ -19,13 +23,15 @@ public class OpenDocExample {
             Desktop.getDesktop().open(file);
 
 
+     /*
+            aqui se intento usar botones de buscr:
             Robot r2 = new Robot();
 
             r2.keyPress(KeyEvent.VK_CONTROL);
             r2.keyPress(KeyEvent.VK_B);
             r2.keyRelease(KeyEvent.VK_B);
             r2.keyRelease(KeyEvent.VK_CONTROL);
-
+*/
 
             //robot controller y bucar texto
 
@@ -34,7 +40,6 @@ public class OpenDocExample {
             exception.printStackTrace();
 
         }
-
     }
 
 
