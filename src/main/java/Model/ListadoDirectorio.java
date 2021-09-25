@@ -1,7 +1,11 @@
 package Model;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class ListadoDirectorio {
 
@@ -9,16 +13,37 @@ public class ListadoDirectorio {
 
     public static void main(String[] args) {
 
-        // new ListadoDirectorio("D:\\Software_hstech\\Contract_Manager");
+        try {
+            new ListadoDirectorio();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     //  public ListadoDirectorio(String path) {
-    public ListadoDirectorio() {
+    public ListadoDirectorio() throws IOException {
+
+        Properties p = new Properties();
+        String path = null;
+
+        try {
+            p.load(new FileReader("custom.properties"));
+            System.out.println(p.getProperty("workingDirectory"));
+            path = p.getProperty("workingDirectory");
+        } catch (Exception e) {
+
+        }
+
+        // add properties to it
+     /*   p.setProperty("name", "Ganesh Chowdhary Sadanala");
+        p.setProperty("email", "ganeshs.gfg@gmail.com");
+        p.store(new FileWriter("custom.properties"), "");*/
 
         //https://stackabuse.com/java-list-files-in-a-directory/
 
+
         String[] pathnames;
-        String path = "D:\\Software_hstech\\Contract_Manager";
+        //  String path = "D:\\Software_hstech\\Contract_Manager";
 
         // Creates a new File instance by converting the given pathname string
         // into an abstract pathname

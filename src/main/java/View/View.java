@@ -13,7 +13,7 @@ public class View extends JFrame {
     //static ArrayList<TableObject> data;
     //public static GridBagConstraints constraints;
     //public static GridBagLayout gridType;
-    addComponents component = new addComponents();
+    public static  addComponents component = new addComponents();
 
     public static void main(String[] args) {
 
@@ -59,8 +59,12 @@ public class View extends JFrame {
         frame.setVisible(true);
     }
 
-    public void setListenerOnButton(ActionListener mListener) {
-        component.setListenerOnAddComponents(mListener);
+    public void setListenerOnSeekButton(ActionListener mListener) {
+        component.setListenerOnSearchButton(mListener);
+    }
+
+    public void setListenerOnLocationButton(ActionListener mListener) {
+        component.setListenerOnChangeLocation(mListener);
     }
 
     public void addNewRow(ArrayList<TableObject> data) {

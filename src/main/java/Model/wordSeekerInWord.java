@@ -27,7 +27,6 @@ public class wordSeekerInWord {
 
         //   String fileName = "D:\\Software_hstech\\Contract_Manager\\articles-97403_Teatro.docx";
 
-
         try (XWPFDocument doc = new XWPFDocument(Files.newInputStream(Paths.get(fileName)))) {
 
             XWPFWordExtractor xwpfWordExtractor = new XWPFWordExtractor(doc);

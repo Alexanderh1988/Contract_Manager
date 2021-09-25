@@ -13,15 +13,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class addComponents extends JFrame implements ActionListener{
+public class addComponents extends JFrame implements ActionListener {
 
-    final static boolean shouldFill = false;
-    final static boolean shouldWeightX = true;
-    final static boolean RIGHT_TO_LEFT = true;
     Container componentsContainer;
 
     TextField textField;
-    public static JButton Seekbutton;
+    private JButton Seekbutton;
+    private JButton selectLocation;
     DefaultTableModel model;
 
     public static void main(String[] args) {
@@ -76,13 +74,39 @@ public class addComponents extends JFrame implements ActionListener{
         constraints.fill = GridBagConstraints.CENTER;
         constraints.ipadx = 50;
         // constraints.weightx = 0.5;
-        constraints.gridx = 2;
+        constraints.gridx = 1;
         constraints.gridy = 1;
         constraints.gridwidth = 1;
         constraints.insets = new Insets(5, 5, 5, 5);
 
         Seekbutton = new JButton("Buscar");
         pane.add(Seekbutton, constraints);
+
+        //cambio de directorio:
+        Container cone1 = new Container();
+        cone1.setLayout(new GridBagLayout());
+        GridBagConstraints Subconstraint = new GridBagConstraints();
+        JLabel lbl1 = new JLabel("Incluir subcarpetas");
+        Subconstraint.gridy = 0;
+        Subconstraint.gridx = 0;
+        cone1.add(lbl1, Subconstraint);
+        JCheckBox checkbtn = new JCheckBox();
+        Subconstraint.gridx = 1;
+        cone1.add(checkbtn, Subconstraint);
+        selectLocation = new JButton("Cambiar Directorio");
+        Subconstraint.gridx = 0;
+        Subconstraint.gridy = 1;
+        Subconstraint.gridwidth = 2;
+        cone1.add(selectLocation, Subconstraint);
+
+        //se agrega el container de directorio:
+        constraints.gridy = 1;
+        constraints.gridx = 2;
+        constraints.gridwidth = 1;
+        constraints.ipadx = 1;
+        //  pane.add(selectLocation, constraints);
+        pane.add(cone1, constraints);
+
 
         JButton btn = new JButton("?");
         constraints.gridy = 1;
@@ -99,7 +123,7 @@ public class addComponents extends JFrame implements ActionListener{
         constraints.gridx = 0;
         constraints.gridwidth = 4;
 
-        String column[] = {"ID", "NAME", "SALARY"};
+        String column[] = {"ID", "ID DOCU", "TEXT"};
 
         model = new DefaultTableModel(column, 0);
 
@@ -175,9 +199,14 @@ public class addComponents extends JFrame implements ActionListener{
     }
 
 
-    public void setListenerOnAddComponents(ActionListener mListener) {
+    public void setListenerOnSearchButton(ActionListener mListener) {
         Seekbutton.addActionListener(mListener);
     }
+
+    public void setListenerOnChangeLocation(ActionListener mListener) {
+        selectLocation.addActionListener(mListener);
+    }
+
 
     public void addColumnToJtable(ArrayList<TableObject> data) {
 
@@ -201,5 +230,13 @@ public class addComponents extends JFrame implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         JOptionPane.showMessageDialog(null, "Agrega ',' entre palabras para buscar ambas al mismo tiempo ");
+    }
+
+    public JButton getSeekbutton() {
+        return Seekbutton;
+    }
+
+    public JButton getSelectLocation() {
+        return selectLocation;
     }
 }
