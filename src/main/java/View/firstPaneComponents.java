@@ -3,30 +3,36 @@ package View;
 import Model.TableObject;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.text.JTextComponent;
+import javax.swing.text.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 
-public class addComponents extends JFrame implements ActionListener {
+public class firstPaneComponents extends JFrame implements ActionListener {
 
     Container componentsContainer;
 
-    TextField textField;
+    private TextField textField;
     private JButton Seekbutton;
     private JButton selectLocation;
-    DefaultTableModel model;
+    private JButton borrar;
+    private DefaultTableModel model;
+    private JCheckBox checkbtn;
+    private JTable jt;
 
     public static void main(String[] args) {
-        new addComponents();
+        new firstPaneComponents();
     }
 
-    public addComponents() {
+    public firstPaneComponents() {
 
         createAndShowGUI();
         /*javax.swing.SwingUtilities.invokeLater(new Runnable() {
@@ -62,14 +68,13 @@ public class addComponents extends JFrame implements ActionListener {
         textField = new TextField(" ");
 
         constraints.fill = GridBagConstraints.LAST_LINE_END;
-        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.insets = new Insets(2, 2, 2, 2);
         constraints.ipadx = 180;
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.gridwidth = 1;
-        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.insets = new Insets(2, 2, 2, 2);
         pane.add(textField, constraints);
-
 
         constraints.fill = GridBagConstraints.CENTER;
         constraints.ipadx = 50;
@@ -77,27 +82,47 @@ public class addComponents extends JFrame implements ActionListener {
         constraints.gridx = 1;
         constraints.gridy = 1;
         constraints.gridwidth = 1;
-        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.insets = new Insets(2, 2, 2, 2);
 
         Seekbutton = new JButton("Buscar");
         pane.add(Seekbutton, constraints);
 
         //cambio de directorio:
         Container cone1 = new Container();
+
         cone1.setLayout(new GridBagLayout());
         GridBagConstraints Subconstraint = new GridBagConstraints();
         JLabel lbl1 = new JLabel("Incluir subcarpetas");
         Subconstraint.gridy = 0;
         Subconstraint.gridx = 0;
         cone1.add(lbl1, Subconstraint);
-        JCheckBox checkbtn = new JCheckBox();
+        checkbtn = new JCheckBox();
         Subconstraint.gridx = 1;
         cone1.add(checkbtn, Subconstraint);
+
+        JButton btn = new JButton("?");
+     /*   constraints.gridy = 1;
+        constraints.gridx = 4;
+        constraints.gridwidth = 1;
+        constraints.ipadx = 1;
+        pane.add(btn, constraints);*/
+        Subconstraint.gridx = 2;
+        cone1.add(btn, Subconstraint);
+        btn.addActionListener(this);
+
+
         selectLocation = new JButton("Cambiar Directorio");
         Subconstraint.gridx = 0;
         Subconstraint.gridy = 1;
         Subconstraint.gridwidth = 2;
         cone1.add(selectLocation, Subconstraint);
+
+        borrar = new JButton("borrar");
+        Subconstraint.gridx = 2;
+        Subconstraint.gridy = 1;
+        Subconstraint.gridwidth = 1;
+        Subconstraint.insets = new Insets(1, 2, 1, 2);
+        cone1.add(borrar, Subconstraint);
 
         //se agrega el container de directorio:
         constraints.gridy = 1;
@@ -107,27 +132,20 @@ public class addComponents extends JFrame implements ActionListener {
         //  pane.add(selectLocation, constraints);
         pane.add(cone1, constraints);
 
-
-        JButton btn = new JButton("?");
-        constraints.gridy = 1;
-        constraints.gridx = 3;
-        constraints.gridwidth = 1;
-        constraints.ipadx = 1;
-        pane.add(btn, constraints);
-        btn.addActionListener(this);
-
         constraints.gridy = 2;
         constraints.fill = GridBagConstraints.HORIZONTAL;
-        constraints.insets = new Insets(15, 15, 15, 15);
-        constraints.ipadx = 0;
+        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.ipadx = 800;
+        constraints.ipady = 550;
+
         constraints.gridx = 0;
         constraints.gridwidth = 4;
 
-        String column[] = {"ID", "ID DOCU", "TEXT"};
+        String column[] = {"ID", "DOCUMENTO", "TEXTO", "PAGINAS"};
 
         model = new DefaultTableModel(column, 0);
 
-        JTable jt = new JTable(model) {
+        jt = new JTable(model) {
 
             private static final long serialVersionUID = 1L;
 
@@ -145,19 +163,22 @@ public class addComponents extends JFrame implements ActionListener {
                         }
                     }
                 }
-                //  }
                 super.doLayout();
             }            //http://tips4java
         };
 
-        jt.setBounds(30, 40, 200, 300);
-
         //para resize textarea hay que anotar colunindex
         jt.getColumnModel().getColumn(0).setCellRenderer(new TextAreaCellRenderer());
-        jt.getColumnModel().getColumn(1).setCellRenderer(new TextAreaCellRenderer());
-        jt.getColumnModel().getColumn(2).setCellRenderer(new TextAreaCellRenderer());
+        jt.getColumnModel().getColumn(0).setPreferredWidth(50);
+        jt.getColumnModel().getColumn(0).setMaxWidth(60);
+        jt.getColumnModel().getColumn(0).setMinWidth(60);
 
-        jt.setBounds(30, 40, 200, 300);
+        jt.getColumnModel().getColumn(1).setCellRenderer(new TextAreaCellRenderer());
+        jt.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jt.getColumnModel().getColumn(2).setCellRenderer(new TextAreaCellRenderer());
+        jt.getColumnModel().getColumn(2).setPreferredWidth(100);
+        jt.getColumnModel().getColumn(2).setPreferredWidth(700);
+        jt.getColumnModel().getColumn(3).setMaxWidth(80);
 
         JScrollPane sp = new JScrollPane(jt);
         pane.add(sp, constraints);
@@ -168,28 +189,12 @@ public class addComponents extends JFrame implements ActionListener {
     //   }
 
     private void createAndShowGUI() {
-
-      /*   //Create and set up the window.
-       JFrame frame = new JFrame("Contract Master");
-        frame.setSize(new Dimension(400, 600));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        //Set up the content pane.
-        //  SeekBar = addComponentsToPane(frame.getContentPane());*/
-
         componentsContainer = addComponentsToPane(getContentPane());
-
-        //addComponentsToPane(frame.getContentPane());
-        //Display the window.
-        //frame.pack();
-        //frame.setVisible(true);
-
     }
 
     public Container getComponentsContainer() {
         return componentsContainer;
     }
-
 
     private int getPreferredHeight(JTextComponent c) {
         Insets insets = c.getInsets();
@@ -197,7 +202,6 @@ public class addComponents extends JFrame implements ActionListener {
         int preferredHeight = (int) view.getPreferredSpan(javax.swing.text.View.Y_AXIS);
         return preferredHeight + insets.top + insets.bottom;
     }
-
 
     public void setListenerOnSearchButton(ActionListener mListener) {
         Seekbutton.addActionListener(mListener);
@@ -207,29 +211,27 @@ public class addComponents extends JFrame implements ActionListener {
         selectLocation.addActionListener(mListener);
     }
 
+    public void setListenerOnDeleteButton(ActionListener mListener) {
+        borrar.addActionListener(mListener);
+    }
 
-    public void addColumnToJtable(ArrayList<TableObject> data) {
+    public void addColumnToJtable(ArrayList<TableObject> data, String soughtWord) {
 
         //primero borra todas las tablas
         model.setRowCount(0);
+
         for (int i = 0; i < data.size(); i++) {
 
-            TableObject row = new TableObject(data.get(i).getId(), data.get(i).getName(), data.get(i).getSalary());
-            model.addRow(new String[]{row.getId(), row.getName(), row.getSalary()});
+            TableObject row = new TableObject(data.get(i).getId(), data.get(i).getDocumentName(), data.get(i).getText(), data.get(i).getPage());
+            model.addRow(new String[]{row.getId(), row.getDocumentName(), row.getText().replaceAll(soughtWord, "<<<" + soughtWord + ">>>"), row.getPage().toString()});
+            //  model.addRow(new String[]{"id","asdasd"+"<strong>+asdasd</strong>sdadsdasdasdasdasdasd", "asfasd", "asasdasd"});
         }
-
-/*        ArrayList data = new ArrayList<TableObject>(Arrays.asList(new TableObject("asd", "Amit", "670000"),
-                new TableObject("123", "Jai", "  Raku"), new TableObject("123", "Sachin", "700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000700000")));*/
-    }
-
-
-    public TextField getTextField() {
-        return textField;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        JOptionPane.showMessageDialog(null, "Agrega ',' entre palabras para buscar ambas al mismo tiempo ");
+        JOptionPane.showMessageDialog(null, "Agrega ',' entre palabras para buscar ambas al mismo tiempo /n " +
+                "cierra todas las instancias de word de los archivos en los que quieras buscar");
     }
 
     public JButton getSeekbutton() {
@@ -239,4 +241,69 @@ public class addComponents extends JFrame implements ActionListener {
     public JButton getSelectLocation() {
         return selectLocation;
     }
+
+    public JButton getBorrar() {
+        return borrar;
+    }
+
+    public JCheckBox getCheckbtn() {
+        return checkbtn;
+    }
+
+    public void onRowSelected(ListSelectionListener listListener) {
+        jt.getSelectionModel().addListSelectionListener(listListener);
+    }
+
+    public void onCellMouseClickListener(MouseListener mouseListener) {
+        jt.addMouseListener(mouseListener);
+    }
+
+    public JTable getJt() {
+        return jt;
+    }
+
+    public TextField getTextField() {
+        return textField;
+    }
+
+    public void highlight(JTextComponent textComp, String pattern) {
+        // First remove all old highlights
+        //  removeHighlights(textComp);
+
+        try {
+            Highlighter hilite = textComp.getHighlighter();
+            Document doc = textComp.getDocument();
+            String text = doc.getText(0, doc.getLength());
+
+            int pos = 0;
+            // Search for pattern
+            while ((pos = text.indexOf(pattern, pos)) >= 0) {
+                // Create highlighter using private painter and apply around pattern
+                hilite.addHighlight(pos, pos + pattern.length(), myHighlightPainter);
+                pos += pattern.length();
+            }
+
+        } catch (BadLocationException e) {
+        }
+    }
+
+    // An instance of the private subclass of the default highlight painter
+    MyHighlightPainter myHighlightPainter = new MyHighlightPainter(Color.red);
+
+    public void setListenerOnResetData(ActionListener mListener) {
+        borrar.addActionListener(mListener);
+    }
+
+    // A private subclass of the default highlight painter
+    static class MyHighlightPainter extends DefaultHighlighter.DefaultHighlightPainter {
+
+        public MyHighlightPainter(Color color) {
+            super(color);
+        }
+    }
+
+    void clearTable() {
+        model.setRowCount(0);
+    }
+
 }

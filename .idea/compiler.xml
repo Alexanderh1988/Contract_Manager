@@ -9,5 +9,8 @@
         <module name="Contract Manager" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="mainclass" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

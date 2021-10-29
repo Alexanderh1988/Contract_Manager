@@ -2,81 +2,25 @@ package Model;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
+import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
 public class Model {
 
-    ArrayList<String> filesNames;
-    ArrayList<TableObject> data;
-    String textToSearch;
+    ArrayList<TableObject> data = new ArrayList<>();
     ArrayList<String> allFilesPaths = new ArrayList<>();
+    private Boolean returnStatement = false;
+    directoriePathFinder mDirectoriePathFinder = new directoriePathFinder();
+    ArrayList<String> allDirectories = new ArrayList<>();
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         new Model();
-    }
-
-    public Model() throws IOException {
-
-
-        // ListadoDirectorio directorios = new ListadoDirectorio();
-
-        //  System.out.println("directorios:    " + directorios.getPaths());
-
-        searchFilesPaths(readCurrentDirectory());
-
-        //  System.out.println(readCurrentDirectory());
-
-        //saveNewCurrentDirectory("C:\\Users\\Alex Hs\\Desktop\\Code Composer");
-
-        data = new ArrayList<>();
-
-     /*   data.add((new TableObject("342", "231", "231")));
-        data.add((new TableObject("342", "231", "231")));
-        data.add((new TableObject("342", "231", "231 as as sa fsa fa af fsdsafd a fa")));
-        data.add((new TableObject("342", "231sadf  fa asdf sdaf sa dfsad fsad fa sdf ", "231")));
-        data.add((new TableObject("342", "231", "231as as af fa adf dfasd fsadf asf sa dsf asf as")));*/
-
-       /*        String actualDirectory = System.getProperty("user.dir");
-
-        //new ListadoDirectorio(actualDirectory);
-
-        filesNames = new ListadoDirectorio(actualDirectory).getPaths();
-
-        for (String a : filesNames) {
-            System.out.println(a);
-        }*/
-
     }
 
     public ArrayList<TableObject> getData() {
         return data;
-    }
-
-    public void setData(ArrayList<TableObject> data) {
-        this.data = data;
-    }
-
-    public void searchingInDocument(String textToFind, ArrayList<String> filesToSearch) throws IOException {
-
-        System.out.println("searchingInDocument");
-        //sin lo siguiente el campo "  " no lo reconoce como vacio o empthy
-        textToFind = textToFind.replaceAll("\\s+", "");
-
-        data.clear();
-        if (!textToFind.isEmpty()) {
-
-            for (int j = 0; j < filesToSearch.size(); j++) {
-                //wordSeekerInWord doc1 = new wordSeekerInWord(textToFind, "D:\\Software_hstech\\Contract_Manager\\articles-97403_Teatro.docx");
-                wordSeekerInWord doc1 = new wordSeekerInWord(textToFind, filesToSearch.get(j));
-
-                for (int i = 0; i < doc1.getSoughtWords().size(); i++) {
-                    System.out.println(doc1.getSoughtWords().get(i));
-                    data.add((new TableObject(i + "", "name " + i, doc1.getSoughtWords().get(i))));
-                }
-            }
-        }
     }
 
     public String changeFolderLocation() {
@@ -96,7 +40,85 @@ public class Model {
         return fileChooser.getSelectedFile().toString();
     }
 
-    public void searchFilesPaths(String path) {
+    public void searchingInDocument(String textToFind, ArrayList<String> filesToSearch) throws IOException {
+
+        //sin lo siguiente el campo "  " no lo reconoce como vacio o empthy
+        textToFind = textToFind.replaceAll("\\s+", "");
+        data.clear();
+        wordSeekedInPdf doc2 = null;
+
+        if (!textToFind.isEmpty()) {
+
+            for (int j = 0; j < filesToSearch.size(); j++) {
+
+                //wordSeekerInWord doc1 = new wordSeekerInWord(textToFind, "D:\\Software_hstech\\Contract_Manager\\articles-97403_Teatro.docx");
+                doc2 = new wordSeekedInPdf(textToFind, filesToSearch.get(j));
+                System.out.println(filesToSearch.get(j));
+            }
+
+            for (int i = 0; i < doc2.getSoughtWords().size(); i++) {
+                //    System.out.println(doc1.getSoughtWords().get(i));
+                data.add((new TableObject(i + "", doc2.getNameOfFileWordFound().get(i), doc2.getSoughtWords().get(i), doc2.getPagesOfTextFound().get(i))));
+            }
+        }
+    }
+
+    /*public void searchinAllDirectories(String path) {
+
+        searchInSingleDirectory(path);
+
+        File file = new File(path);
+        String[] directories = file.list(new FilenameFilter() {
+            @Override
+            public boolean accept(File current, String name) {
+                if (new File(current, name).isDirectory()) {
+                    String text = new File(current, name).toString();
+                    if (new File(current, name).toString().substring(text.length() - 5, text.length()).equals(".idea")) {
+                        returnStatement = false;
+                    } else if (new File(current, name).toString().substring(text.length() - 4, text.length()).equals(".git"))
+                        returnStatement = false;
+                    else
+                        returnStatement = true;
+                } else if (new File(current, name).isHidden()) { //elimina las carpetas invisibles
+                    returnStatement = false;
+                }
+                return returnStatement;
+            }
+        });
+
+        ArrayList<String> subpaths = new ArrayList();
+
+        for (String text : directories) {
+            subpaths.add(text);
+            System.out.println("subpaths: " + text);
+        }
+
+        File f = new File(path);
+        String[] pathnames;
+        pathnames = f.list();
+        if (pathnames != null) {
+            for (String names : pathnames) {
+                int wordLength = names.length();
+
+                String extention = wordLength >= 3 ? names.substring(wordLength - 3, wordLength) : "";
+
+                // String fileCompletePath = path + "\\" + subpaths.get(i) + "\\" + names;
+                String partialPath = path + "\\" + names;
+                //    System.out.println("complete path: " + fileCompletePath);
+                System.out.println("partial path: " + path + "\\" + names);
+
+                if (extention.equals("pdf"))  //solo se agregan archivos word
+                {
+                    //      System.out.println("se agrego: " + fileCompletePath);
+                    //if (!allFilesPaths.contains(fileCompletePath)) allFilesPaths.add(fileCompletePath);
+                    if (!allFilesPaths.contains(partialPath)) allFilesPaths.add(partialPath);
+                }
+            }
+        }
+        //  }
+    }*/
+
+   /*public void searchInSingleDirectory(String path) {
 
         //solo archivos word por ahora:
         File f = new File(path);
@@ -110,12 +132,14 @@ public class Model {
             // Print the names of files and directories
             int wordLength = pathname.length();
 
-            String extention = wordLength >= 4 ? pathname.substring(wordLength - 4, wordLength) : "";
+            String extention = wordLength >= 3 ? pathname.substring(wordLength - 3, wordLength) : "";
 
-            if (extention.equals("docx"))  //solo se agregan archivos word
-                allFilesPaths.add(pathname);
+            if (extention.equals("pdf"))  //solo se agregan archivos word
+                if (!allFilesPaths.contains(path + "\\" + pathname)) {
+                    allFilesPaths.add(path + "\\" + pathname);
+                }
         }
-    }
+    }*/
 
     public String readCurrentDirectory() {
 
@@ -132,10 +156,6 @@ public class Model {
         return pathName;
     }
 
-    public ArrayList<String> getAllFilesPaths() {
-        return allFilesPaths;
-    }
-
     public void saveNewCurrentDirectory(String currentDirectory) throws IOException {
 
         // create and load default properties
@@ -144,5 +164,94 @@ public class Model {
         defaultProps.setProperty("workingDirectory", currentDirectory);
         defaultProps.store(new FileWriter("custom.properties"), "no comment");
 
+    }
+
+    public void clearData() {
+        data.clear();
+    }
+
+    public int getIndexOfRowClicked(JTable jTable) {
+        return Integer.valueOf(String.valueOf(jTable.getValueAt(jTable.getSelectedRow(), 0)));
+    }
+
+    public void OpenWordFile(File fileClicked) throws IOException {
+
+        Desktop.getDesktop().open(fileClicked);
+
+    }
+
+ /*   public boolean isOneOfTheFilesTooBig() {result = "C:\Users\Alex Hs\Desktop\3381\Importante\Anexos Licitación.pdf"
+        return new wordSeekedInPdf().isThereIsABigFile();result = "C:\Users\Alex Hs\Desktop\3381\Importante\Anexos Licitación.pdf"
+    }*/
+
+    public void directoriesFinder(String path) {
+        searchDirectory(new File((path)));
+    }
+
+    public void searchDirectory(File directory) {
+
+        // setFileNameToSearch(fileNameToSearch);
+        if (directory.isDirectory()) {
+            search(directory);
+        } else {
+            System.out.println(directory.getAbsoluteFile() + " is not a directory!");
+        }
+    }
+
+    private void search(File file) {
+
+        if (file.isDirectory()) {
+            System.out.println("Searching directory ... " + file.getAbsoluteFile());
+
+            allDirectories.add(file.getAbsoluteFile().toString());
+
+            //do you have permission to read this directory?
+            if (file.canRead()) {
+                for (File temp : file.listFiles()) {
+                    if (temp.isDirectory()) {
+                        search(temp);
+                    }
+                }
+            } else {
+                System.out.println(file.getAbsoluteFile() + "Permission Denied");
+            }
+        }
+
+    }
+
+    public ArrayList<String> getAllFilesPaths() {
+        return allFilesPaths;
+    }
+
+    public void saveAllFiles(ArrayList<String> directories) {
+
+        System.out.println("saveAllFiles");
+
+        for (int i = 0; i < directories.size(); i++) {
+
+            System.out.println(directories.get(i));
+
+            File file = new File(directories.get(i));
+
+            for (File temp : file.listFiles()) {
+                if (!temp.isDirectory()) {
+                    System.out.println(temp);
+
+                    Integer FileNameLength = temp.toString().length();
+
+                    String extention = FileNameLength >= 3 ? temp.toString().substring(FileNameLength - 3, FileNameLength) : "";
+
+                    if (!allFilesPaths.contains(temp.toString()) && extention.equals("pdf")) {
+                        System.out.println("se agrego archivo: " + temp.toString());
+                        allFilesPaths.add(temp.toString());
+                    }
+                }
+            }
+        }
+
+    }
+
+    public ArrayList<String> getAllDirectories() {
+        return allDirectories;
     }
 }

@@ -3,37 +3,39 @@ package Model;
 public class TableObject {
 
     String Id;
-    String Name;
-    String Salary;
+    String DocumentName;
+    String Text;
+    Integer page;
 
-    public  TableObject(String  Id,String Name, String Salary){
+    public TableObject(String Id, String DocumentName, String Text, Integer page) {
         super();
-        this.Id=Id;
-        this.Name=Name;
-        this.Salary=Salary;
+        this.Id = Id;
+        this.DocumentName = DocumentName;
+        this.Text = Text;
+        this.page = page;
     }
 
-    public String  getId() {
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
+    }
+
+    public String getId() {
         return Id;
     }
 
-    public void setId(String  id) {
+    public void setId(String id) {
         Id = id;
     }
 
-    public String getName() {
-        return Name;
+    public String getDocumentName() {
+        return DocumentName;
     }
 
-    public void setName(String name) {
-        Name = name;
-    }
-
-    public String getSalary() {
-        return Salary;
-    }
-
-    public void setSalary(String salary) {
-        Salary = salary;
+    public String getText() {
+        return Text;
     }
 }

@@ -1,3 +1,4 @@
+/*
 package Model;
 
 import java.io.File;
@@ -35,9 +36,11 @@ public class ListadoDirectorio {
         }
 
         // add properties to it
-     /*   p.setProperty("name", "Ganesh Chowdhary Sadanala");
+     */
+/*   p.setProperty("name", "Ganesh Chowdhary Sadanala");
         p.setProperty("email", "ganeshs.gfg@gmail.com");
-        p.store(new FileWriter("custom.properties"), "");*/
+        p.store(new FileWriter("custom.properties"), "");*//*
+
 
         //https://stackabuse.com/java-list-files-in-a-directory/
 
@@ -67,3 +70,4 @@ public class ListadoDirectorio {
         return paths;
     }
 }
+*/
