@@ -1,5 +1,6 @@
 import Model.Model;
 import View.View;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -65,6 +66,8 @@ public class Controller {
                     //si no se encuentra nada:
                     if (mModel.getData().size() == 0) mView.noWordsFound();
                 } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (Exception ex) {
                     ex.printStackTrace();
                 }
                 //se agrega a tabla

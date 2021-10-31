@@ -1,5 +1,7 @@
 package Model;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
@@ -40,26 +42,32 @@ public class Model {
         return fileChooser.getSelectedFile().toString();
     }
 
-    public void searchingInDocument(String textToFind, ArrayList<String> filesToSearch) throws IOException {
+    public void searchingInDocument(String textToFind, ArrayList<String> filesToSearch) throws IOException, InvalidFormatException {
 
         //sin lo siguiente el campo "  " no lo reconoce como vacio o empthy
-        textToFind = textToFind.replaceAll("\\s+", "");
+        // textToFind = textToFind.replaceAll("\\s+", "");
         data.clear();
         wordSeekedInPdf doc2 = null;
+        wordSeekerInWord doc3 = null;
 
         if (!textToFind.isEmpty()) {
 
             for (int j = 0; j < filesToSearch.size(); j++) {
 
-                //wordSeekerInWord doc1 = new wordSeekerInWord(textToFind, "D:\\Software_hstech\\Contract_Manager\\articles-97403_Teatro.docx");
-                doc2 = new wordSeekedInPdf(textToFind, filesToSearch.get(j));
-                System.out.println(filesToSearch.get(j));
+                String extension = filesToSearch.get(j).length() > 5 ? filesToSearch.get(j).substring(filesToSearch.get(j).length()-3) : "";
+                //  if (extension.equals("pdf")) doc2 = new wordSeekedInPdf(textToFind, filesToSearch.get(j));
+                //else
+                if (extension.equals("doc")) doc3 = new wordSeekerInWord(textToFind, filesToSearch.get(j));
+            }
+            //se pega todo lo de pdf primero
+          /*  for (int i = 0; i < doc2.getSoughtWords().size(); i++) {
+                data.add((new TableObject(i + "", doc2.getNameOfFileWordFound().get(i), doc2.getSoughtWords().get(i), doc2.getPagesOfTextFound().get(i))));
+            }*/
+            //se pega todo lo de word despues
+            for (int i = 0; i < doc3.getSoughtWords().size(); i++) {
+                data.add((new TableObject(i + "", doc3.getNameOfFileWordFound().get(i), doc3.getSoughtWords().get(i), doc3.getPagesOfTextFound().get(i))));
             }
 
-            for (int i = 0; i < doc2.getSoughtWords().size(); i++) {
-                //    System.out.println(doc1.getSoughtWords().get(i));
-                data.add((new TableObject(i + "", doc2.getNameOfFileWordFound().get(i), doc2.getSoughtWords().get(i), doc2.getPagesOfTextFound().get(i))));
-            }
         }
     }
 
@@ -241,7 +249,7 @@ public class Model {
 
                     String extention = FileNameLength >= 3 ? temp.toString().substring(FileNameLength - 3, FileNameLength) : "";
 
-                    if (!allFilesPaths.contains(temp.toString()) && extention.equals("pdf")) {
+                    if (!allFilesPaths.contains(temp.toString()) && (extention.equals("pdf") || extention.equals("doc"))) {
                         System.out.println("se agrego archivo: " + temp.toString());
                         allFilesPaths.add(temp.toString());
                     }

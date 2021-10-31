@@ -135,7 +135,7 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         constraints.gridy = 2;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(5, 5, 5, 5);
-        constraints.ipadx = 800;
+        constraints.ipadx = 900;
         constraints.ipady = 550;
 
         constraints.gridx = 0;

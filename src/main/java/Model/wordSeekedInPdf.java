@@ -37,7 +37,7 @@ public class wordSeekedInPdf {
 
             System.out.println("document.getNumberOfPages(): " + document.getNumberOfPages());
             System.out.println("pagina 4: " + document.getPages());
-            //  System.out.println("document.getDocumentId(): " + document.getDocumentId()); 0
+
             //     if (document.getPages().getCount() > 350) thereIsABigFile = true;
 
             if (!document.isEncrypted()) {
@@ -47,23 +47,14 @@ public class wordSeekedInPdf {
 
                 PDFTextStripper tStripper = new PDFTextStripper();
 
-         /*       for (int p = 1; p <= document.getNumberOfPages(); ++p) {
-                    tStripper.setStartPage(p);
-                    tStripper.setEndPage(p);
-                }*/
-
-                // loop through a range of pages
-
-                //for (int i = 1; i < document.getNumberOfPages(); i++) {
                 for (int i = 0; i < document.getNumberOfPages(); i++) {
 
                     tStripper.setStartPage(i);
                     tStripper.setEndPage(i);
                     String docText = tStripper.getText(document);
 
-                  //  String docTextAux = docText.replaceAll("\\s+", "_");
-                  //  String soughtWordAux = soughtWord.replaceAll("\\s+", "_");
-
+                    //  String docTextAux = docText.replaceAll("\\s+", "_");
+                    //  String soughtWordAux = soughtWord.replaceAll("\\s+", "_");
                     //    int foundIndex = docText.toLowerCase().indexOf(soughtWord.toLowerCase());
 
                     int foundIndex = docText.toLowerCase().indexOf(soughtWord.toLowerCase());
