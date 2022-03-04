@@ -15,6 +15,7 @@ public class wordSeekedInPdf {
     //public static  String filePath1 ="C:\\Users\\Alex Hs\\Desktop\\Contratos2\\articles-97403_casa_particular_puertas_afuera.pdf";
     private String docText;
     private ArrayList<String> soughtWords = new ArrayList<>();
+    private ArrayList<String> KeyWord = new ArrayList<>();
     private ArrayList<Integer> pagesOfTextFound = new ArrayList<>();
     private ArrayList<String> nameOfFileWordFound = new ArrayList<>();
     boolean DocuEncrypted;
@@ -31,12 +32,12 @@ public class wordSeekedInPdf {
         System.out.println("fileName: " + fileName);
 
         try (PDDocument document = PDDocument.load(new File(fileName), MemoryUsageSetting.setupTempFileOnly())) {
-            // try (PDDocument document = PDDocument.load(new File(fileName))) {
+            //       try (PDDocument document = PDDocument.load(new File(fileName))) {
 
-            document.getClass();
+            //  document.getClass();
 
-            System.out.println("document.getNumberOfPages(): " + document.getNumberOfPages());
-            System.out.println("pagina 4: " + document.getPages());
+            // System.out.println("document.getNumberOfPages(): " + document.getNumberOfPages());
+            //  System.out.println("pagina 4: " + document.getPages());
 
             //     if (document.getPages().getCount() > 350) thereIsABigFile = true;
 
@@ -57,25 +58,31 @@ public class wordSeekedInPdf {
                     //  String soughtWordAux = soughtWord.replaceAll("\\s+", "_");
                     //    int foundIndex = docText.toLowerCase().indexOf(soughtWord.toLowerCase());
 
+                    String restText = docText;
+                    int largoDeExtracto = 400;
                     int foundIndex = docText.toLowerCase().indexOf(soughtWord.toLowerCase());
 
-
-                    String restText = docText;
-                    int largoDeExtracto;
-                    largoDeExtracto = 400;
-
-                    while (foundIndex != -1) {
+                    while (foundIndex != -1 && foundIndex != 0) {
                         //  contadorMaximaIteracion++;
 
                         if (restText.length() > foundIndex + largoDeExtracto && foundIndex > largoDeExtracto) {
-                            soughtWords.add(restText.substring(foundIndex - largoDeExtracto, foundIndex + largoDeExtracto));
-                            pagesOfTextFound.add(i);
-                            nameOfFileWordFound.add(fileName);
-                            wordFound = true;
+                            //con esto se busca si esta la palabra completa
+                            // Integer index = restText.indexOf(foundIndex, foundIndex + soughtWord.length());
 
-                            int textLength = restText.length();
-                            restText = restText.substring(foundIndex + soughtWord.length(), textLength);
-                            foundIndex = restText.indexOf(soughtWord);
+                            Integer index = restText.substring(foundIndex, foundIndex + soughtWord.length()).toLowerCase().indexOf(soughtWord.toLowerCase());
+
+                            if (index != -1) {
+                                System.out.println("soughtWords: " + restText.substring(foundIndex - largoDeExtracto, foundIndex + largoDeExtracto));
+                                soughtWords.add(restText.substring(foundIndex - largoDeExtracto, foundIndex + largoDeExtracto));
+                                pagesOfTextFound.add(i);
+                                KeyWord.add(soughtWord);
+                                nameOfFileWordFound.add(fileName);
+                                wordFound = true;
+
+                                int textLength = restText.length();
+                                restText = restText.substring(foundIndex + soughtWord.length(), textLength);
+                                foundIndex = restText.indexOf(soughtWord);
+                            }
                         } else {
                             largoDeExtracto = largoDeExtracto - 20;
                         }
@@ -84,11 +91,12 @@ public class wordSeekedInPdf {
 
             } else {
                 JOptionPane.showMessageDialog(null, "Documento encriptado ");
+                System.out.println("encriptado");
                 DocuEncrypted = true;
             }
         }
 
-        if (!wordFound) JOptionPane.showMessageDialog(null, "No se encontro palabras en " + fileName);
+        // if (!wordFound) JOptionPane.showMessageDialog(null, "No se encontro palabras en " + fileName);
     }
 
     public ArrayList<String> getSoughtWords() {
@@ -105,5 +113,17 @@ public class wordSeekedInPdf {
 
     public ArrayList<String> getNameOfFileWordFound() {
         return nameOfFileWordFound;
+    }
+
+    public void setSoughtWords(ArrayList<String> soughtWords) {
+        this.soughtWords = soughtWords;
+    }
+
+    public ArrayList<String> getKeyWord() {
+        return KeyWord;
+    }
+
+    public void setKeyWord(ArrayList<String> keyWord) {
+        KeyWord = keyWord;
     }
 }

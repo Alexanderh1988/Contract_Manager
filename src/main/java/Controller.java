@@ -25,10 +25,11 @@ public class Controller {
         //Menu 1:
         this.mView = mView;
         this.mModel = mModel;
+
         //set listener to seek button
         mView.setListenerOnSeekButton(new ListenerClass());
         //set listener to delete button
-        mView.setListenerOnDeleteButton(new ListenerClass());
+//        mView.setListenerOnDeleteButton(new ListenerClass());
         //set listener to change location
         mView.setListenerOnLocationButton(new ListenerClass());
         //set listener to cell excel
@@ -43,37 +44,40 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            if (e.getSource() == View.getmFirstComponentsPanel().getSeekbutton()) { // boton buscar
+            if (e.getSource() == mView.getmSecondComponentsPane().getBuscar()) { // boton buscar
 
-                //primero se busca al directorio actual:
                 if (mModel.readCurrentDirectory() == null) {
+                    System.out.println("no hay directorio");
                     try {
-                        mModel.saveNewCurrentDirectory(mModel.changeFolderLocation() == null ? mModel.changeFolderLocation() : "");
+                        mModel.saveNewCurrentDirectory(mModel.changeFolderLocation());
                     } catch (IOException ex) {
                         ex.printStackTrace();
+                        System.out.println("error4 "+ex);
                     }
                 } else {
+                    System.out.println("si hay directorio");
                     mModel.directoriesFinder(mModel.readCurrentDirectory());
                 }
 
                 mModel.saveAllFiles(mModel.getAllDirectories());
 
                 try {
-                    // mModel.clearData();
-                    mModel.searchingInDocument(mView.getTextToSearch(), mModel.getAllFilesPaths());
 
-                    //   if (mModel.isOneOfTheFilesTooBig()) mView.fileIsTooBig();
-                    //si no se encuentra nada:
-                    if (mModel.getData().size() == 0) mView.noWordsFound();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
+                    mModel.clearData();
+                    mModel.searchingInDocument(mModel.getAllFilesPaths());
+
+
                 } catch (Exception ex) {
+                    System.out.println("exepcion "+ex);
                     ex.printStackTrace();
                 }
                 //se agrega a tabla
-                mView.addNewRow(mModel.getData(), mView.getTextToSearch());
+                 //mView.addNewRow(mModel.getData(), mView.getTextToSearch());
+         //       mView.addNewRow(mModel.getData(), mModel.getTextToFind());
+                mView.addNewRow(mModel.getData(), "PALABRA");
 
-            } else if (e.getSource() == mView.getmFirstComponentsPanel().getSelectLocation()) {  //se cambia el nuevo directorio
+
+            } else if (e.getSource() == mView.getmSecondComponentsPane().getSelectLocation()) {  //se cambia el nuevo directorio
 
                 try {
                     mModel.saveNewCurrentDirectory(mModel.changeFolderLocation());
@@ -84,7 +88,7 @@ public class Controller {
 
             } else if (e.getSource() == mView.getmJMenu().getMenuItem1()) {
                 System.out.println("Menu click");
-            } else if (e.getSource() == mView.getmFirstComponentsPanel().getBorrar()) {
+            } else if (e.getSource() == mView.getmSecondComponentsPane().getBorrar()) {
                 System.out.println("click borrar");
                 mView.clearTable();
             }
@@ -98,19 +102,21 @@ public class Controller {
             try {
                 //  System.out.println("open docu: " + mModel.getIndexOfRowClicked(mView.getJTable()));
                 //  if (e.getValueIsAdjusting() == false) {
-                int fileNameClicked = mModel.getIndexOfRowClicked(View.getJTable());
-                System.out.println(fileNameClicked);
-                System.out.println(mModel.getData().get(fileNameClicked).getDocumentName());
-                File fileClicked = new File(mModel.getData().get(fileNameClicked).getDocumentName());
+                //     int fileNameClicked = mModel.getIndexOfRowClicked(View.getJTable());
+                //    System.out.println(fileNameClicked);
+                //    System.out.println(mModel.getData().get(fileNameClicked).getDocumentName());
+                //    File fileClicked = new File(mModel.getData().get(fileNameClicked).getDocumentName());
 
-                mModel.OpenWordFile(fileClicked);
+                //     mModel.OpenWordFile(fileClicked);
                 //        }
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 ex.printStackTrace();
+                System.out.println("error3 "+ex);
             }
 
         }
     }
+}
 
     /*private class MouseListenerClass implements MouseListener {
         @Override
@@ -139,4 +145,5 @@ public class Controller {
 
         }
     }*/
-}
+
+

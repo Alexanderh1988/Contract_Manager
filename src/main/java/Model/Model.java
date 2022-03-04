@@ -7,6 +7,7 @@ import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Properties;
 
 public class Model {
@@ -16,6 +17,7 @@ public class Model {
     private Boolean returnStatement = false;
     directoriePathFinder mDirectoriePathFinder = new directoriePathFinder();
     ArrayList<String> allDirectories = new ArrayList<>();
+    ArrayList<String> textToFind;
 
     public static void main(String[] args) {
         new Model();
@@ -42,32 +44,48 @@ public class Model {
         return fileChooser.getSelectedFile().toString();
     }
 
-    public void searchingInDocument(String textToFind, ArrayList<String> filesToSearch) throws IOException, InvalidFormatException {
+    public void searchingInDocument(ArrayList<String> filesToSearch) throws IOException, InvalidFormatException {
 
         //sin lo siguiente el campo "  " no lo reconoce como vacio o empthy
         // textToFind = textToFind.replaceAll("\\s+", "");
+
+        textToFind = new ArrayList<>(Arrays.asList("Notificar",
+                "avisar",
+                "cumplimiento",
+                "cumplir"
+        ));
+
         data.clear();
         wordSeekedInPdf doc2 = null;
-        wordSeekerInWord doc3 = null;
+        //  wordSeekerInWord doc3 = null;
 
         if (!textToFind.isEmpty()) {
 
+
             for (int j = 0; j < filesToSearch.size(); j++) {
 
-                String extension = filesToSearch.get(j).length() > 5 ? filesToSearch.get(j).substring(filesToSearch.get(j).length()-3) : "";
-                //  if (extension.equals("pdf")) doc2 = new wordSeekedInPdf(textToFind, filesToSearch.get(j));
-                //else
-                if (extension.equals("doc")) doc3 = new wordSeekerInWord(textToFind, filesToSearch.get(j));
-            }
-            //se pega todo lo de pdf primero
-          /*  for (int i = 0; i < doc2.getSoughtWords().size(); i++) {
-                data.add((new TableObject(i + "", doc2.getNameOfFileWordFound().get(i), doc2.getSoughtWords().get(i), doc2.getPagesOfTextFound().get(i))));
-            }*/
-            //se pega todo lo de word despues
-            for (int i = 0; i < doc3.getSoughtWords().size(); i++) {
-                data.add((new TableObject(i + "", doc3.getNameOfFileWordFound().get(i), doc3.getSoughtWords().get(i), doc3.getPagesOfTextFound().get(i))));
+                for (int i = 0; i < textToFind.size(); i++) {
+
+                    //    String extension = filesToSearch.get(j).length() > 5 ? filesToSearch.get(j).substring(filesToSearch.get(j).length() - 3) : "";
+                    //  if (extension.equals("pdf"))
+                    doc2 = new wordSeekedInPdf(textToFind.get(i), filesToSearch.get(j));
+                    //else
+                    //   if (extension.equals("doc")) doc3 = new wordSeekerInWord(textToFind, filesToSearch.get(j));
+                }
             }
 
+            for (int i = 0; i < doc2.getNameOfFileWordFound().size(); i++) {
+                //id, extracto encontrado, la palabra buscada, pagina
+                data.add((new TableObject(i + "", doc2.getNameOfFileWordFound().get(i), doc2.getSoughtWords().get(i), doc2.getKeyWord().get(i), doc2.getPagesOfTextFound().get(i))));
+                //   data.add((new TableObject(  "12", "name of file", doc2.getSoughtWords().get(i), 12)));
+            }
+
+            //if (data.size() == 0) JOptionPane.showMessageDialog(null, "No se encontró nada ");
+            //se pega todo lo de word despues
+           /* for (int i = 0; i < doc3.getSoughtWords().size(); i++) {
+                data.add((new TableObject(i + "", doc3.getNameOfFileWordFound().get(i), doc3.getSoughtWords().get(i), doc3.getPagesOfTextFound().get(i))));
+            }
+*/
         }
     }
 
@@ -159,7 +177,7 @@ public class Model {
             System.out.println(p.getProperty("workingDirectory"));
             pathName = p.getProperty("workingDirectory");
         } catch (Exception e) {
-
+            System.out.println("error5 " + e);
         }
         return pathName;
     }
@@ -171,7 +189,7 @@ public class Model {
 
         defaultProps.setProperty("workingDirectory", currentDirectory);
         defaultProps.store(new FileWriter("custom.properties"), "no comment");
-
+        System.out.println("Se grabo: " + currentDirectory);
     }
 
     public void clearData() {
@@ -179,7 +197,8 @@ public class Model {
     }
 
     public int getIndexOfRowClicked(JTable jTable) {
-        return Integer.valueOf(String.valueOf(jTable.getValueAt(jTable.getSelectedRow(), 0)));
+        Integer rowIndex = Integer.valueOf(String.valueOf(jTable.getValueAt(jTable.getSelectedRow(), 0)));
+        return rowIndex != -1 ? rowIndex : 0;
     }
 
     public void OpenWordFile(File fileClicked) throws IOException {
@@ -249,11 +268,13 @@ public class Model {
 
                     String extention = FileNameLength >= 3 ? temp.toString().substring(FileNameLength - 3, FileNameLength) : "";
 
-                    if (!allFilesPaths.contains(temp.toString()) && (extention.equals("pdf") || extention.equals("doc"))) {
+                    //       if (!allFilesPaths.contains(temp.toString()) && (extention.equals("pdf") || extention.equals("doc"))) {
+                    if (!allFilesPaths.contains(temp.toString()) && (extention.equals("pdf"))) {
                         System.out.println("se agrego archivo: " + temp.toString());
                         allFilesPaths.add(temp.toString());
                     }
                 }
+                System.out.println("no es directorio");
             }
         }
 
@@ -261,5 +282,13 @@ public class Model {
 
     public ArrayList<String> getAllDirectories() {
         return allDirectories;
+    }
+
+    public ArrayList<String> getTextToFind() {
+        return textToFind;
+    }
+
+    public void setTextToFind(ArrayList<String> textToFind) {
+        this.textToFind = textToFind;
     }
 }

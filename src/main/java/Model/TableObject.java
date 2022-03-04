@@ -5,13 +5,15 @@ public class TableObject {
     String Id;
     String DocumentName;
     String Text;
+    String keyWord;
     Integer page;
 
-    public TableObject(String Id, String DocumentName, String Text, Integer page) {
+    public TableObject(String Id, String DocumentName, String Text, String keyWord, Integer page) {
         super();
         this.Id = Id;
         this.DocumentName = DocumentName;
         this.Text = Text;
+        this.keyWord = keyWord;
         this.page = page;
     }
 
@@ -37,5 +39,13 @@ public class TableObject {
 
     public String getText() {
         return Text;
+    }
+
+    public String getKeyWord() {
+        return keyWord;
+    }
+
+    public void setKeyWord(String keyWord) {
+        this.keyWord = keyWord;
     }
 }

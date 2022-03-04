@@ -15,34 +15,23 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+public class secondPaneComponents extends JFrame implements ActionListener {
 
-public class firstPaneComponents extends JFrame implements ActionListener {
-
-    Container componentsContainer;
-
-    private TextField textField;
-    private TextField textField2;
-    private TextField textField3;
+    private Container componentsContainer;
     private JButton Seekbutton;
     private JButton selectLocation;
+    private JButton buscar;
     private JButton borrar;
     private DefaultTableModel model;
-    private JCheckBox checkbtn;
     private JTable jt;
 
     public static void main(String[] args) {
-        new firstPaneComponents();
+        new secondPaneComponents();
     }
 
-    public firstPaneComponents() {
+    public secondPaneComponents() {
 
         createAndShowGUI();
-        /*javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });*/
-
     }
 
     // dobu :   https://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html
@@ -51,132 +40,50 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
         //ROW #1
         pane.setLayout(new GridBagLayout());
+
         GridBagConstraints constraints = new GridBagConstraints();
         GridBagConstraints subconstraints = new GridBagConstraints();
 
-        Container searchPanel = new Container();
-
-        searchPanel.setLayout(new GridBagLayout());
-
-        JLabel mJLabel = new JLabel("Buscar:");
-        JLabel mJLabel2 = new JLabel("Excluir:");
-        JLabel mJLabel3 = new JLabel("Estricto:");
-
-        mJLabel.setSize(new Dimension(100, 20));
-
-        // constraints.weightx = 0.3;
-        // subconstraints.ipadx = 50;
-        //subconstraints.anchor = GridBagConstraints.LAST_LINE_END;
-        subconstraints.gridx = 0;
-        subconstraints.gridy = 0;
-        // subconstraints.gridwidth = 1;
-        searchPanel.add(mJLabel, constraints);
-        subconstraints.gridy = 2;
-        searchPanel.add(mJLabel2, constraints);
-
-        textField = new TextField("textField ");
-        textField2 = new TextField(" textField2");
-        textField3 = new TextField(" textField3");
-        JCheckBox checkbtn2 = new JCheckBox();
-        JCheckBox checkbtn3 = new JCheckBox();
-
-        //subconstraints.fill = GridBagConstraints.LAST_LINE_END;
         subconstraints.insets = new Insets(2, 2, 2, 2);
+
+        // Container searchPanel = new Container();
+        //   subconstraints.ipady=50;
         subconstraints.ipadx = 50;
-        subconstraints.gridx = 0;
-        subconstraints.gridy = 2;
-        subconstraints.gridwidth = 1;
-        searchPanel.add(textField, subconstraints);
-        subconstraints.gridx = 1;
-        subconstraints.gridy = 2;
-        searchPanel.add(textField2, subconstraints);
-        subconstraints.gridx = 3;
-        subconstraints.gridy = 0;
-        searchPanel.add(mJLabel3, subconstraints);
-        subconstraints.gridx = 1;
-        subconstraints.gridy = 3;
-        searchPanel.add(textField3, subconstraints);
-        subconstraints.gridx = 1;
-        subconstraints.gridx = 3;
-        searchPanel.add(checkbtn2, subconstraints);
-        subconstraints.gridy = 2;
-        searchPanel.add(checkbtn3, subconstraints);
 
-        //---------------------------------------------------------
+        constraints.ipady = 50;
+        constraints.ipadx = 200;
 
+        Container container1 = new Container();
+
+        container1.setLayout(new GridBagLayout());
+
+        selectLocation = new JButton("Cambiar Directorio");
+        buscar = new JButton("buscar");
         //  constraints.fill = GridBagConstraints.CENTER;
-        constraints.ipadx = 50;
+        //   subconstraints.i = 50;
         // constraints.weightx = 0.5;
 
+        subconstraints.gridwidth = 1;
         subconstraints.gridx = 0;
-        subconstraints.gridy = 2;
-        pane.add(searchPanel, subconstraints);
-        subconstraints.gridx = 4;
+        subconstraints.gridy = 0;
 
-        //constraints.insets = new Insets(2, 2, 2, 2);
-
-        Seekbutton = new JButton("Buscar");
-        searchPanel.add(Seekbutton, subconstraints);
-
-        subconstraints.gridy = 3;
-        borrar = new JButton("borrar");
-        //subconstraints.gridx = 2;
-        //subconstraints.gridy = 1;
-        //subconstraints.gridwidth = 1;
-        //subconstraints.insets = new Insets(1, 2, 1, 2);
-        searchPanel.add(borrar, subconstraints);
-
-
-        //cambio de directorio:
-        Container cone1 = new Container();
-
-        // cone1.setLayout(new GridBagLayout());
-        // GridBagConstraints Subconstraint = new GridBagConstraints();
-  /*      JLabel lbl1 = new JLabel("Incluir subcarpetas");
-        subconstraints.gridy = 2;
-        subconstraints.gridx = 4;
-        searchPanel.add(lbl1, subconstraints);*/
-  /*      checkbtn = new JCheckBox();
-        subconstraints.gridx = 5;
-        searchPanel.add(checkbtn, subconstraints);*/
-
-        JButton btn = new JButton("?");
-        subconstraints.gridx = 5;
-             /*   constraints.gridy = 1;
-        constraints.gridx = 4;
-        constraints.gridwidth = 1;
-        constraints.ipadx = 1;
-        pane.add(btn, constraints);*/
-        //subconstraints.gridx = 2;
-        searchPanel.add(btn, subconstraints);
-        btn.addActionListener(this);
-        subconstraints.gridx = 4;
-        selectLocation = new JButton("Cambiar Directorio");
-        //subconstraints.gridx = 0;
-        //subconstraints.gridy = 1;
-        //subconstraints.gridwidth = 2;
-        searchPanel.add(selectLocation, subconstraints);
-
-
-        //se agrega el container de directorio:
-        //constraints.gridy = 1;
-        //constraints.gridx = 2;
-        //constraints.gridwidth = 1;
-        //constraints.ipadx = 1;
-        //  pane.add(selectLocation, constraints);
-        pane.add(cone1, subconstraints);
-
-        subconstraints.gridx = 0;
-        subconstraints.gridy = 5;
-        subconstraints.fill = GridBagConstraints.HORIZONTAL;
-        subconstraints.insets = new Insets(5, 5, 5, 5);
-        subconstraints.ipadx = 900;
-        subconstraints.ipady = 550;
+        container1.add(selectLocation, subconstraints);
+        subconstraints.gridx = 1;
+        container1.add(buscar, subconstraints);
 
         constraints.gridx = 0;
-        constraints.gridwidth = 4;
+        constraints.gridy = 0;
 
-        String column[] = {"ID", "DOCUMENTO", "TEXTO", "PAGINAS"};
+        pane.add(container1, constraints);
+        constraints.gridy = 1;
+        constraints.ipadx = 500;
+
+        //    pane.add(mcontainer, subconstraints);
+
+        Seekbutton = new JButton("Buscar");
+        //   searchPanel.add(Seekbutton, subconstraints);
+
+        String column[] = {"ID", "DOCUMENTO", "TEXTO", " CLAVE","PAGINAS"};
 
         model = new DefaultTableModel(column, 0);
 
@@ -209,14 +116,16 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         jt.getColumnModel().getColumn(0).setMinWidth(60);
 
         jt.getColumnModel().getColumn(1).setCellRenderer(new TextAreaCellRenderer());
-        jt.getColumnModel().getColumn(1).setPreferredWidth(100);
+        jt.getColumnModel().getColumn(1).setPreferredWidth(150);
         jt.getColumnModel().getColumn(2).setCellRenderer(new TextAreaCellRenderer());
         jt.getColumnModel().getColumn(2).setPreferredWidth(100);
         jt.getColumnModel().getColumn(2).setPreferredWidth(700);
-        jt.getColumnModel().getColumn(3).setMaxWidth(80);
+        jt.getColumnModel().getColumn(3).setMaxWidth(150);
+        jt.getColumnModel().getColumn(4).setPreferredWidth(80);
 
         JScrollPane sp = new JScrollPane(jt);
-        pane.add(sp, subconstraints);
+
+        pane.add(sp, constraints);
 
         //pane.add(scrollPane);
         return pane;
@@ -239,16 +148,13 @@ public class firstPaneComponents extends JFrame implements ActionListener {
     }
 
     public void setListenerOnSearchButton(ActionListener mListener) {
-        Seekbutton.addActionListener(mListener);
+        buscar.addActionListener(mListener);
     }
 
     public void setListenerOnChangeLocation(ActionListener mListener) {
         selectLocation.addActionListener(mListener);
     }
 
-    public void setListenerOnDeleteButton(ActionListener mListener) {
-        borrar.addActionListener(mListener);
-    }
 
     public void addColumnToJtable(ArrayList<TableObject> data, String soughtWord) {
 
@@ -257,8 +163,11 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
         for (int i = 0; i < data.size(); i++) {
 
-            TableObject row = new TableObject(data.get(i).getId(), data.get(i).getDocumentName(), data.get(i).getText(),data.get(i).getKeyWord(), data.get(i).getPage());
-            model.addRow(new String[]{row.getId(), row.getDocumentName(), row.getText().replaceAll(soughtWord, "<<<" + soughtWord + ">>>"), row.getPage().toString()});
+            TableObject row = new TableObject(data.get(i).getId(), data.get(i).getDocumentName(), data.get(i).getText(), data.get(i).getKeyWord(),data.get(i).getPage());
+
+          //ESTE ERA UNA PALABRA FIJA
+          //  model.addRow(new String[]{row.getId(), row.getDocumentName(), row.getText().replaceAll(soughtWord, "<<<" + soughtWord + ">>>"), row.getPage().toString()});
+            model.addRow(new String[]{row.getId(), row.getDocumentName(), row.getText().replaceAll(row.getKeyWord(), "<<<" + row.getKeyWord() + ">>>"), row.getKeyWord(),row.getPage().toString()});
             //  model.addRow(new String[]{"id","asdasd"+"<strong>+asdasd</strong>sdadsdasdasdasdasdasd", "asfasd", "asasdasd"});
         }
     }
@@ -281,9 +190,6 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         return borrar;
     }
 
-    public JCheckBox getCheckbtn() {
-        return checkbtn;
-    }
 
     public void onRowSelected(ListSelectionListener listListener) {
         jt.getSelectionModel().addListSelectionListener(listListener);
@@ -295,10 +201,6 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
     public JTable getJt() {
         return jt;
-    }
-
-    public TextField getTextField() {
-        return textField;
     }
 
     public void highlight(JTextComponent textComp, String pattern) {
@@ -341,4 +243,23 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         model.setRowCount(0);
     }
 
+    public void setSeekbutton(JButton seekbutton) {
+        Seekbutton = seekbutton;
+    }
+
+    public void setSelectLocation(JButton selectLocation) {
+        this.selectLocation = selectLocation;
+    }
+
+    public JButton getBuscar() {
+        return buscar;
+    }
+
+    public void setBuscar(JButton buscar) {
+        this.buscar = buscar;
+    }
+
+    public void setBorrar(JButton borrar) {
+        this.borrar = borrar;
+    }
 }

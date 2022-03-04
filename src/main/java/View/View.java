@@ -12,8 +12,9 @@ import java.util.ArrayList;
 
 public class View extends JFrame {
 
-    public static firstPaneComponents mFirstComponentsPanel = new firstPaneComponents();
-    public static JMenu1 mJMenu = new JMenu1();
+    public secondPaneComponents mSecondComponentsPane = new secondPaneComponents();
+
+    public JMenu1 mJMenu = new JMenu1();
 
     public static void main(String[] args) {
 
@@ -51,7 +52,7 @@ public class View extends JFrame {
 
         frame.add(pane);
 
-        frame.add(mFirstComponentsPanel.getComponentsContainer());
+        frame.add(mSecondComponentsPane.getComponentsContainer());
         //mFirstComponentsPanel.setContentPane(pane);
 
         //frame.add(mJMenu1.getMenuBar());
@@ -63,66 +64,59 @@ public class View extends JFrame {
     }
 
     public void setListenerOnSeekButton(ActionListener mListener) {
-        mFirstComponentsPanel.setListenerOnSearchButton(mListener);
+        mSecondComponentsPane.setListenerOnSearchButton(mListener);
     }
 
-    public void setListenerOnDeleteButton(ActionListener mListener) {
-        mFirstComponentsPanel.setListenerOnDeleteButton(mListener);
-    }
-    public void setListenerOnLocationButton(ActionListener mListener) {
-        mFirstComponentsPanel.setListenerOnChangeLocation(mListener);
+     public void setListenerOnLocationButton(ActionListener mListener) {
+        mSecondComponentsPane.setListenerOnChangeLocation(mListener);
     }
 
     public void addNewRow(ArrayList<TableObject> data, String soughtWord) {
-        mFirstComponentsPanel.addColumnToJtable(data, soughtWord);
+        mSecondComponentsPane.addColumnToJtable(data, soughtWord);
     }
 
     public void setListenerOnResetData(ActionListener mListener) {
-        mFirstComponentsPanel.setListenerOnResetData(mListener);
-    }
-
-    public void noWordsFound() {
-        JOptionPane.showMessageDialog(null, "No se encontró nada ");
+        mSecondComponentsPane.setListenerOnResetData(mListener);
     }
 
     public void fileIsTooBig() {
         JOptionPane.showMessageDialog(null, "Archivo muy grande ");
     }
 
-    public Boolean getSubFolderValue() {
-        return mFirstComponentsPanel.getCheckbtn().isSelected();
-    }
 
     public void setOnJtableRowListener(ListSelectionListener listSelectionListener) {
-        mFirstComponentsPanel.onRowSelected(listSelectionListener);
+        mSecondComponentsPane.onRowSelected(listSelectionListener);
     }
 
     public void setOnCellJtableListener(MouseListener mouseListener) {
-        mFirstComponentsPanel.onCellMouseClickListener(mouseListener);
+        mSecondComponentsPane.onCellMouseClickListener(mouseListener);
     }
 
-    public static JTable getJTable() {
-        return mFirstComponentsPanel.getJt();
+
+    public JMenu1 getmJMenu() {
+        return mJMenu;
     }
 
-    public static firstPaneComponents getmFirstComponentsPanel() {
-        return mFirstComponentsPanel;
+    public void setmJMenu(JMenu1 mJMenu) {
+        this.mJMenu = mJMenu;
     }
 
     public void setMenuClickListener(ActionListener Listener) {
         mJMenu.setItem1Click(Listener);
     }
 
-    public static JMenu1 getmJMenu() {
-        return mJMenu;
-    }
-
-    public String getTextToSearch() {
-        return mFirstComponentsPanel.getTextField().getText();
-    }
 
     public void clearTable() {
-        mFirstComponentsPanel.clearTable();
+        mSecondComponentsPane.clearTable();
+    }
+
+
+    public secondPaneComponents getmSecondComponentsPane() {
+        return mSecondComponentsPane;
+    }
+
+    public void setmSecondComponentsPane(secondPaneComponents mSecondComponentsPane) {
+        this.mSecondComponentsPane = mSecondComponentsPane;
     }
 
 
