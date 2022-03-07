@@ -8,6 +8,7 @@ import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Properties;
 
 public class Model {
@@ -49,21 +50,53 @@ public class Model {
         //sin lo siguiente el campo "  " no lo reconoce como vacio o empthy
         // textToFind = textToFind.replaceAll("\\s+", "");
 
-        textToFind = new ArrayList<>(Arrays.asList("Notificar",
+        textToFind = new ArrayList<>(Arrays.asList(
+                "Notificar",
                 "avisar",
                 "cumplimiento",
-                "cumplir"
+                "cumplir",
+                "debe",
+                "entregar",
+                "exige",
+                "tener",
+                "tomar",
+                "acciones",
+                "aprobado",
+                "aceptado",
+                "requerido",
+                "permitido",
+                "prohibido",
+                "cargo",
+                "costa",
+                "costo",
+                "cuenta",
+                "responsabilidad",
+                "pronunciarse",
+                "rechazo",
+                "prejuicios",
+                "pagar",
+                "garantías",
+                "por escrito",
+                "permitir",
+                "detener",
+                "modificar",
+                "variar",
+                "analizar",
+                "aclarar",
+                "revisar",
+                "demorar",
+                "gestionar",
+                "negociar",
+                "aprobar"
         ));
 
         data.clear();
-        wordSeekedInPdf doc2 = null;
+        wordSeekedInPdf doc2 = new wordSeekedInPdf(textToFind, filesToSearch);
         //  wordSeekerInWord doc3 = null;
 
         if (!textToFind.isEmpty()) {
 
-
-            for (int j = 0; j < filesToSearch.size(); j++) {
-
+          /*  for (int j = 0; j < filesToSearch.size(); j++) {
                 for (int i = 0; i < textToFind.size(); i++) {
 
                     //    String extension = filesToSearch.get(j).length() > 5 ? filesToSearch.get(j).substring(filesToSearch.get(j).length() - 3) : "";
@@ -72,100 +105,37 @@ public class Model {
                     //else
                     //   if (extension.equals("doc")) doc3 = new wordSeekerInWord(textToFind, filesToSearch.get(j));
                 }
+            }*/
+
+            try {
+                for (int i = 0; i < doc2.getNameOfFileWordFound().size(); i++) {
+                    //id, extracto encontrado, la palabra buscada, pagina
+                    data.add((new TableObject(i + "", doc2.getNameOfFileWordFound().get(i), doc2.getSoughtWords().get(i), doc2.getKeyWord().get(i), doc2.getPagesOfTextFound().get(i))));
+                    //   data.add((new TableObject(  "12", "name of file", doc2.getSoughtWords().get(i), 12)));
+                }
+            } catch (Exception e) {
+
             }
 
-            for (int i = 0; i < doc2.getNameOfFileWordFound().size(); i++) {
-                //id, extracto encontrado, la palabra buscada, pagina
-                data.add((new TableObject(i + "", doc2.getNameOfFileWordFound().get(i), doc2.getSoughtWords().get(i), doc2.getKeyWord().get(i), doc2.getPagesOfTextFound().get(i))));
-                //   data.add((new TableObject(  "12", "name of file", doc2.getSoughtWords().get(i), 12)));
+            //ordenar por pagina:
+            int Minimo = 900000;
+            Integer Index = 1;
+            for (int j = 0; j < data.size(); j++) {
+                for (int i = j; i < data.size(); i++) {
+                    if (Minimo >= data.get(i).getPage()) {
+                        Minimo = data.get(i).getPage();
+                        Index = i;
+                    }
+                }
+                Collections.swap(data, j, Index);
+                data.get(j).setId(String.valueOf(j));
+
+                Minimo = 900000;
             }
 
-            //if (data.size() == 0) JOptionPane.showMessageDialog(null, "No se encontró nada ");
-            //se pega todo lo de word despues
-           /* for (int i = 0; i < doc3.getSoughtWords().size(); i++) {
-                data.add((new TableObject(i + "", doc3.getNameOfFileWordFound().get(i), doc3.getSoughtWords().get(i), doc3.getPagesOfTextFound().get(i))));
-            }
-*/
+
         }
     }
-
-    /*public void searchinAllDirectories(String path) {
-
-        searchInSingleDirectory(path);
-
-        File file = new File(path);
-        String[] directories = file.list(new FilenameFilter() {
-            @Override
-            public boolean accept(File current, String name) {
-                if (new File(current, name).isDirectory()) {
-                    String text = new File(current, name).toString();
-                    if (new File(current, name).toString().substring(text.length() - 5, text.length()).equals(".idea")) {
-                        returnStatement = false;
-                    } else if (new File(current, name).toString().substring(text.length() - 4, text.length()).equals(".git"))
-                        returnStatement = false;
-                    else
-                        returnStatement = true;
-                } else if (new File(current, name).isHidden()) { //elimina las carpetas invisibles
-                    returnStatement = false;
-                }
-                return returnStatement;
-            }
-        });
-
-        ArrayList<String> subpaths = new ArrayList();
-
-        for (String text : directories) {
-            subpaths.add(text);
-            System.out.println("subpaths: " + text);
-        }
-
-        File f = new File(path);
-        String[] pathnames;
-        pathnames = f.list();
-        if (pathnames != null) {
-            for (String names : pathnames) {
-                int wordLength = names.length();
-
-                String extention = wordLength >= 3 ? names.substring(wordLength - 3, wordLength) : "";
-
-                // String fileCompletePath = path + "\\" + subpaths.get(i) + "\\" + names;
-                String partialPath = path + "\\" + names;
-                //    System.out.println("complete path: " + fileCompletePath);
-                System.out.println("partial path: " + path + "\\" + names);
-
-                if (extention.equals("pdf"))  //solo se agregan archivos word
-                {
-                    //      System.out.println("se agrego: " + fileCompletePath);
-                    //if (!allFilesPaths.contains(fileCompletePath)) allFilesPaths.add(fileCompletePath);
-                    if (!allFilesPaths.contains(partialPath)) allFilesPaths.add(partialPath);
-                }
-            }
-        }
-        //  }
-    }*/
-
-   /*public void searchInSingleDirectory(String path) {
-
-        //solo archivos word por ahora:
-        File f = new File(path);
-        String[] pathnames;
-        // Populates the array with names of files and directories
-        pathnames = f.list();
-
-        // For each pathname in the pathnames array
-        for (String pathname : pathnames) {
-
-            // Print the names of files and directories
-            int wordLength = pathname.length();
-
-            String extention = wordLength >= 3 ? pathname.substring(wordLength - 3, wordLength) : "";
-
-            if (extention.equals("pdf"))  //solo se agregan archivos word
-                if (!allFilesPaths.contains(path + "\\" + pathname)) {
-                    allFilesPaths.add(path + "\\" + pathname);
-                }
-        }
-    }*/
 
     public String readCurrentDirectory() {
 

@@ -258,6 +258,7 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         for (int i = 0; i < data.size(); i++) {
 
             TableObject row = new TableObject(data.get(i).getId(), data.get(i).getDocumentName(), data.get(i).getText(),data.get(i).getKeyWord(), data.get(i).getPage());
+
             model.addRow(new String[]{row.getId(), row.getDocumentName(), row.getText().replaceAll(soughtWord, "<<<" + soughtWord + ">>>"), row.getPage().toString()});
             //  model.addRow(new String[]{"id","asdasd"+"<strong>+asdasd</strong>sdadsdasdasdasdasdasd", "asfasd", "asasdasd"});
         }

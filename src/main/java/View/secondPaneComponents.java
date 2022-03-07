@@ -83,7 +83,7 @@ public class secondPaneComponents extends JFrame implements ActionListener {
         Seekbutton = new JButton("Buscar");
         //   searchPanel.add(Seekbutton, subconstraints);
 
-        String column[] = {"ID", "DOCUMENTO", "TEXTO", " CLAVE","PAGINAS"};
+        String column[] = {"ID", "DOCUMENTO", "TEXTO", " CLAVE", "PAGINAS"};
 
         model = new DefaultTableModel(column, 0);
 
@@ -110,17 +110,21 @@ public class secondPaneComponents extends JFrame implements ActionListener {
         };
 
         //para resize textarea hay que anotar colunindex
+        //id:
         jt.getColumnModel().getColumn(0).setCellRenderer(new TextAreaCellRenderer());
         jt.getColumnModel().getColumn(0).setPreferredWidth(50);
         jt.getColumnModel().getColumn(0).setMaxWidth(60);
         jt.getColumnModel().getColumn(0).setMinWidth(60);
-
+        //Documento
         jt.getColumnModel().getColumn(1).setCellRenderer(new TextAreaCellRenderer());
         jt.getColumnModel().getColumn(1).setPreferredWidth(150);
+        //Texto
         jt.getColumnModel().getColumn(2).setCellRenderer(new TextAreaCellRenderer());
         jt.getColumnModel().getColumn(2).setPreferredWidth(100);
         jt.getColumnModel().getColumn(2).setPreferredWidth(700);
-        jt.getColumnModel().getColumn(3).setMaxWidth(150);
+        //Clave
+        jt.getColumnModel().getColumn(3).setMaxWidth(220);
+        //Paginas
         jt.getColumnModel().getColumn(4).setPreferredWidth(80);
 
         JScrollPane sp = new JScrollPane(jt);
@@ -163,11 +167,11 @@ public class secondPaneComponents extends JFrame implements ActionListener {
 
         for (int i = 0; i < data.size(); i++) {
 
-            TableObject row = new TableObject(data.get(i).getId(), data.get(i).getDocumentName(), data.get(i).getText(), data.get(i).getKeyWord(),data.get(i).getPage());
+            TableObject row = new TableObject(data.get(i).getId(), data.get(i).getDocumentName(), data.get(i).getText(), data.get(i).getKeyWord(), data.get(i).getPage());
 
-          //ESTE ERA UNA PALABRA FIJA
-          //  model.addRow(new String[]{row.getId(), row.getDocumentName(), row.getText().replaceAll(soughtWord, "<<<" + soughtWord + ">>>"), row.getPage().toString()});
-            model.addRow(new String[]{row.getId(), row.getDocumentName(), row.getText().replaceAll(row.getKeyWord(), "<<<" + row.getKeyWord() + ">>>"), row.getKeyWord(),row.getPage().toString()});
+            //ESTE ERA UNA PALABRA FIJA
+            //  model.addRow(new String[]{row.getId(), row.getDocumentName(), row.getText().replaceAll(soughtWord, "<<<" + soughtWord + ">>>"), row.getPage().toString()});
+            model.addRow(new String[]{row.getId(), row.getDocumentName(), row.getText().replaceAll(row.getKeyWord(), "<<<" + row.getKeyWord() + ">>>"), row.getKeyWord(), row.getPage().toString()});
             //  model.addRow(new String[]{"id","asdasd"+"<strong>+asdasd</strong>sdadsdasdasdasdasdasd", "asfasd", "asasdasd"});
         }
     }
