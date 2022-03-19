@@ -31,12 +31,15 @@ public class Controller {
         //set listener to delete button
 //        mView.setListenerOnDeleteButton(new ListenerClass());
         //set listener to change location
-        mView.setListenerOnLocationButton(new ListenerClass());
+        mView.setListenerOnExportButton(new ListenerClass());
+
+        mView.setListenerOnExportButton(new ListenerClass());
         //set listener to cell excel
         mView.setOnJtableRowListener(new TableListListenerClass());
 
         // mView.
         mView.setMenuClickListener(new ListenerClass());
+
 
     }
 
@@ -52,7 +55,7 @@ public class Controller {
                         mModel.saveNewCurrentDirectory(mModel.changeFolderLocation());
                     } catch (IOException ex) {
                         ex.printStackTrace();
-                        System.out.println("error4 "+ex);
+                        System.out.println("error4 " + ex);
                     }
                 } else {
                     System.out.println("si hay directorio");
@@ -68,12 +71,12 @@ public class Controller {
 
 
                 } catch (Exception ex) {
-                    System.out.println("exepcion "+ex);
+                    System.out.println("exepcion " + ex);
                     ex.printStackTrace();
                 }
                 //se agrega a tabla
-                 //mView.addNewRow(mModel.getData(), mView.getTextToSearch());
-         //       mView.addNewRow(mModel.getData(), mModel.getTextToFind());
+                //mView.addNewRow(mModel.getData(), mView.getTextToSearch());
+                //       mView.addNewRow(mModel.getData(), mModel.getTextToFind());
                 mView.addNewRow(mModel.getData(), "PALABRA");
 
 
@@ -91,6 +94,9 @@ public class Controller {
             } else if (e.getSource() == mView.getmSecondComponentsPane().getBorrar()) {
                 System.out.println("click borrar");
                 mView.clearTable();
+            } else if (e.getSource() == mView.getmSecondComponentsPane().getExportar()) {
+
+                new ExcelExport(mModel.readCurrentDirectory()+"\\excel2.xls", mModel.getData());
             }
         }
     }
@@ -111,7 +117,7 @@ public class Controller {
                 //        }
             } catch (Exception ex) {
                 ex.printStackTrace();
-                System.out.println("error3 "+ex);
+                System.out.println("error3 " + ex);
             }
 
         }

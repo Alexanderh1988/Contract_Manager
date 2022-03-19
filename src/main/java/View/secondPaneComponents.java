@@ -15,12 +15,16 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import static java.awt.GridBagConstraints.FIRST_LINE_START;
+
 public class secondPaneComponents extends JFrame implements ActionListener {
 
+    private static final boolean RIGHT_TO_LEFT = true;
     private Container componentsContainer;
     private JButton Seekbutton;
     private JButton selectLocation;
     private JButton buscar;
+    private JButton exportar;
     private JButton borrar;
     private DefaultTableModel model;
     private JTable jt;
@@ -38,13 +42,25 @@ public class secondPaneComponents extends JFrame implements ActionListener {
 
     public Container addComponentsToPane(Container pane) {
 
+        GridBagLayout g = new GridBagLayout();
+
+
         //ROW #1
-        pane.setLayout(new GridBagLayout());
+        pane.setLayout(g);
+
+        if (RIGHT_TO_LEFT) {
+            pane.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+        }
 
         GridBagConstraints constraints = new GridBagConstraints();
         GridBagConstraints subconstraints = new GridBagConstraints();
 
-        subconstraints.insets = new Insets(2, 2, 2, 2);
+        constraints.fill = GridBagConstraints.PAGE_END;
+        subconstraints.fill = GridBagConstraints.PAGE_END;
+
+        //https://www.javatpoint.com/java-gridbaglayout
+
+        //  subconstraints.insets = new Insets(2, 2, 2, 2);
 
         // Container searchPanel = new Container();
         //   subconstraints.ipady=50;
@@ -55,10 +71,12 @@ public class secondPaneComponents extends JFrame implements ActionListener {
 
         Container container1 = new Container();
 
-        container1.setLayout(new GridBagLayout());
+        container1.setLayout(g);
 
         selectLocation = new JButton("Cambiar Directorio");
         buscar = new JButton("buscar");
+
+        exportar = new JButton("Exportar");
         //  constraints.fill = GridBagConstraints.CENTER;
         //   subconstraints.i = 50;
         // constraints.weightx = 0.5;
@@ -70,6 +88,9 @@ public class secondPaneComponents extends JFrame implements ActionListener {
         container1.add(selectLocation, subconstraints);
         subconstraints.gridx = 1;
         container1.add(buscar, subconstraints);
+
+        subconstraints.gridx = 2;
+        container1.add(exportar, subconstraints);
 
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -157,6 +178,10 @@ public class secondPaneComponents extends JFrame implements ActionListener {
 
     public void setListenerOnChangeLocation(ActionListener mListener) {
         selectLocation.addActionListener(mListener);
+    }
+
+    public void setListenerOnExportButton(ActionListener mListener) {
+        exportar.addActionListener(mListener);
     }
 
 
@@ -265,5 +290,14 @@ public class secondPaneComponents extends JFrame implements ActionListener {
 
     public void setBorrar(JButton borrar) {
         this.borrar = borrar;
+    }
+
+
+    public JButton getExportar() {
+        return exportar;
+    }
+
+    public void setExportar(JButton exportar) {
+        this.exportar = exportar;
     }
 }

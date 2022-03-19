@@ -71,6 +71,11 @@ public class View extends JFrame {
         mSecondComponentsPane.setListenerOnChangeLocation(mListener);
     }
 
+    public void setListenerOnExportButton(ActionListener mListener) {
+        mSecondComponentsPane.setListenerOnExportButton(mListener);
+    }
+
+
     public void addNewRow(ArrayList<TableObject> data, String soughtWord) {
         mSecondComponentsPane.addColumnToJtable(data, soughtWord);
     }

@@ -110,29 +110,33 @@ public class Model {
             try {
                 for (int i = 0; i < doc2.getNameOfFileWordFound().size(); i++) {
                     //id, extracto encontrado, la palabra buscada, pagina
-                    data.add((new TableObject(i + "", doc2.getNameOfFileWordFound().get(i), doc2.getSoughtWords().get(i), doc2.getKeyWord().get(i), doc2.getPagesOfTextFound().get(i))));
+
+                    data.add((new TableObject(i + "", doc2.getNameOfFileWordFound().get(i), doc2.getSoughtWords().get(i).replaceAll(doc2.getKeyWord().get(i), "<<<<" + doc2.getKeyWord().get(i) + ">>>>"), doc2.getKeyWord().get(i), doc2.getPagesOfTextFound().get(i))));
                     //   data.add((new TableObject(  "12", "name of file", doc2.getSoughtWords().get(i), 12)));
+
+                    //row.getText().replaceAll(row.getKeyWord(), "<<<" + row.getKeyWord() + ">>>")
                 }
             } catch (Exception e) {
 
             }
+            //for (int i = 0; i < data.size(); i++) {
 
-            //ordenar por pagina:
-            int Minimo = 900000;
-            Integer Index = 1;
-            for (int j = 0; j < data.size(); j++) {
-                for (int i = j; i < data.size(); i++) {
-                    if (Minimo >= data.get(i).getPage()) {
-                        Minimo = data.get(i).getPage();
-                        Index = i;
+                //ordenar por pagina:
+                int Minimo = 900000;
+                Integer Index = 1;
+                for (int j = 0; j < data.size(); j++) {
+                    for (int i = j; i < data.size(); i++) {
+                        if (Minimo >= data.get(i).getPage()) {
+                            Minimo = data.get(i).getPage();
+                            Index = i;
+                        }
                     }
+                    Collections.swap(data, j, Index);
+                    data.get(j).setId(String.valueOf(j));
+
+                    Minimo = 900000;
                 }
-                Collections.swap(data, j, Index);
-                data.get(j).setId(String.valueOf(j));
-
-                Minimo = 900000;
-            }
-
+            //}
 
         }
     }

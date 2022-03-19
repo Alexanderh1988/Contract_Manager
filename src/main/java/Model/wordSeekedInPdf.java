@@ -62,7 +62,7 @@ public class wordSeekedInPdf {
                             //    int foundIndex = docText.toLowerCase().indexOf(soughtWord.toLowerCase());
 
                             String restText = docText;
-                            int largoDeExtracto = 300;
+                            int largoDeExtracto = 400;
                             int foundIndex = docText.toLowerCase().indexOf(soughtWord.get(k).toLowerCase());
 
                             while (foundIndex != -1 && foundIndex != 0) {
