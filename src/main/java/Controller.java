@@ -5,6 +5,8 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -13,8 +15,8 @@ import java.io.IOException;
 
 public class Controller {
 
-    View mView;
-    Model mModel;
+    public static View mView;
+    public static Model mModel;
 
     public static void main(String[] args) {
         //new Controller(new View());
@@ -26,61 +28,35 @@ public class Controller {
         this.mView = mView;
         this.mModel = mModel;
 
-        //set listener to seek button
-        mView.setListenerOnSeekButton(new ListenerClass());
-        //set listener to delete button
-//        mView.setListenerOnDeleteButton(new ListenerClass());
-        //set listener to change location
-        mView.setListenerOnExportButton(new ListenerClass());
+        ListenerClass mListener = new ListenerClass();
+        TableListListenerClass mTableListener = new TableListListenerClass();
 
-        mView.setListenerOnExportButton(new ListenerClass());
-        //set listener to cell excel
-        mView.setOnJtableRowListener(new TableListListenerClass());
+        //main menu:
+        mView.setMenuChequearListener(mListener);
+        mView.setMenuBuscarListener(mListener);
 
-        // mView.
-        mView.setMenuClickListener(new ListenerClass());
+        //firstPane:
+        mView.setListenerOnSeekButton(mListener);
 
+
+        //secondPane:
+        mView.setListenerOnSeekButton2(mListener);
+        //    mView.setListenerOnDeleteButton(new ListenerClass());
+        mView.setOnJtableRowListener(mTableListener);
+
+
+        //transfersal
+        mView.setListenerOnExportButton(mListener);
+        mView.setLocationChooserListener(mListener);
 
     }
 
-    class ListenerClass implements ActionListener {
+    public class ListenerClass implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-            if (e.getSource() == mView.getmSecondComponentsPane().getBuscar()) { // boton buscar
-
-                if (mModel.readCurrentDirectory() == null) {
-                    System.out.println("no hay directorio");
-                    try {
-                        mModel.saveNewCurrentDirectory(mModel.changeFolderLocation());
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                        System.out.println("error4 " + ex);
-                    }
-                } else {
-                    System.out.println("si hay directorio");
-                    mModel.directoriesFinder(mModel.readCurrentDirectory());
-                }
-
-                mModel.saveAllFiles(mModel.getAllDirectories());
-
-                try {
-
-                    mModel.clearData();
-                    mModel.searchingInDocument(mModel.getAllFilesPaths());
-
-
-                } catch (Exception ex) {
-                    System.out.println("exepcion " + ex);
-                    ex.printStackTrace();
-                }
-                //se agrega a tabla
-                //mView.addNewRow(mModel.getData(), mView.getTextToSearch());
-                //       mView.addNewRow(mModel.getData(), mModel.getTextToFind());
-                mView.addNewRow(mModel.getData(), "PALABRA");
-
-
-            } else if (e.getSource() == mView.getmSecondComponentsPane().getSelectLocation()) {  //se cambia el nuevo directorio
+            //listener para page2:
+            if (e.getSource() == mView.getmSecondComponentsPane().getSelectLocation()) {  //se cambia el nuevo directorio
 
                 try {
                     mModel.saveNewCurrentDirectory(mModel.changeFolderLocation());
@@ -88,21 +64,70 @@ public class Controller {
                     System.out.println("error en gua");
                     ex.printStackTrace();
                 }
-
-            } else if (e.getSource() == mView.getmJMenu().getMenuItem1()) {
-                System.out.println("Menu click");
             } else if (e.getSource() == mView.getmSecondComponentsPane().getBorrar()) {
+
                 System.out.println("click borrar");
                 mView.clearTable();
-            } else if (e.getSource() == mView.getmSecondComponentsPane().getExportar()) {
 
-                new ExcelExport(mModel.readCurrentDirectory()+"\\excel2.xls", mModel.getData());
             }
+            //listener para page1:
+            else                  //menu listeners:
+                if (e.getSource() == mView.getmJMenu().getMenuBuscador()) {
+                    System.out.println("menu buscador");
+
+                    mView.setMenuItemBuscador();
+
+                } else if (e.getSource() == mView.getmJMenu().getMenuChequeo()) {
+                    System.out.println("menu chequeo");
+                    mView.setMenuItemChequeo();
+                }
+
+                //transversal:
+                else if (e.getSource() == mView.getmFirstComponentsPane().getSelectLocation() || e.getSource() == mView.getmSecondComponentsPane().getLocation()) {
+                    mModel.changeFolderLocation();
+                } else if (e.getSource() == mView.getmSecondComponentsPane().getExportar()) {
+                    new ExcelExport(mModel.readCurrentDirectory() + "\\excel2.xls", mModel.getData());
+
+                } else if (e.getSource() == mView.getmSecondComponentsPane().getSeekbutton2() ||
+                        e.getSource() == mView.getmFirstComponentsPane().getSeekbutton()) { // boton buscar
+
+                    Boolean isSecondPane = e.getSource() == mView.getmSecondComponentsPane().getSeekbutton2();
+
+                    if (mModel.readCurrentDirectory() == null) {
+                        System.out.println("no hay directorio");
+                        try {
+                            mModel.saveNewCurrentDirectory(mModel.changeFolderLocation());
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                            System.out.println("error4 " + ex);
+                        }
+                    } else {
+                        System.out.println("si hay directorio");
+                        mModel.directoriesFinder(mModel.readCurrentDirectory());
+                    }
+                    mModel.saveAllFiles(mModel.getAllDirectories());
+
+                    try {
+                        mModel.clearData();
+                        if (isSecondPane)
+                            mModel.searchingInDocument(mModel.getAllFilesPaths(), "check");
+                        else
+                            mModel.searchingInDocument(mModel.getAllFilesPaths(), mView.getmFirstComponentsPane().getTextField1().getText());
+                    } catch (Exception ex) {
+                        System.out.println("exepcion " + ex);
+                        ex.printStackTrace();
+                    }
+                    if (isSecondPane)
+                        mView.addNewRow2(mModel.getData());
+                    else
+                        mView.addNewRow(mModel.getData(), mView.getmFirstComponentsPane().getTextField1().getText());
+
+                }
         }
     }
 
-    private class TableListListenerClass implements ListSelectionListener {
-        @Override
+    public class TableListListenerClass implements ListSelectionListener {
+
         public void valueChanged(ListSelectionEvent e) {
             //System.out.println("jtab clicked: " );
             try {
@@ -119,37 +144,9 @@ public class Controller {
                 ex.printStackTrace();
                 System.out.println("error3 " + ex);
             }
-
         }
     }
+
 }
-
-    /*private class MouseListenerClass implements MouseListener {
-        @Override
-        public void mouseClicked(MouseEvent e)
-        {
-            System.out.println("Mouse Clicked");
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseReleased(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseEntered(MouseEvent e) {
-
-        }
-
-        @Override
-        public void mouseExited(MouseEvent e) {
-
-        }
-    }*/
 
 

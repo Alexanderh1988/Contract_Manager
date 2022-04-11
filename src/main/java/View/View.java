@@ -4,6 +4,7 @@ import Model.TableObject;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.event.MenuListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,8 +14,10 @@ import java.util.ArrayList;
 public class View extends JFrame {
 
     public secondPaneComponents mSecondComponentsPane = new secondPaneComponents();
-
-    public JMenu1 mJMenu = new JMenu1();
+    public firstPaneComponents mFirstComponentsPane = new firstPaneComponents();
+    public JMenu1 mJMenu1 = new JMenu1();
+    JFrame frame;
+    Container pane;
 
     public static void main(String[] args) {
 
@@ -24,70 +27,70 @@ public class View extends JFrame {
 
     public View() {
 
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+        javax.swing.SwingUtilities.invokeLater(() -> {
 
-                createAndShowGUI();
+            createAndShowGUI();
 
-                //   timer = new Timer();
-                // old.Helper class extends TimerTask
-                //   TimerTask task = new old.TableConJareaIncorporado.Helper2();
-                //  timer.schedule(task, 1000, 3000);
+            //   timer = new Timer();
+            // old.Helper class extends TimerTask
+            //   TimerTask task = new old.TableConJareaIncorporado.Helper2();
+            //  timer.schedule(task, 1000, 3000);
 
-            }
         });
 
     }
 
     private void createAndShowGUI() {
 
-        JFrame frame = new JFrame("Contract Master");
+        frame = new JFrame("Contract Master");
+
         //frame.setSize(new Dimension(950, 600));
         frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
         frame.setMinimumSize(new Dimension(400, 600));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Container pane = new Container();
+        pane = new Container();
 
         frame.add(pane);
 
-        frame.add(mSecondComponentsPane.getComponentsContainer());
+        frame.getContentPane().add(mFirstComponentsPane.getComponentsContainer());
+
+        //frame.add(mSecondComponentsPane.getComponentsContainer());
+        // frame.add(mFirstComponentsPane.getComponentsContainer());
         //mFirstComponentsPanel.setContentPane(pane);
-
         //frame.add(mJMenu1.getMenuBar());
-        frame.setJMenuBar(mJMenu.getMenuBar());
+        frame.setJMenuBar(mJMenu1.getMenuBar1());
 
-        frame.setResizable(true);
+        frame.setResizable(false);
         // frame.pack();
         frame.setVisible(true);
     }
 
     public void setListenerOnSeekButton(ActionListener mListener) {
-        mSecondComponentsPane.setListenerOnSearchButton(mListener);
+        mFirstComponentsPane.setButtonSeekerListener(mListener);
     }
 
-     public void setListenerOnLocationButton(ActionListener mListener) {
-        mSecondComponentsPane.setListenerOnChangeLocation(mListener);
+    public void setListenerOnSeekButton2(ActionListener mListener) {
+        mSecondComponentsPane.setListenerOnSeekButton2(mListener);
     }
 
     public void setListenerOnExportButton(ActionListener mListener) {
         mSecondComponentsPane.setListenerOnExportButton(mListener);
     }
 
-
     public void addNewRow(ArrayList<TableObject> data, String soughtWord) {
-        mSecondComponentsPane.addColumnToJtable(data, soughtWord);
+        mFirstComponentsPane.addColumnToJtable(data, soughtWord);
     }
 
-    public void setListenerOnResetData(ActionListener mListener) {
-        mSecondComponentsPane.setListenerOnResetData(mListener);
+    public void addNewRow2(ArrayList<TableObject> data) {
+        mSecondComponentsPane.addColumnToJtable(data);
     }
+
 
     public void fileIsTooBig() {
         JOptionPane.showMessageDialog(null, "Archivo muy grande ");
     }
-
 
     public void setOnJtableRowListener(ListSelectionListener listSelectionListener) {
         mSecondComponentsPane.onRowSelected(listSelectionListener);
@@ -97,24 +100,25 @@ public class View extends JFrame {
         mSecondComponentsPane.onCellMouseClickListener(mouseListener);
     }
 
-
     public JMenu1 getmJMenu() {
-        return mJMenu;
+        return mJMenu1;
     }
 
     public void setmJMenu(JMenu1 mJMenu) {
-        this.mJMenu = mJMenu;
+        this.mJMenu1 = mJMenu;
     }
 
-    public void setMenuClickListener(ActionListener Listener) {
-        mJMenu.setItem1Click(Listener);
+    public void setMenuChequearListener(ActionListener Listener) {
+        mJMenu1.getMenuChequeo().addActionListener(Listener);
     }
 
+    public void setMenuBuscarListener(ActionListener Listener) {
+        mJMenu1.getMenuBuscador().addActionListener(Listener);
+    }
 
     public void clearTable() {
         mSecondComponentsPane.clearTable();
     }
-
 
     public secondPaneComponents getmSecondComponentsPane() {
         return mSecondComponentsPane;
@@ -124,5 +128,30 @@ public class View extends JFrame {
         this.mSecondComponentsPane = mSecondComponentsPane;
     }
 
+    public void setLocationChooserListener(ActionListener mListener) {
 
+        mSecondComponentsPane.getSelectLocation().addActionListener(mListener);
+        mFirstComponentsPane.getSelectLocation().addActionListener(mListener);
+
+    }
+
+    public firstPaneComponents getmFirstComponentsPane() {
+        return mFirstComponentsPane;
+    }
+
+    public void setMenuItemBuscador() {
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(mFirstComponentsPane.getComponentsContainer());
+        frame.validate();
+        frame.repaint();
+    }
+
+    public void setMenuItemChequeo() {
+        frame.getContentPane().removeAll();
+        frame.getContentPane().add(mSecondComponentsPane.getComponentsContainer());
+        frame.validate();
+        frame.repaint();
+
+    }
 }
+

@@ -18,7 +18,45 @@ public class Model {
     private Boolean returnStatement = false;
     directoriePathFinder mDirectoriePathFinder = new directoriePathFinder();
     ArrayList<String> allDirectories = new ArrayList<>();
-    ArrayList<String> textToFind;
+    ArrayList<String> textToFindCheck = new ArrayList<>(Arrays.asList(
+            "Notificar",
+            "avisar",
+            "cumplimiento",
+            "cumplir",
+            "debe",
+            "entregar",
+            "exige",
+            "tener",
+            "tomar",
+            "acciones",
+            "aprobado",
+            "aceptado",
+            "requerido",
+            "permitido",
+            "prohibido",
+            "cargo",
+            "costa",
+            "costo",
+            "cuenta",
+            "responsabilidad",
+            "pronunciarse",
+            "rechazo",
+            "prejuicios",
+            "pagar",
+            "garantías",
+            "por escrito",
+            "permitir",
+            "detener",
+            "modificar",
+            "variar",
+            "analizar",
+            "aclarar",
+            "revisar",
+            "demorar",
+            "gestionar",
+            "negociar",
+            "aprobar"
+    ));
 
     public static void main(String[] args) {
         new Model();
@@ -45,56 +83,24 @@ public class Model {
         return fileChooser.getSelectedFile().toString();
     }
 
-    public void searchingInDocument(ArrayList<String> filesToSearch) throws IOException, InvalidFormatException {
+    public void searchingInDocument(ArrayList<String> filesToSearch, String check) throws IOException {
 
         //sin lo siguiente el campo "  " no lo reconoce como vacio o empthy
         // textToFind = textToFind.replaceAll("\\s+", "");
 
-        textToFind = new ArrayList<>(Arrays.asList(
-                "Notificar",
-                "avisar",
-                "cumplimiento",
-                "cumplir",
-                "debe",
-                "entregar",
-                "exige",
-                "tener",
-                "tomar",
-                "acciones",
-                "aprobado",
-                "aceptado",
-                "requerido",
-                "permitido",
-                "prohibido",
-                "cargo",
-                "costa",
-                "costo",
-                "cuenta",
-                "responsabilidad",
-                "pronunciarse",
-                "rechazo",
-                "prejuicios",
-                "pagar",
-                "garantías",
-                "por escrito",
-                "permitir",
-                "detener",
-                "modificar",
-                "variar",
-                "analizar",
-                "aclarar",
-                "revisar",
-                "demorar",
-                "gestionar",
-                "negociar",
-                "aprobar"
-        ));
+        ArrayList<String> wordsToCheck = new ArrayList<>();
+
+        if (check.equals("check")) {  //chequeo estandar
+            wordsToCheck = textToFindCheck;
+        } else {   //palabra especifica a buscar
+            wordsToCheck.add(check);
+        }
 
         data.clear();
-        wordSeekedInPdf doc2 = new wordSeekedInPdf(textToFind, filesToSearch);
+        wordSeekedInPdf doc2 = new wordSeekedInPdf(wordsToCheck, filesToSearch);
         //  wordSeekerInWord doc3 = null;
 
-        if (!textToFind.isEmpty()) {
+        if (!wordsToCheck.isEmpty()) {
 
           /*  for (int j = 0; j < filesToSearch.size(); j++) {
                 for (int i = 0; i < textToFind.size(); i++) {
@@ -121,23 +127,21 @@ public class Model {
             }
             //for (int i = 0; i < data.size(); i++) {
 
-                //ordenar por pagina:
-                int Minimo = 900000;
-                Integer Index = 1;
-                for (int j = 0; j < data.size(); j++) {
-                    for (int i = j; i < data.size(); i++) {
-                        if (Minimo >= data.get(i).getPage()) {
-                            Minimo = data.get(i).getPage();
-                            Index = i;
-                        }
+            //ordenar por pagina:
+            int Minimo = 900000;
+            Integer Index = 1;
+            for (int j = 0; j < data.size(); j++) {
+                for (int i = j; i < data.size(); i++) {
+                    if (Minimo >= data.get(i).getPage()) {
+                        Minimo = data.get(i).getPage();
+                        Index = i;
                     }
-                    Collections.swap(data, j, Index);
-                    data.get(j).setId(String.valueOf(j));
-
-                    Minimo = 900000;
                 }
-            //}
+                Collections.swap(data, j, Index);
+                data.get(j).setId(String.valueOf(j));
 
+                Minimo = 900000;
+            }
         }
     }
 
@@ -178,7 +182,6 @@ public class Model {
     public void OpenWordFile(File fileClicked) throws IOException {
 
         Desktop.getDesktop().open(fileClicked);
-
     }
 
  /*   public boolean isOneOfTheFilesTooBig() {result = "C:\Users\Alex Hs\Desktop\3381\Importante\Anexos Licitación.pdf"
@@ -217,7 +220,6 @@ public class Model {
                 System.out.println(file.getAbsoluteFile() + "Permission Denied");
             }
         }
-
     }
 
     public ArrayList<String> getAllFilesPaths() {
@@ -258,11 +260,4 @@ public class Model {
         return allDirectories;
     }
 
-    public ArrayList<String> getTextToFind() {
-        return textToFind;
-    }
-
-    public void setTextToFind(ArrayList<String> textToFind) {
-        this.textToFind = textToFind;
-    }
 }

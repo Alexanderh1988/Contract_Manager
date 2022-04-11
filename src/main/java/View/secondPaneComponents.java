@@ -21,10 +21,9 @@ public class secondPaneComponents extends JFrame implements ActionListener {
 
     private static final boolean RIGHT_TO_LEFT = true;
     private Container componentsContainer;
-    private JButton Seekbutton;
     private JButton selectLocation;
-    private JButton buscar;
-    private JButton exportar;
+    private JButton SeekButton2;
+    private JButton export;
     private JButton borrar;
     private DefaultTableModel model;
     private JTable jt;
@@ -43,7 +42,6 @@ public class secondPaneComponents extends JFrame implements ActionListener {
     public Container addComponentsToPane(Container pane) {
 
         GridBagLayout g = new GridBagLayout();
-
 
         //ROW #1
         pane.setLayout(g);
@@ -68,15 +66,16 @@ public class secondPaneComponents extends JFrame implements ActionListener {
 
         constraints.ipady = 50;
         constraints.ipadx = 200;
+        subconstraints.insets = new Insets(2, 2, 2, 2);
 
         Container container1 = new Container();
 
         container1.setLayout(g);
 
         selectLocation = new JButton("Cambiar Directorio");
-        buscar = new JButton("buscar");
+        SeekButton2 = new JButton("Buscar");
 
-        exportar = new JButton("Exportar");
+        export = new JButton("Exportar");
         //  constraints.fill = GridBagConstraints.CENTER;
         //   subconstraints.i = 50;
         // constraints.weightx = 0.5;
@@ -87,10 +86,10 @@ public class secondPaneComponents extends JFrame implements ActionListener {
 
         container1.add(selectLocation, subconstraints);
         subconstraints.gridx = 1;
-        container1.add(buscar, subconstraints);
+        container1.add(SeekButton2, subconstraints);
 
         subconstraints.gridx = 2;
-        container1.add(exportar, subconstraints);
+        container1.add(export, subconstraints);
 
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -98,11 +97,6 @@ public class secondPaneComponents extends JFrame implements ActionListener {
         pane.add(container1, constraints);
         constraints.gridy = 1;
         constraints.ipadx = 500;
-
-        //    pane.add(mcontainer, subconstraints);
-
-        Seekbutton = new JButton("Buscar");
-        //   searchPanel.add(Seekbutton, subconstraints);
 
         String column[] = {"ID", "DOCUMENTO", "TEXTO", " CLAVE", "PAGINAS"};
 
@@ -172,20 +166,16 @@ public class secondPaneComponents extends JFrame implements ActionListener {
         return preferredHeight + insets.top + insets.bottom;
     }
 
-    public void setListenerOnSearchButton(ActionListener mListener) {
-        buscar.addActionListener(mListener);
-    }
-
-    public void setListenerOnChangeLocation(ActionListener mListener) {
-        selectLocation.addActionListener(mListener);
+    public void setListenerOnSeekButton2(ActionListener mListener) {
+        SeekButton2.addActionListener(mListener);
     }
 
     public void setListenerOnExportButton(ActionListener mListener) {
-        exportar.addActionListener(mListener);
+        export.addActionListener(mListener);
     }
 
 
-    public void addColumnToJtable(ArrayList<TableObject> data, String soughtWord) {
+    public void addColumnToJtable(ArrayList<TableObject> data ) {
 
         //primero borra todas las tablas
         model.setRowCount(0);
@@ -207,8 +197,8 @@ public class secondPaneComponents extends JFrame implements ActionListener {
                 "cierra todas las instancias de word de los archivos en los que quieras buscar");
     }
 
-    public JButton getSeekbutton() {
-        return Seekbutton;
+    public JButton getSeekbutton2() {
+        return SeekButton2;
     }
 
     public JButton getSelectLocation() {
@@ -245,7 +235,7 @@ public class secondPaneComponents extends JFrame implements ActionListener {
             // Search for pattern
             while ((pos = text.indexOf(pattern, pos)) >= 0) {
                 // Create highlighter using private painter and apply around pattern
-                hilite.addHighlight(pos, pos + pattern.length(), myHighlightPainter);
+                //     hilite.addHighlight(pos, pos + pattern.length(), myHighlightPainter);
                 pos += pattern.length();
             }
 
@@ -254,9 +244,9 @@ public class secondPaneComponents extends JFrame implements ActionListener {
     }
 
     // An instance of the private subclass of the default highlight painter
-    MyHighlightPainter myHighlightPainter = new MyHighlightPainter(Color.red);
+    //   MyHighlightPainter myHighlightPainter = new MyHighlightPainter(Color.red);
 
-    public void setListenerOnResetData(ActionListener mListener) {
+ /*   public void setListenerOnResetData(ActionListener mListener) {
         borrar.addActionListener(mListener);
     }
 
@@ -266,38 +256,27 @@ public class secondPaneComponents extends JFrame implements ActionListener {
         public MyHighlightPainter(Color color) {
             super(color);
         }
-    }
+    }*/
 
     void clearTable() {
         model.setRowCount(0);
-    }
-
-    public void setSeekbutton(JButton seekbutton) {
-        Seekbutton = seekbutton;
     }
 
     public void setSelectLocation(JButton selectLocation) {
         this.selectLocation = selectLocation;
     }
 
-    public JButton getBuscar() {
-        return buscar;
-    }
-
-    public void setBuscar(JButton buscar) {
-        this.buscar = buscar;
-    }
 
     public void setBorrar(JButton borrar) {
         this.borrar = borrar;
     }
 
-
     public JButton getExportar() {
-        return exportar;
+        return export;
     }
 
     public void setExportar(JButton exportar) {
-        this.exportar = exportar;
+        this.export = exportar;
     }
+
 }
