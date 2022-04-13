@@ -84,7 +84,13 @@ public class Controller {
 
                 //transversal:
                 else if (e.getSource() == mView.getmFirstComponentsPane().getSelectLocation() || e.getSource() == mView.getmSecondComponentsPane().getLocation()) {
-                    mModel.changeFolderLocation();
+
+                    try {
+                        mModel.saveNewCurrentDirectory( mModel.changeFolderLocation());
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+
                 } else if (e.getSource() == mView.getmSecondComponentsPane().getExportar()) {
                     new ExcelExport(mModel.readCurrentDirectory() + "\\excel2.xls", mModel.getData());
 
@@ -112,7 +118,7 @@ public class Controller {
                         if (isSecondPane)
                             mModel.searchingInDocument(mModel.getAllFilesPaths(), "check");
                         else
-                            mModel.searchingInDocument(mModel.getAllFilesPaths(), mView.getmFirstComponentsPane().getTextField1().getText());
+                            mModel.searchingInDocument(mModel.getAllFilesPaths(), mView.getmFirstComponentsPane().getTextField1().getText().trim());
                     } catch (Exception ex) {
                         System.out.println("exepcion " + ex);
                         ex.printStackTrace();
@@ -131,14 +137,18 @@ public class Controller {
         public void valueChanged(ListSelectionEvent e) {
             //System.out.println("jtab clicked: " );
             try {
-                //  System.out.println("open docu: " + mModel.getIndexOfRowClicked(mView.getJTable()));
+                //   System.out.println("open docu: " + mModel.getIndexOfRowClicked(mView.getJTable()));
                 //  if (e.getValueIsAdjusting() == false) {
-                //     int fileNameClicked = mModel.getIndexOfRowClicked(View.getJTable());
+                int fileNameClicked;
+                if (mView.getCurrentPane1())
+                    fileNameClicked = mModel.getIndexOfRowClicked(mView.getmFirstComponentsPane().getJt());
+                else
+                    fileNameClicked = mModel.getIndexOfRowClicked(mView.getmSecondComponentsPane().getJt());
                 //    System.out.println(fileNameClicked);
                 //    System.out.println(mModel.getData().get(fileNameClicked).getDocumentName());
-                //    File fileClicked = new File(mModel.getData().get(fileNameClicked).getDocumentName());
+                File fileClicked = new File(mModel.getData().get(fileNameClicked).getDocumentName());
 
-                //     mModel.OpenWordFile(fileClicked);
+                mModel.OpenWordFile(fileClicked);
                 //        }
             } catch (Exception ex) {
                 ex.printStackTrace();

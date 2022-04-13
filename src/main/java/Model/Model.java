@@ -102,17 +102,6 @@ public class Model {
 
         if (!wordsToCheck.isEmpty()) {
 
-          /*  for (int j = 0; j < filesToSearch.size(); j++) {
-                for (int i = 0; i < textToFind.size(); i++) {
-
-                    //    String extension = filesToSearch.get(j).length() > 5 ? filesToSearch.get(j).substring(filesToSearch.get(j).length() - 3) : "";
-                    //  if (extension.equals("pdf"))
-                    doc2 = new wordSeekedInPdf(textToFind.get(i), filesToSearch.get(j));
-                    //else
-                    //   if (extension.equals("doc")) doc3 = new wordSeekerInWord(textToFind, filesToSearch.get(j));
-                }
-            }*/
-
             try {
                 for (int i = 0; i < doc2.getNameOfFileWordFound().size(); i++) {
                     //id, extracto encontrado, la palabra buscada, pagina

@@ -75,7 +75,7 @@ public class wordSeekedInPdf {
                                     Integer index = restText.substring(foundIndex, foundIndex + soughtWord.get(k).length()).toLowerCase().indexOf(soughtWord.get(k).toLowerCase());
 
                                     if (index != -1) {
-                                        // System.out.println("soughtWords: " + restText.substring(foundIndex - largoDeExtracto, foundIndex + largoDeExtracto));
+                                         System.out.println("soughtWords: " + restText.substring(foundIndex - largoDeExtracto, foundIndex + largoDeExtracto));
                                         soughtWords.add(restText.substring(foundIndex - largoDeExtracto, foundIndex + largoDeExtracto));
                                         pagesOfTextFound.add(i);
                                         KeyWord.add(soughtWord.get(k));

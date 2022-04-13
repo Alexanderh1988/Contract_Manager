@@ -18,6 +18,7 @@ public class View extends JFrame {
     public JMenu1 mJMenu1 = new JMenu1();
     JFrame frame;
     Container pane;
+    private Boolean currentPane1 = true;
 
     public static void main(String[] args) {
 
@@ -93,7 +94,11 @@ public class View extends JFrame {
     }
 
     public void setOnJtableRowListener(ListSelectionListener listSelectionListener) {
-        mSecondComponentsPane.onRowSelected(listSelectionListener);
+        if (currentPane1)
+            mFirstComponentsPane.onRowSelected(listSelectionListener);
+        else
+            mSecondComponentsPane.onRowSelected(listSelectionListener);
+
     }
 
     public void setOnCellJtableListener(MouseListener mouseListener) {
@@ -139,7 +144,9 @@ public class View extends JFrame {
         return mFirstComponentsPane;
     }
 
+
     public void setMenuItemBuscador() {
+        currentPane1 = true;
         frame.getContentPane().removeAll();
         frame.getContentPane().add(mFirstComponentsPane.getComponentsContainer());
         frame.validate();
@@ -147,11 +154,15 @@ public class View extends JFrame {
     }
 
     public void setMenuItemChequeo() {
+        currentPane1 = false;
         frame.getContentPane().removeAll();
         frame.getContentPane().add(mSecondComponentsPane.getComponentsContainer());
         frame.validate();
         frame.repaint();
+    }
 
+    public Boolean getCurrentPane1() {
+        return currentPane1;
     }
 }
 
