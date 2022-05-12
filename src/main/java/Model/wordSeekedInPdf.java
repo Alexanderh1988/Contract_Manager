@@ -8,6 +8,7 @@ import org.apache.pdfbox.text.PDFTextStripperByArea;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -26,19 +27,18 @@ public class wordSeekedInPdf {
     public static void main(String[] args) {
     }
 
-    public wordSeekedInPdf(ArrayList<String> soughtWord, ArrayList<String> fileName) throws IOException {
+    public wordSeekedInPdf(ArrayList<String> soughtWord, ArrayList<String> fileName, Boolean check) throws IOException {
 
         wordFound = false;
 
-        System.out.println("fileName: " + fileName);
+        //System.out.println("fileName: " + fileName);
 
 
         for (int k = 0; k < soughtWord.size(); k++) {
             for (int j = 0; j < fileName.size(); j++) {
 
-                try (PDDocument document = PDDocument.load(new File(fileName.get(j)), MemoryUsageSetting.setupTempFileOnly())) {
-
-                    //       try (PDDocument document = PDDocument.load(new File(fileName))) {
+                //try (PDDocument document = PDDocument.load(new File(fileName.get(j)), MemoryUsageSetting.setupTempFileOnly())) {
+                try (PDDocument document = PDDocument.load(new File(fileName.get(j)))) {
                     //  document.getClass();
                     // System.out.println("document.getNumberOfPages(): " + document.getNumberOfPages());
                     //  System.out.println("pagina 4: " + document.getPages());
@@ -57,13 +57,16 @@ public class wordSeekedInPdf {
                             tStripper.setEndPage(i);
                             String docText = tStripper.getText(document);
 
-                            //  String docTextAux = docText.replaceAll("\\s+", "_");
-                            //  String soughtWordAux = soughtWord.replaceAll("\\s+", "_");
-                            //    int foundIndex = docText.toLowerCase().indexOf(soughtWord.toLowerCase());
+                            docText = Normalizer.normalize(docText, Normalizer.Form.NFD);
 
                             String restText = docText;
-                            int largoDeExtracto = 400;
-                            int foundIndex = docText.toLowerCase().indexOf(soughtWord.get(k).toLowerCase());
+                            int largoDeExtracto = 450;
+                            int foundIndex;
+
+                            if (check)
+                                foundIndex = docText.toLowerCase().indexOf(soughtWord.get(k).toLowerCase() + " ");
+                            else
+                                foundIndex = docText.toLowerCase().indexOf(soughtWord.get(k).toLowerCase());
 
                             while (foundIndex != -1 && foundIndex != 0) {
                                 //  contadorMaximaIteracion++;
@@ -75,7 +78,7 @@ public class wordSeekedInPdf {
                                     Integer index = restText.substring(foundIndex, foundIndex + soughtWord.get(k).length()).toLowerCase().indexOf(soughtWord.get(k).toLowerCase());
 
                                     if (index != -1) {
-                                         System.out.println("soughtWords: " + restText.substring(foundIndex - largoDeExtracto, foundIndex + largoDeExtracto));
+                                        // System.out.println("soughtWords: " + restText.substring(foundIndex - largoDeExtracto, foundIndex + largoDeExtracto));
                                         soughtWords.add(restText.substring(foundIndex - largoDeExtracto, foundIndex + largoDeExtracto));
                                         pagesOfTextFound.add(i);
                                         KeyWord.add(soughtWord.get(k));
@@ -93,10 +96,12 @@ public class wordSeekedInPdf {
                         }
 
                     } else {
-                        JOptionPane.showMessageDialog(null, "Documento encriptado ");
-                        System.out.println("encriptado");
+                        //  JOptionPane.showMessageDialog(null, "Documento encriptado " + fileName.get(j));
+                        System.out.println("encriptado: " + fileName.get(j));
                         DocuEncrypted = true;
                     }
+                } catch (Exception e) {
+                    System.out.println("error 5 " + e);
                 }
 
             }

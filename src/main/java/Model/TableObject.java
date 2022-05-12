@@ -8,6 +8,7 @@ public class TableObject {
     String keyWord;
     Integer page;
 
+
     public TableObject(String Id, String DocumentName, String Text, String keyWord, Integer page) {
         super();
         this.Id = Id;

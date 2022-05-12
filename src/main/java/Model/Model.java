@@ -1,10 +1,16 @@
 package Model;
 
+import View.View;
+import com.sun.istack.NotNull;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +19,15 @@ import java.util.Properties;
 
 public class Model {
 
+    Boolean checkstate = false;
+
     ArrayList<TableObject> data = new ArrayList<>();
+
+    ArrayList<TableObject> data1;
+    ArrayList<TableObject> data2;
+    ArrayList<TableObject> data3;
+    String actualAux1 = "", actualAux2 = "", actualAux3 = "", actualAux4 = "";
+
     ArrayList<String> allFilesPaths = new ArrayList<>();
     private Boolean returnStatement = false;
     directoriePathFinder mDirectoriePathFinder = new directoriePathFinder();
@@ -66,6 +80,7 @@ public class Model {
         return data;
     }
 
+    @NotNull
     public String changeFolderLocation() {
 
         try {
@@ -83,21 +98,25 @@ public class Model {
         return fileChooser.getSelectedFile().toString();
     }
 
-    public void searchingInDocument(ArrayList<String> filesToSearch, String check) throws IOException {
+    public void searchingInDocument(ArrayList<String> filesToSearch, String word1, String word2, Boolean check) throws IOException {
 
         //sin lo siguiente el campo "  " no lo reconoce como vacio o empthy
         // textToFind = textToFind.replaceAll("\\s+", "");
+
+        System.out.println("searchingInDocument");
 
         ArrayList<String> wordsToCheck = new ArrayList<>();
 
         if (check.equals("check")) {  //chequeo estandar
             wordsToCheck = textToFindCheck;
         } else {   //palabra especifica a buscar
-            wordsToCheck.add(check);
+            wordsToCheck.add(word1);
+            if (!word2.equals(""))
+                wordsToCheck.add(word2);
         }
 
         data.clear();
-        wordSeekedInPdf doc2 = new wordSeekedInPdf(wordsToCheck, filesToSearch);
+        wordSeekedInPdf doc2 = new wordSeekedInPdf(wordsToCheck, filesToSearch, check);
         //  wordSeekerInWord doc3 = null;
 
         if (!wordsToCheck.isEmpty()) {
@@ -134,27 +153,79 @@ public class Model {
         }
     }
 
-    public String readCurrentDirectory() {
+    public String readCurrentDirectory(View mView) {
+
+        boolean dir1 = mView.getmFirstComponentsPane().getDir1().isSelected();
+        boolean dir2 = mView.getmFirstComponentsPane().getDir2().isSelected();
+        boolean dir3 = mView.getmFirstComponentsPane().getDir3().isSelected();
+        boolean dir4 = mView.getmFirstComponentsPane().getDir4().isSelected();
 
         Properties p = new Properties();
         String pathName = null;
 
         try {
             p.load(new FileReader("custom.properties"));
-            System.out.println(p.getProperty("workingDirectory"));
-            pathName = p.getProperty("workingDirectory");
+            //   System.out.println(p.getProperty("workingDirectory"));
+            if (dir1) pathName = p.getProperty("workingDirectory1");
+            if (dir2) pathName = p.getProperty("workingDirectory2");
+            if (dir3) pathName = p.getProperty("workingDirectory3");
+            if (dir4) pathName = p.getProperty("workingDirectory4");
         } catch (Exception e) {
             System.out.println("error5 " + e);
         }
         return pathName;
     }
 
-    public void saveNewCurrentDirectory(String currentDirectory) throws IOException {
+    public void saveNewCurrentDirectory(String currentDirectory, View mView) throws IOException {
 
         // create and load default properties
         Properties defaultProps = new Properties();
 
-        defaultProps.setProperty("workingDirectory", currentDirectory);
+        boolean dir1 = mView.getmFirstComponentsPane().getDir1().isSelected();
+        boolean dir2 = mView.getmFirstComponentsPane().getDir2().isSelected();
+        boolean dir3 = mView.getmFirstComponentsPane().getDir3().isSelected();
+        boolean dir4 = mView.getmFirstComponentsPane().getDir4().isSelected();
+
+        defaultProps.clear();
+
+        if (dir1) {
+            actualAux1 = currentDirectory;
+            //   defaultProps.setProperty("workingDirectory1", actualAux1);
+        } else if (dir2) {
+            actualAux2 = currentDirectory;
+            //   defaultProps.setProperty("workingDirectory2", actualAux2);
+        } else if (dir3) {
+            actualAux3 = currentDirectory;
+           //  defaultProps.setProperty("workingDirectory3", actualAux3);
+        } else if (dir4) {
+            actualAux4 = currentDirectory;
+            //   defaultProps.setProperty("workingDirectory4", actualAux4);
+        }
+
+        defaultProps.setProperty("workingDirectory1", actualAux1);
+        defaultProps.setProperty("workingDirectory2", actualAux2);
+        defaultProps.setProperty("workingDirectory3", actualAux3);
+        defaultProps.setProperty("workingDirectory4", actualAux4);
+        //        if (actualDir1 == null)
+        //       defaultProps.setProperty("workingDirectory1", "0");
+
+        //   else if (!dir1)
+        //       defaultProps.setProperty("workingDirectory1", actualDir1);
+        //  if (dir2)
+        //       defaultProps.setProperty("workingDirectory2", currentDirectory);
+
+        //    if (actualDir2 == null)
+        //       defaultProps.setProperty("workingDirectory2", "0");
+        //   else if (!dir2)
+        //    defaultProps.setProperty("workingDirectory2", actualDir2);
+
+        //  if (dir3)
+        //    defaultProps.setProperty("workingDirectory3", currentDirectory);
+
+        //   if (actualDir3 == null) defaultProps.setProperty("workingDirectory3", "0");
+        //  else if (!dir3) defaultProps.setProperty("workingDirectory3", actualDir3);
+
+
         defaultProps.store(new FileWriter("custom.properties"), "no comment");
         System.out.println("Se grabo: " + currentDirectory);
     }
@@ -187,14 +258,14 @@ public class Model {
         if (directory.isDirectory()) {
             search(directory);
         } else {
-            System.out.println(directory.getAbsoluteFile() + " is not a directory!");
+            //    System.out.println(directory.getAbsoluteFile() + " is not a directory!");
         }
     }
 
     private void search(File file) {
 
         if (file.isDirectory()) {
-            System.out.println("Searching directory ... " + file.getAbsoluteFile());
+            //      System.out.println("Searching directory ... " + file.getAbsoluteFile());
 
             allDirectories.add(file.getAbsoluteFile().toString());
 
@@ -245,8 +316,35 @@ public class Model {
 
     }
 
+
     public ArrayList<String> getAllDirectories() {
         return allDirectories;
     }
 
+    public String setSynonym(int i, String textToSearch) {
+
+        switch (i) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+
+        return "asd";
+    }
+
+    public ArrayList<TableObject> getData1() {
+        return data1;
+    }
+
+    public ArrayList<TableObject> getData2() {
+        return data2;
+    }
+
+    public ArrayList<TableObject> getData3() {
+        return data3;
+    }
 }
+

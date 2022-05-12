@@ -15,10 +15,15 @@ public class View extends JFrame {
 
     public secondPaneComponents mSecondComponentsPane = new secondPaneComponents();
     public firstPaneComponents mFirstComponentsPane = new firstPaneComponents();
+
     public JMenu1 mJMenu1 = new JMenu1();
     JFrame frame;
     Container pane;
     private Boolean currentPane1 = true;
+
+    private View view1;
+    private View view2;
+    private View view3;
 
     public static void main(String[] args) {
 
@@ -43,6 +48,7 @@ public class View extends JFrame {
 
     private void createAndShowGUI() {
 
+
         frame = new JFrame("Contract Master");
 
         //frame.setSize(new Dimension(950, 600));
@@ -55,21 +61,33 @@ public class View extends JFrame {
 
         frame.add(pane);
 
+        /* if (*//*m*//* true)   //get panel with control buttons
+        {
+            mFirstComponentsPane = new firstPaneComponents(true);
+            frame.getContentPane().add(mFirstComponentsPane.getComponentsContainer());
+        } else   //get just the table
+*/
+
         frame.getContentPane().add(mFirstComponentsPane.getComponentsContainer());
 
-        //frame.add(mSecondComponentsPane.getComponentsContainer());
-        // frame.add(mFirstComponentsPane.getComponentsContainer());
-        //mFirstComponentsPanel.setContentPane(pane);
-        //frame.add(mJMenu1.getMenuBar());
+
+//frame.add(mSecondComponentsPane.getComponentsContainer());
+// frame.add(mFirstComponentsPane.getComponentsContainer());
+//mFirstComponentsPanel.setContentPane(pane);
+//frame.add(mJMenu1.getMenuBar());
         frame.setJMenuBar(mJMenu1.getMenuBar1());
 
-        frame.setResizable(false);
+        frame.setResizable(true);
         // frame.pack();
         frame.setVisible(true);
     }
 
     public void setListenerOnSeekButton(ActionListener mListener) {
         mFirstComponentsPane.setButtonSeekerListener(mListener);
+    }
+
+    public void setListenerOnStopButton(ActionListener mListener) {
+        mFirstComponentsPane.setButtonStopListener(mListener);
     }
 
     public void setListenerOnSeekButton2(ActionListener mListener) {
@@ -98,7 +116,6 @@ public class View extends JFrame {
             mFirstComponentsPane.onRowSelected(listSelectionListener);
         else
             mSecondComponentsPane.onRowSelected(listSelectionListener);
-
     }
 
     public void setOnCellJtableListener(MouseListener mouseListener) {
@@ -163,6 +180,25 @@ public class View extends JFrame {
 
     public Boolean getCurrentPane1() {
         return currentPane1;
+    }
+
+    public void showViews() {
+
+        view1 = new View();
+        view2 = new View();
+        view2 = new View();
+    }
+
+    public View getView1() {
+        return view1;
+    }
+
+    public View getView2() {
+        return view2;
+    }
+
+    public View getView3() {
+        return view3;
     }
 }
 
