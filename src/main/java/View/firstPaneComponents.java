@@ -32,7 +32,7 @@ public class firstPaneComponents extends JFrame implements ActionListener {
     private JButton selectLocation;
     private JButton borrar;
     private DefaultTableModel model;
-    private JCheckBox dir1, dir2, dir3,dir4;
+    private JCheckBox dir1, dir2, dir3, dir4;
     private JTable jt;
     private JScrollPane sp;
     private int mainTextWidth = 900;
@@ -115,7 +115,6 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         subconstraints.gridx = 1;
         subconstraints.gridx = 3;
 
-
         //---------------------------------------------------------
 
         //  constraints.fill = GridBagConstraints.CENTER;
@@ -171,7 +170,8 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         subconstraints.gridy = 2;
         dir2 = new JCheckBox();
         dir2.setSelected(false);
-        searchPanel.add(dir2, subconstraints);buttonGroup.add(dir2);
+        searchPanel.add(dir2, subconstraints);
+        buttonGroup.add(dir2);
 
         subconstraints.gridx = 9;
         subconstraints.gridy = 1;
@@ -180,7 +180,8 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         subconstraints.gridy = 2;
         dir3 = new JCheckBox();
         dir3.setSelected(false);
-        searchPanel.add(dir3, subconstraints);buttonGroup.add(dir3);
+        searchPanel.add(dir3, subconstraints);
+        buttonGroup.add(dir3);
 
         subconstraints.gridx = 10;
         subconstraints.gridy = 1;
@@ -189,9 +190,8 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         subconstraints.gridy = 2;
         dir4 = new JCheckBox();
         dir4.setSelected(false);
-        searchPanel.add(dir4, subconstraints);buttonGroup.add(dir4);
-
-
+        searchPanel.add(dir4, subconstraints);
+        buttonGroup.add(dir4);
 
         // searchPanel.add(btnExplicativo, subconstraints);
         // btnExplicativo.addActionListener(this);
@@ -214,13 +214,10 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         model = new DefaultTableModel(column, 0);
 
         jt = new JTable(model) {
-
             //private static final long serialVersionUID = 1L;
 
             @Override
             public void doLayout() {
-                //  for (int i = 1; i < 2; i++) {
-                /*  */
 
                 TableColumn col = getColumnModel().getColumn(2);
                 //  jt. setFont(new Font("Serif", Font.PLAIN, 15));
@@ -229,19 +226,19 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
                 for (int row = 0; row < getRowCount(); row++) {
 
+                    Component c1 = prepareRenderer(col.getCellRenderer(), row, 1);
                     Component c = prepareRenderer(col.getCellRenderer(), row, 2);
                     //      Component c1 = prepareRenderer(col.getCellRenderer(), row, 1);
                     //    System.out.println("c todo aqui: " + c);
 
                     int optimumHeight;
 
-
                     if (c.getPreferredSize().getHeight() > standardHeight) {
                         optimumHeight = c.getPreferredSize().height;
-                        System.out.println("A");
+                        //   System.out.println("A");
                         System.out.println(optimumHeight);
                     } else {
-                        System.out.println("B");
+                        //   System.out.println("B");
                         String cellText = jt.getModel().getValueAt(row, 2).toString();
                         Matcher m = Pattern.compile("\r\n|\r|\n").matcher(cellText);
                         int lines = 0;
@@ -252,10 +249,7 @@ public class firstPaneComponents extends JFrame implements ActionListener {
                         optimumHeight = standardHeight * (lines + 1);
                         System.out.println(optimumHeight);
                     }
-
-
                     setRowHeight(row, optimumHeight);
-
 
                     //   }
 

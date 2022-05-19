@@ -114,12 +114,16 @@ public class Controller {
                 //   Thread t = new Thread(() -> {  // override the run() for the running behaviors
 
                 String textToSearch = mView.getmFirstComponentsPane().getTextField1().getText();
+                String secondTextToSearch = mView.getmFirstComponentsPane().getTextField2().getText();
+
                 Boolean isSecondPane = e.getSource() == mView.getmSecondComponentsPane().getSeekbutton2();
 
                 // if (areThereSynonimum(textToSearch)) mView.showViews();
 
                 if (mModel.readCurrentDirectory(mView) == null) {  //set location if there is nothing else
+
                     System.out.println("no hay directorio");
+
                     try {
                         mModel.saveNewCurrentDirectory(mModel.changeFolderLocation(), mView);
                     } catch (IOException ex) {

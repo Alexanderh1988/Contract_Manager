@@ -15,7 +15,6 @@ import java.util.Collections;
 public class wordSeekedInPdf {
 
     //public static  String filePath1 ="C:\\Users\\Alex Hs\\Desktop\\Contratos2\\articles-97403_casa_particular_puertas_afuera.pdf";
-    private String docText;
     private ArrayList<String> soughtWords = new ArrayList<>();
     private ArrayList<String> KeyWord = new ArrayList<>();
     private ArrayList<Integer> pagesOfTextFound = new ArrayList<>();
@@ -30,9 +29,6 @@ public class wordSeekedInPdf {
     public wordSeekedInPdf(ArrayList<String> soughtWord, ArrayList<String> fileName, Boolean check) throws IOException {
 
         wordFound = false;
-
-        //System.out.println("fileName: " + fileName);
-
 
         for (int k = 0; k < soughtWord.size(); k++) {
             for (int j = 0; j < fileName.size(); j++) {
@@ -63,10 +59,10 @@ public class wordSeekedInPdf {
                             int largoDeExtracto = 450;
                             int foundIndex;
 
-                            if (check)
-                                foundIndex = docText.toLowerCase().indexOf(soughtWord.get(k).toLowerCase() + " ");
-                            else
-                                foundIndex = docText.toLowerCase().indexOf(soughtWord.get(k).toLowerCase());
+                            // if (check)
+                            //     foundIndex = docText.toLowerCase().indexOf(soughtWord.get(k).toLowerCase());
+                            //  else
+                            foundIndex = docText.toLowerCase().indexOf(soughtWord.get(k).toLowerCase());
 
                             while (foundIndex != -1 && foundIndex != 0) {
                                 //  contadorMaximaIteracion++;

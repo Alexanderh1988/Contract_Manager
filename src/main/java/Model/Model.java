@@ -106,18 +106,18 @@ public class Model {
         System.out.println("searchingInDocument");
 
         ArrayList<String> wordsToCheck = new ArrayList<>();
+        ArrayList<String> swapRule = new ArrayList<>();
 
         if (check.equals("check")) {  //chequeo estandar
             wordsToCheck = textToFindCheck;
         } else {   //palabra especifica a buscar
             wordsToCheck.add(word1);
-            if (!word2.equals(""))
-                wordsToCheck.add(word2);
+            //if (!word2.equals(""))
+            //swapRule.add(word2);
         }
 
         data.clear();
         wordSeekedInPdf doc2 = new wordSeekedInPdf(wordsToCheck, filesToSearch, check);
-        //  wordSeekerInWord doc3 = null;
 
         if (!wordsToCheck.isEmpty()) {
 
@@ -127,28 +127,40 @@ public class Model {
 
                     data.add((new TableObject(i + "", doc2.getNameOfFileWordFound().get(i), doc2.getSoughtWords().get(i).replaceAll(doc2.getKeyWord().get(i), "<<<<" + doc2.getKeyWord().get(i) + ">>>>"), doc2.getKeyWord().get(i), doc2.getPagesOfTextFound().get(i))));
                     //   data.add((new TableObject(  "12", "name of file", doc2.getSoughtWords().get(i), 12)));
-
-                    //row.getText().replaceAll(row.getKeyWord(), "<<<" + row.getKeyWord() + ">>>")
+                    //row.getText().repla  ceAll(row.getKeyWord(), "<<<" + row.getKeyWord() + ">>>")
                 }
             } catch (Exception e) {
-
             }
-            //for (int i = 0; i < data.size(); i++) {
+
+            Integer IndexSwap = 1;
+            //ordenar por palabra adicional contenida:
+            if (swapRule.size() != 0)
+                for (int j = 0; j < data.size(); j++) {
+                    for (int i = 0; i < data.size(); i++) {
+                        if (data.get(i).getText().contains(word2)) {
+                            IndexSwap = i;
+                        }
+                    }
+                    Collections.swap(data, j, IndexSwap);
+                    data.get(j).setId(String.valueOf(j));
+                }
 
             //ordenar por pagina:
-            int Minimo = 900000;
-            Integer Index = 1;
-            for (int j = 0; j < data.size(); j++) {
-                for (int i = j; i < data.size(); i++) {
-                    if (Minimo >= data.get(i).getPage()) {
-                        Minimo = data.get(i).getPage();
-                        Index = i;
+            if (false) {        //deje el de arriba, mas importante ponderar por palabra buscada que por pagina
+                int Minimo = 900000;
+                Integer Index = 1;
+                for (int j = 0; j < data.size(); j++) {
+                    for (int i = j; i < data.size(); i++) {
+                        if (Minimo >= data.get(i).getPage()) {
+                            Minimo = data.get(i).getPage();
+                            Index = i;
+                        }
                     }
-                }
-                Collections.swap(data, j, Index);
-                data.get(j).setId(String.valueOf(j));
+                    Collections.swap(data, j, Index);
+                    data.get(j).setId(String.valueOf(j));
 
-                Minimo = 900000;
+                    Minimo = 900000;
+                }
             }
         }
     }
@@ -196,7 +208,7 @@ public class Model {
             //   defaultProps.setProperty("workingDirectory2", actualAux2);
         } else if (dir3) {
             actualAux3 = currentDirectory;
-           //  defaultProps.setProperty("workingDirectory3", actualAux3);
+            //  defaultProps.setProperty("workingDirectory3", actualAux3);
         } else if (dir4) {
             actualAux4 = currentDirectory;
             //   defaultProps.setProperty("workingDirectory4", actualAux4);
@@ -295,22 +307,25 @@ public class Model {
             System.out.println(directories.get(i));
 
             File file = new File(directories.get(i));
+            try {
+                for (File temp : file.listFiles()) {
+                    if (!temp.isDirectory()) {
+                        System.out.println(temp);
 
-            for (File temp : file.listFiles()) {
-                if (!temp.isDirectory()) {
-                    System.out.println(temp);
+                        Integer FileNameLength = temp.toString().length();
 
-                    Integer FileNameLength = temp.toString().length();
+                        String extention = FileNameLength >= 3 ? temp.toString().substring(FileNameLength - 3, FileNameLength) : "";
 
-                    String extention = FileNameLength >= 3 ? temp.toString().substring(FileNameLength - 3, FileNameLength) : "";
-
-                    //       if (!allFilesPaths.contains(temp.toString()) && (extention.equals("pdf") || extention.equals("doc"))) {
-                    if (!allFilesPaths.contains(temp.toString()) && (extention.equals("pdf"))) {
-                        System.out.println("se agrego archivo: " + temp.toString());
-                        allFilesPaths.add(temp.toString());
+                        //       if (!allFilesPaths.contains(temp.toString()) && (extention.equals("pdf") || extention.equals("doc"))) {
+                        if (!allFilesPaths.contains(temp.toString()) && (extention.equals("pdf"))) {
+                            System.out.println("se agrego archivo: " + temp.toString());
+                            allFilesPaths.add(temp.toString());
+                        }
                     }
+                    System.out.println("no es directorio");
                 }
-                System.out.println("no es directorio");
+
+            } catch (Exception e) {
             }
         }
 
