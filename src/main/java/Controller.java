@@ -11,8 +11,8 @@ import java.io.IOException;
 
 public class Controller {
 
-    public static View mView;
-    public static Model mModel;
+    public View mView;
+    public Model mModel;
     private Thread searchThread;
 
 
@@ -34,6 +34,8 @@ public class Controller {
         mView.setMenuChequearListener(mListener);
         mView.setMenuBuscarListener(mListener);
 
+        mView.setgetMenuBuscadorIndependienteListener(mListener);
+
         //firstPane:
         mView.setListenerOnSeekButton(mListener);
         mView.setListenerOnStopButton(mListener);
@@ -41,7 +43,7 @@ public class Controller {
         //secondPane:
         // mView.setListenerOnSeekButton2(mListener);
         //    mView.setListenerOnDeleteButton(new ListenerClass());
-          mView.setOnJtableRowListener(mTableListener);
+        mView.setOnJtableRowListener(mTableListener);
 
 
         //transfersal
@@ -51,6 +53,7 @@ public class Controller {
     }
 
     public class ListenerClass implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -64,32 +67,21 @@ public class Controller {
                     ex.printStackTrace();
                 }
             } else if (e.getSource() == mView.getmSecondComponentsPane().getBorrar()) {
-
                 System.out.println("click borrar");
                 mView.clearTable();
-
             }
             //listener para page1:
             //menu listeners:
             else if (e.getSource() == mView.getmJMenu().getMenuBuscador()) {
 
-                //   searchThread = new Thread() {
-                //      @Override
-                //      public void run() {
-
-                //  while (!Thread.currentThread().isInterrupted()) { //stop thread deprecated
-                // override the run() for the running behaviors
                 System.out.println("menu buscador");
                 mView.setMenuItemBuscador();
-                //  }
-                //        }
-                //   };
-
-                // searchThread.start();
 
             } else if (e.getSource() == mView.getmJMenu().getMenuChequeo()) {
+
                 System.out.println("menu chequeo");
                 mView.setMenuItemChequeo();
+
             } else if (e.getSource() == mView.getmFirstComponentsPane().getStopButton()) {
                 //   System.out.println("Stopped thread");
                 //    searchThread.interrupt();   //stop deprecated
@@ -97,86 +89,88 @@ public class Controller {
 
             //transversal:
             else if (e.getSource() == mView.getmFirstComponentsPane().getSelectLocation() || e.getSource() == mView.getmSecondComponentsPane().getLocation()) {
+
+
                 try {
                     mModel.saveNewCurrentDirectory(mModel.changeFolderLocation(), mView);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
+
+
             } else if (e.getSource() == mView.mFirstComponentsPane.getBtnExportar()) {
 
                 new ExcelExport(mModel.readCurrentDirectory(mView) + "\\excel2.xls", mModel.getData());
 
+            } else if (e.getSource() == mView.getMenuBuscadorIndependiente()) {
+
+                System.out.println("click");
+
             } else if ( /*e.getSource() == mView.getmSecondComponentsPane().getSeekbutton2() ||*/
                     e.getSource() == mView.getmFirstComponentsPane().getSeekbutton()) { // boton buscar
 
-                System.out.println("boton buscar");
+                Thread t = new Thread(() -> {  // override the run() for the running behaviors
 
-                //   Thread t = new Thread(() -> {  // override the run() for the running behaviors
+                    String textToSearch = mView.getmFirstComponentsPane().getTextField1().getText();
 
-                String textToSearch = mView.getmFirstComponentsPane().getTextField1().getText();
-                String secondTextToSearch = mView.getmFirstComponentsPane().getTextField2().getText();
+                    Boolean isSecondPane = e.getSource() == mView.getmSecondComponentsPane().getSeekbutton2();
 
-                Boolean isSecondPane = e.getSource() == mView.getmSecondComponentsPane().getSeekbutton2();
+                    if (mModel.readCurrentDirectory(mView) == null) {  //set location if there is nothing else
 
-                // if (areThereSynonimum(textToSearch)) mView.showViews();
-
-                if (mModel.readCurrentDirectory(mView) == null) {  //set location if there is nothing else
-
-                    System.out.println("no hay directorio");
+                        try {
+                            mModel.saveNewCurrentDirectory(mModel.changeFolderLocation(), mView);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                            System.out.println("error4 " + ex);
+                        }
+                    } else {
+                        System.out.println("si hay directorio");
+                        if (textToSearch != null)
+                            mModel.directoriesFinder(mModel.readCurrentDirectory(mView));
+                        // else JOptionPane.showMessageDialog(this,"Eggs are not supposed to be green.");
+                    }
+                    mModel.saveAllFiles(mModel.getAllDirectories());  //get all files in selected path
 
                     try {
-                        mModel.saveNewCurrentDirectory(mModel.changeFolderLocation(), mView);
-                    } catch (IOException ex) {
+                        String text1 = mView.getmFirstComponentsPane().getTextField1().getText().trim();
+                        String text2 = mView.getmFirstComponentsPane().getTextField2().getText().trim();
+
+                        //boolean check = mView.getmFirstComponentsPane().getCheckbtn().isSelected();
+
+                        mModel.clearData();
+                        if (isSecondPane)
+                            mModel.searchingInDocument(mModel.getAllFilesPaths(), "check", null, null);
+                        else
+                            mModel.searchingInDocument(mModel.getAllFilesPaths(), text1, text2, false);
+
+                    } catch (Exception ex) {
+                        System.out.println("exepcion " + ex);
                         ex.printStackTrace();
-                        System.out.println("error4 " + ex);
                     }
-                } else {
-                    System.out.println("si hay directorio");
-                    if (textToSearch != null)
-                        mModel.directoriesFinder(mModel.readCurrentDirectory(mView));
-                   // else JOptionPane.showMessageDialog(this,"Eggs are not supposed to be green.");
-                }
-                mModel.saveAllFiles(mModel.getAllDirectories());  //get all files in selected path
+                    //eliminar
+                    //  if (isSecondPane)
+                    //      mView.addNewRow2(mModel.getData());
+                    //  else
 
-                try {
-                    String text1 = mView.getmFirstComponentsPane().getTextField1().getText().trim();
-                    String text2 = mView.getmFirstComponentsPane().getTextField2().getText().trim();
+                    if (areThereSynonimum(textToSearch)) {
 
-                    //boolean check = mView.getmFirstComponentsPane().getCheckbtn().isSelected();
+                        mView.addNewRow(mModel.getData(), textToSearch);
 
-                    mModel.clearData();
-                    if (isSecondPane)
-                        mModel.searchingInDocument(mModel.getAllFilesPaths(), "check", null, null);
-                    else
-                        mModel.searchingInDocument(mModel.getAllFilesPaths(), text1, text2, false);
+                        //# on develpoment:
+                        //  mView.getView1().addNewRow(mModel.getData1(), mModel.setSynonym(1, textToSearch));
+                        //   mView.getView2().addNewRow(mModel.getData2(), mModel.setSynonym(2, textToSearch));
+                        //    mView.getView3().addNewRow(mModel.getData3(), mModel.setSynonym(3, textToSearch));
 
-                } catch (Exception ex) {
-                    System.out.println("exepcion " + ex);
-                    ex.printStackTrace();
-                }
-                //eliminar
-                //  if (isSecondPane)
-                //      mView.addNewRow2(mModel.getData());
-                //  else
+                    } else
+                        mView.addNewRow(mModel.getData(), mView.getmFirstComponentsPane().getTextField1().getText());
 
-                if (areThereSynonimum(textToSearch)) {
+                });
+                t.start();
 
-                    mView.addNewRow(mModel.getData(), textToSearch);
-
-//                    mView.getView1().addNewRow(mModel.getData1(), mModel.setSynonym(1, textToSearch));
-                 //   mView.getView2().addNewRow(mModel.getData2(), mModel.setSynonym(2, textToSearch));
-                //    mView.getView3().addNewRow(mModel.getData3(), mModel.setSynonym(3, textToSearch));
-
-                } else
-                    mView.addNewRow(mModel.getData(), mView.getmFirstComponentsPane().getTextField1().getText());
-                //  });
-
-                //  t.start();
 
             }
         }
     }
-
 
     public class TableListListenerClass implements ListSelectionListener {
 
@@ -201,11 +195,12 @@ public class Controller {
                 System.out.println("error3 " + ex);
             }
         }
+
     }
 
     private boolean areThereSynonimum(String textToSearch) {
 
-        //pendiente aca revisar sinonimos
+        //pendiente aca revisar sinonimos para buscar varias instancias
         return true;
     }
 

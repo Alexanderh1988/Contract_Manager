@@ -95,7 +95,7 @@ public class Model {
 
         System.out.println(fileChooser.getSelectedFile());
 
-        return fileChooser.getSelectedFile().toString();
+        return fileChooser.getSelectedFile()!=null? fileChooser.getSelectedFile().toString():null;
     }
 
     public void searchingInDocument(ArrayList<String> filesToSearch, String word1, String word2, Boolean check) throws IOException {
@@ -134,7 +134,8 @@ public class Model {
 
             Integer IndexSwap = 1;
             //ordenar por palabra adicional contenida:
-            if (swapRule.size() != 0)
+            //if (swapRule.size() != 0)
+            if (word2 != "")
                 for (int j = 0; j < data.size(); j++) {
                     for (int i = 0; i < data.size(); i++) {
                         if (data.get(i).getText().contains(word2)) {
@@ -191,55 +192,42 @@ public class Model {
     public void saveNewCurrentDirectory(String currentDirectory, View mView) throws IOException {
 
         // create and load default properties
-        Properties defaultProps = new Properties();
+        if (currentDirectory != null) {
+            Properties defaultProps = new Properties();
 
-        boolean dir1 = mView.getmFirstComponentsPane().getDir1().isSelected();
-        boolean dir2 = mView.getmFirstComponentsPane().getDir2().isSelected();
-        boolean dir3 = mView.getmFirstComponentsPane().getDir3().isSelected();
-        boolean dir4 = mView.getmFirstComponentsPane().getDir4().isSelected();
+            boolean dir1 = mView.getmFirstComponentsPane().getDir1().isSelected();
+            boolean dir2 = mView.getmFirstComponentsPane().getDir2().isSelected();
+            boolean dir3 = mView.getmFirstComponentsPane().getDir3().isSelected();
+            boolean dir4 = mView.getmFirstComponentsPane().getDir4().isSelected();
 
-        defaultProps.clear();
+            defaultProps.clear();
 
-        if (dir1) {
-            actualAux1 = currentDirectory;
-            //   defaultProps.setProperty("workingDirectory1", actualAux1);
-        } else if (dir2) {
-            actualAux2 = currentDirectory;
-            //   defaultProps.setProperty("workingDirectory2", actualAux2);
-        } else if (dir3) {
-            actualAux3 = currentDirectory;
-            //  defaultProps.setProperty("workingDirectory3", actualAux3);
-        } else if (dir4) {
-            actualAux4 = currentDirectory;
-            //   defaultProps.setProperty("workingDirectory4", actualAux4);
+            if (dir1) {
+                actualAux1 = currentDirectory;
+                //   defaultProps.setProperty("workingDirectory1", actualAux1);
+            } else if (dir2) {
+                actualAux2 = currentDirectory;
+                //   defaultProps.setProperty("workingDirectory2", actualAux2);
+            } else if (dir3) {
+                actualAux3 = currentDirectory;
+                //  defaultProps.setProperty("workingDirectory3", actualAux3);
+            } else if (dir4) {
+                actualAux4 = currentDirectory;
+                //   defaultProps.setProperty("workingDirectory4", actualAux4);
+            }
+
+            if (actualAux1 != null)
+                defaultProps.setProperty("workingDirectory1", actualAux1);
+            if (actualAux2 != null)
+                defaultProps.setProperty("workingDirectory2", actualAux2);
+            if (actualAux3 != null)
+                defaultProps.setProperty("workingDirectory3", actualAux3);
+            if (actualAux3 != null)
+                defaultProps.setProperty("workingDirectory4", actualAux4);
+
+            defaultProps.store(new FileWriter("custom.properties"), "no comment");
+            System.out.println("Se grabo: " + currentDirectory);
         }
-
-        defaultProps.setProperty("workingDirectory1", actualAux1);
-        defaultProps.setProperty("workingDirectory2", actualAux2);
-        defaultProps.setProperty("workingDirectory3", actualAux3);
-        defaultProps.setProperty("workingDirectory4", actualAux4);
-        //        if (actualDir1 == null)
-        //       defaultProps.setProperty("workingDirectory1", "0");
-
-        //   else if (!dir1)
-        //       defaultProps.setProperty("workingDirectory1", actualDir1);
-        //  if (dir2)
-        //       defaultProps.setProperty("workingDirectory2", currentDirectory);
-
-        //    if (actualDir2 == null)
-        //       defaultProps.setProperty("workingDirectory2", "0");
-        //   else if (!dir2)
-        //    defaultProps.setProperty("workingDirectory2", actualDir2);
-
-        //  if (dir3)
-        //    defaultProps.setProperty("workingDirectory3", currentDirectory);
-
-        //   if (actualDir3 == null) defaultProps.setProperty("workingDirectory3", "0");
-        //  else if (!dir3) defaultProps.setProperty("workingDirectory3", actualDir3);
-
-
-        defaultProps.store(new FileWriter("custom.properties"), "no comment");
-        System.out.println("Se grabo: " + currentDirectory);
     }
 
     public void clearData() {

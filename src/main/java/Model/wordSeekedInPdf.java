@@ -53,16 +53,16 @@ public class wordSeekedInPdf {
                             tStripper.setEndPage(i);
                             String docText = tStripper.getText(document);
 
-                            docText = Normalizer.normalize(docText, Normalizer.Form.NFD);
+                            String decomposed = Normalizer.normalize(docText, Normalizer.Form.NFD);
+
+                            // remove accents and diacritics
+                            docText = decomposed.replaceAll("[^\\p{ASCII}]", "");
 
                             String restText = docText;
                             int largoDeExtracto = 450;
                             int foundIndex;
 
-                            // if (check)
-                            //     foundIndex = docText.toLowerCase().indexOf(soughtWord.get(k).toLowerCase());
-                            //  else
-                            foundIndex = docText.toLowerCase().indexOf(soughtWord.get(k).toLowerCase());
+                    foundIndex = docText.toLowerCase().indexOf(soughtWord.get(k).toLowerCase());
 
                             while (foundIndex != -1 && foundIndex != 0) {
                                 //  contadorMaximaIteracion++;
@@ -90,7 +90,6 @@ public class wordSeekedInPdf {
                                 }
                             }
                         }
-
                     } else {
                         //  JOptionPane.showMessageDialog(null, "Documento encriptado " + fileName.get(j));
                         System.out.println("encriptado: " + fileName.get(j));
@@ -102,7 +101,6 @@ public class wordSeekedInPdf {
 
             }
         }
-
         // if (!wordFound) JOptionPane.showMessageDialog(null, "No se encontro palabras en " + fileName);
     }
 

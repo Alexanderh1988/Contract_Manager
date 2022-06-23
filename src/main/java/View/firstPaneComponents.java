@@ -37,6 +37,7 @@ public class firstPaneComponents extends JFrame implements ActionListener {
     private JScrollPane sp;
     private int mainTextWidth = 900;
     private Boolean showControlNav = true;
+    private JLabel dir2Label, dir3Label, dir4Label, dir1Label;
 
     public static void main(String[] args) {
         new firstPaneComponents();
@@ -47,12 +48,6 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         //  showControlNav = m;
 
         createAndShowGUI();
-        /*javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });*/
-
     }
 
     // dobu :   https://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html
@@ -73,8 +68,6 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
         subconstraints.anchor = GridBagConstraints.WEST;
         subconstraints.fill = GridBagConstraints.HORIZONTAL;
-
-        //  if (showControlNav) {
 
         JLabel BuscarLabel = new JLabel("Buscar:");
         JLabel ExluirLabel = new JLabel("Excluir:");
@@ -128,7 +121,7 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
         //constraints.insets = new Insets(2, 2, 2, 2);
 
-        StopButton = new JButton("Para");
+        StopButton = new JButton("Parar Busqueda");
 
         Seekbutton = new JButton("Buscar");
         searchPanel.add(Seekbutton, subconstraints);
@@ -154,8 +147,9 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
         ButtonGroup buttonGroup = new ButtonGroup();
         subconstraints.gridy = 1;
-        JLabel txt = new JLabel("dir1");
-        searchPanel.add(txt, subconstraints);
+        dir1Label = new JLabel("dir1");
+
+        searchPanel.add(dir1Label, subconstraints);
         subconstraints.insets = new Insets(1, 1, 1, 1);
         subconstraints.gridy = 2;
         dir1 = new JCheckBox();
@@ -165,8 +159,8 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         subconstraints.gridx = 8;
 
         subconstraints.gridy = 1;
-        JLabel txt2 = new JLabel("dir2");
-        searchPanel.add(txt2, subconstraints);
+        dir2Label = new JLabel("dir2");
+        searchPanel.add(dir2Label, subconstraints);
         subconstraints.gridy = 2;
         dir2 = new JCheckBox();
         dir2.setSelected(false);
@@ -175,8 +169,8 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
         subconstraints.gridx = 9;
         subconstraints.gridy = 1;
-        JLabel txt3 = new JLabel("dir3");
-        searchPanel.add(txt3, subconstraints);
+        dir3Label = new JLabel("dir3");
+        searchPanel.add(dir2Label, subconstraints);
         subconstraints.gridy = 2;
         dir3 = new JCheckBox();
         dir3.setSelected(false);
@@ -185,8 +179,8 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
         subconstraints.gridx = 10;
         subconstraints.gridy = 1;
-        JLabel txt4 = new JLabel("dir4");
-        searchPanel.add(txt4, subconstraints);
+        dir4Label = new JLabel("dir4");
+        searchPanel.add(dir4Label, subconstraints);
         subconstraints.gridy = 2;
         dir4 = new JCheckBox();
         dir4.setSelected(false);
@@ -228,15 +222,13 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
                     Component c1 = prepareRenderer(col.getCellRenderer(), row, 1);
                     Component c = prepareRenderer(col.getCellRenderer(), row, 2);
-                    //      Component c1 = prepareRenderer(col.getCellRenderer(), row, 1);
-                    //    System.out.println("c todo aqui: " + c);
 
                     int optimumHeight;
 
                     if (c.getPreferredSize().getHeight() > standardHeight) {
                         optimumHeight = c.getPreferredSize().height;
                         //   System.out.println("A");
-                        System.out.println(optimumHeight);
+                        // System.out.println(optimumHeight);
                     } else {
                         //   System.out.println("B");
                         String cellText = jt.getModel().getValueAt(row, 2).toString();
@@ -246,7 +238,7 @@ public class firstPaneComponents extends JFrame implements ActionListener {
                             lines++;
                         }
 
-                        optimumHeight = standardHeight * (lines + 1);
+                        optimumHeight = standardHeight * (lines + 3);
                         System.out.println(optimumHeight);
                     }
                     setRowHeight(row, optimumHeight);
@@ -399,6 +391,18 @@ public class firstPaneComponents extends JFrame implements ActionListener {
     public void onCellMouseClickListener(MouseListener mouseListener) {
         jt.addMouseListener(mouseListener);
     }
+
+    public void setPopUpPanel(String textToShow) {
+
+        final JFrame parent = new JFrame();
+        JLabel label = new JLabel();
+
+        label.setText(textToShow);
+        parent.add(label);
+        parent.pack();
+        parent.setVisible(true);
+    }
+
 
     public JTable getJt() {
         return jt;
