@@ -23,19 +23,12 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
     Container componentsContainer;
 
-    private TextField textField1;
-    private TextField textField2;
-    private TextField textField3;
-    private JButton Seekbutton;
-    private JButton StopButton;
-    private JButton btnExportar;
-    private JButton selectLocation;
-    private JButton borrar;
+    private TextField textField1, textField2, textField3;
+    private JButton Seekbutton, StopButton, btnExportar, selectLocation, borrar;
     private DefaultTableModel model;
     private JCheckBox dir1, dir2, dir3, dir4;
     private JTable jt;
     private JScrollPane sp;
-    private int mainTextWidth = 900;
     private Boolean showControlNav = true;
     private JLabel dir2Label, dir3Label, dir4Label, dir1Label;
 
@@ -77,13 +70,13 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         textField2 = new TextField("");
         textField3 = new TextField("");
 
-        searchPanel.setSize(new Dimension(100, 20));
+       // searchPanel.setSize(new Dimension(20, 20));
 
         subconstraints.gridx = 0;
         subconstraints.gridy = 1;
         // subconstraints.gridwidth = 1;
 
-        subconstraints.ipadx = 50;
+        subconstraints.ipadx = 30;
 
         searchPanel.add(BuscarLabel, subconstraints);
         subconstraints.gridx = 1;
@@ -97,35 +90,25 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         subconstraints.gridx = 1;
         searchPanel.add(textField3, subconstraints);
         subconstraints.gridy = 2;
-        // searchPanel.add(textField2, subconstraints);
-
 
         //subconstraints.fill = GridBagConstraints.LAST_LINE_END;
         subconstraints.insets = new Insets(2, 2, 2, 2);
-        subconstraints.ipadx = 50;
-        subconstraints.gridwidth = 1;
+        // subconstraints.gridwidth = 1;
 
         subconstraints.gridx = 1;
         subconstraints.gridx = 3;
-
-        //---------------------------------------------------------
-
-        //  constraints.fill = GridBagConstraints.CENTER;
-        constraints.ipadx = 30;
-        // constraints.weightx = 0.5;
+         constraints.ipadx = 10;
 
         subconstraints.gridx = 0;
         subconstraints.gridy = 1;
         pane.add(searchPanel, subconstraints);
         subconstraints.gridx = 4;
 
-        //constraints.insets = new Insets(2, 2, 2, 2);
-
         StopButton = new JButton("Parar Busqueda");
-
-        Seekbutton = new JButton("Buscar");
+     Seekbutton = new JButton("Buscar");
         searchPanel.add(Seekbutton, subconstraints);
         subconstraints.gridx = 5;
+        subconstraints.ipadx = 10;
         searchPanel.add(StopButton, subconstraints);
         subconstraints.gridx = 4;
 
@@ -135,7 +118,6 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         //cambio de directorio:
         Container cone1 = new Container();
 
-        // JButton btnExplicativo = new JButton("?");
         subconstraints.gridx = 5;
         subconstraints.gridy = 2;
 
@@ -161,16 +143,16 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         subconstraints.gridy = 1;
         dir2Label = new JLabel("dir2");
         searchPanel.add(dir2Label, subconstraints);
-        subconstraints.gridy = 2;
         dir2 = new JCheckBox();
         dir2.setSelected(false);
+        subconstraints.gridy = 2;
         searchPanel.add(dir2, subconstraints);
         buttonGroup.add(dir2);
 
         subconstraints.gridx = 9;
         subconstraints.gridy = 1;
         dir3Label = new JLabel("dir3");
-        searchPanel.add(dir2Label, subconstraints);
+        searchPanel.add(dir3Label, subconstraints);
         subconstraints.gridy = 2;
         dir3 = new JCheckBox();
         dir3.setSelected(false);
@@ -187,21 +169,17 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         searchPanel.add(dir4, subconstraints);
         buttonGroup.add(dir4);
 
-        // searchPanel.add(btnExplicativo, subconstraints);
-        // btnExplicativo.addActionListener(this);
-
-
-        pane.add(cone1, subconstraints);
+           pane.add(cone1, subconstraints);
         //  }
 
         subconstraints.gridx = 0;
         subconstraints.gridy = 3;
         subconstraints.fill = GridBagConstraints.HORIZONTAL;
-        subconstraints.insets = new Insets(5, 5, 5, 5);
-        subconstraints.ipadx = 900;
-        subconstraints.ipady = 550;
+        subconstraints.insets = new Insets(3, 3, 3, 3);
+        //subconstraints.ipadx = 200;
+        subconstraints.ipady = 500;
 
-        constraints.gridwidth = 4;
+        constraints.gridwidth = 3;
 
         String column[] = {"ID", "DOCUMENTO", "TEXTO", "PAGINAS"};
 
@@ -263,18 +241,18 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         //  jt.getColumnModel().getColumn(0).setCellRenderer(new TextAreaCellRenderer());
         jt.getColumnModel().getColumn(0).setPreferredWidth(50);
         jt.getColumnModel().getColumn(0).setMaxWidth(60);
-        jt.getColumnModel().getColumn(0).setMinWidth(60);
+        jt.getColumnModel().getColumn(0).setMinWidth(20);
 
         //   jt.setRowHeight(100);
         // jt.setRowHeight(jt.getRowHeight() + 20);
         //  jt.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
         // jt.getColumnModel().getColumn(1).setCellRenderer(new TextAreaCellRenderer());
-        jt.getColumnModel().getColumn(1).setPreferredWidth(120);
-        jt.getColumnModel().getColumn(2).setPreferredWidth(130);
-        jt.getColumnModel().getColumn(2).setPreferredWidth(mainTextWidth);
+        jt.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jt.getColumnModel().getColumn(2).setPreferredWidth(80);
+        jt.getColumnModel().getColumn(2).setPreferredWidth(350);
         jt.getColumnModel().getColumn(2).setCellRenderer(new TextAreaCellRenderer());
-        jt.getColumnModel().getColumn(3).setMaxWidth(120);
+        jt.getColumnModel().getColumn(3).setMaxWidth(100);
 
         sp = new JScrollPane(jt);
 

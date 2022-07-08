@@ -95,7 +95,7 @@ public class Model {
 
         System.out.println(fileChooser.getSelectedFile());
 
-        return fileChooser.getSelectedFile()!=null? fileChooser.getSelectedFile().toString():null;
+        return fileChooser.getSelectedFile() != null ? fileChooser.getSelectedFile().toString() : null;
     }
 
     public void searchingInDocument(ArrayList<String> filesToSearch, String word1, String word2, Boolean check) throws IOException {
@@ -193,6 +193,7 @@ public class Model {
 
         // create and load default properties
         if (currentDirectory != null) {
+
             Properties defaultProps = new Properties();
 
             boolean dir1 = mView.getmFirstComponentsPane().getDir1().isSelected();
@@ -200,33 +201,16 @@ public class Model {
             boolean dir3 = mView.getmFirstComponentsPane().getDir3().isSelected();
             boolean dir4 = mView.getmFirstComponentsPane().getDir4().isSelected();
 
-            defaultProps.clear();
+            defaultProps.load(new FileReader("custom.properties"));
 
-            if (dir1) {
-                actualAux1 = currentDirectory;
-                //   defaultProps.setProperty("workingDirectory1", actualAux1);
-            } else if (dir2) {
-                actualAux2 = currentDirectory;
-                //   defaultProps.setProperty("workingDirectory2", actualAux2);
-            } else if (dir3) {
-                actualAux3 = currentDirectory;
-                //  defaultProps.setProperty("workingDirectory3", actualAux3);
-            } else if (dir4) {
-                actualAux4 = currentDirectory;
-                //   defaultProps.setProperty("workingDirectory4", actualAux4);
-            }
-
-            if (actualAux1 != null)
-                defaultProps.setProperty("workingDirectory1", actualAux1);
-            if (actualAux2 != null)
-                defaultProps.setProperty("workingDirectory2", actualAux2);
-            if (actualAux3 != null)
-                defaultProps.setProperty("workingDirectory3", actualAux3);
-            if (actualAux3 != null)
-                defaultProps.setProperty("workingDirectory4", actualAux4);
+            defaultProps.setProperty("workingDirectory1", dir1 ? currentDirectory : defaultProps.getProperty("workingDirectory1"));
+            defaultProps.setProperty("workingDirectory2", dir2 ? currentDirectory : defaultProps.getProperty("workingDirectory2"));
+            defaultProps.setProperty("workingDirectory3", dir3 ? currentDirectory : defaultProps.getProperty("workingDirectory3"));
+            defaultProps.setProperty("workingDirectory4", dir4 ? currentDirectory : defaultProps.getProperty("workingDirectory4"));
 
             defaultProps.store(new FileWriter("custom.properties"), "no comment");
             System.out.println("Se grabo: " + currentDirectory);
+
         }
     }
 
@@ -306,11 +290,11 @@ public class Model {
 
                         //       if (!allFilesPaths.contains(temp.toString()) && (extention.equals("pdf") || extention.equals("doc"))) {
                         if (!allFilesPaths.contains(temp.toString()) && (extention.equals("pdf"))) {
-                            System.out.println("se agrego archivo: " + temp.toString());
+                            //    System.out.println("se agrego archivo: " + temp.toString());
                             allFilesPaths.add(temp.toString());
                         }
                     }
-                    System.out.println("no es directorio");
+                    //  System.out.println("no es directorio");
                 }
 
             } catch (Exception e) {

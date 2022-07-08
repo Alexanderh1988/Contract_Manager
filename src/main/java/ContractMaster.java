@@ -15,7 +15,6 @@ public class ContractMaster extends Thread {
 
     public static void main(String[] args) {
 
-
         ContractMaster mainBuscador = new ContractMaster();
         ContractMaster buscadorAdicional = new ContractMaster();
 
@@ -29,6 +28,7 @@ public class ContractMaster extends Thread {
         SwingUtilities.invokeLater(() -> new Controller(new View(), new Model()));
 
     }
+
 }
 
 

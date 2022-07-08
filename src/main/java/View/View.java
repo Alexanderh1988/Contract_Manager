@@ -50,12 +50,19 @@ public class View extends JFrame {
         frame = new JFrame("Contract Master");
 
         //frame.setSize(new Dimension(950, 600));
-        frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+      //  frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
 
-        frame.setMinimumSize(new Dimension(400, 600));
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        System.out.println(screenSize);
+
+      //  frame.setMinimumSize(new Dimension((int)screenSize.getWidth(),(int) screenSize.getHeight()));
+
+        frame.setMinimumSize(new Dimension(700, 700));
+        //frame.setMinimumSize(new Dimension(400, 600));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        pane = new Container();
+             pane = new Container();
 
         frame.add(pane);
 
@@ -204,6 +211,11 @@ public class View extends JFrame {
 
     public View getView3() {
         return view3;
+    }
+
+    public void setLocation (int x, int y){
+
+        frame.setLocation(x,y);
     }
 }
 

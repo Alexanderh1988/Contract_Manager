@@ -15,7 +15,6 @@ public class Controller {
     public Model mModel;
     private Thread searchThread;
 
-
     public static void main(String[] args) {
         //new Controller(new View());
     }
@@ -24,7 +23,6 @@ public class Controller {
 
         //Menu 1:
         this.mView = mView;
-
         this.mModel = mModel;
 
         ListenerClass mListener = new ListenerClass();
@@ -44,7 +42,6 @@ public class Controller {
         // mView.setListenerOnSeekButton2(mListener);
         //    mView.setListenerOnDeleteButton(new ListenerClass());
         mView.setOnJtableRowListener(mTableListener);
-
 
         //transfersal
         mView.setListenerOnExportButton(mListener);
@@ -203,6 +200,15 @@ public class Controller {
         //pendiente aca revisar sinonimos para buscar varias instancias
         return true;
     }
+
+    private void setLocation(int x, int y){
+        mView.setLocation(   x,y);
+    }
+
+    public View getmView() {
+        return mView;
+    }
+
 
 }
 
