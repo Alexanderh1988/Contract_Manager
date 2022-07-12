@@ -82,6 +82,7 @@ public class Controller {
             } else if (e.getSource() == mView.getmFirstComponentsPane().getStopButton()) {
                 //   System.out.println("Stopped thread");
                 //    searchThread.interrupt();   //stop deprecated
+                searchThread.stop();
             }
 
             //transversal:
@@ -106,7 +107,7 @@ public class Controller {
             } else if ( /*e.getSource() == mView.getmSecondComponentsPane().getSeekbutton2() ||*/
                     e.getSource() == mView.getmFirstComponentsPane().getSeekbutton()) { // boton buscar
 
-                Thread t = new Thread(() -> {  // override the run() for the running behaviors
+                  searchThread = new Thread(() -> {  // override the run() for the running behaviors
 
                     String textToSearch = mView.getmFirstComponentsPane().getTextField1().getText();
 
@@ -162,7 +163,7 @@ public class Controller {
                         mView.addNewRow(mModel.getData(), mView.getmFirstComponentsPane().getTextField1().getText());
 
                 });
-                t.start();
+                searchThread.start();
 
 
             }

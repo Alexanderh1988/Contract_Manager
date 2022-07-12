@@ -17,9 +17,10 @@ public class ContractMaster extends Thread {
 
         ContractMaster mainBuscador = new ContractMaster();
         ContractMaster buscadorAdicional = new ContractMaster();
-
+        ContractMaster buscadorAdiciona2 = new ContractMaster();
         mainBuscador.start();
         buscadorAdicional.start();
+        buscadorAdiciona2.start();
 
     }
 

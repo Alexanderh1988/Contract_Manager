@@ -37,7 +37,7 @@ public class wordSeekedInPdf {
                 try (PDDocument document = PDDocument.load(new File(fileName.get(j)))) {
                     //  document.getClass();
                     // System.out.println("document.getNumberOfPages(): " + document.getNumberOfPages());
-                    //  System.out.println("pagina 4: " + document.getPages());
+                     System.out.println("pagina 4: " + document.getPages());
                     //     if (document.getPages().getCount() > 350) thereIsABigFile = true;
 
                     if (!document.isEncrypted()) {
