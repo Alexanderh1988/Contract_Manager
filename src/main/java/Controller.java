@@ -7,6 +7,7 @@ import javax.swing.event.ListSelectionListener;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 
 public class Controller {
@@ -83,11 +84,7 @@ public class Controller {
                 //   System.out.println("Stopped thread");
                 //    searchThread.interrupt();   //stop deprecated
                 searchThread.stop();
-            }
-
-            //transversal:
-            else if (e.getSource() == mView.getmFirstComponentsPane().getSelectLocation() || e.getSource() == mView.getmSecondComponentsPane().getLocation()) {
-
+            } else if (e.getSource() == mView.getmFirstComponentsPane().getSelectLocation() || e.getSource() == mView.getmSecondComponentsPane().getLocation()) {
 
                 try {
                     mModel.saveNewCurrentDirectory(mModel.changeFolderLocation(), mView);
@@ -95,10 +92,12 @@ public class Controller {
                     ex.printStackTrace();
                 }
 
-
             } else if (e.getSource() == mView.mFirstComponentsPane.getBtnExportar()) {
 
-                new ExcelExport(mModel.readCurrentDirectory(mView) + "\\excel2.xls", mModel.getData());
+                //new ExcelExport(mModel.readCurrentDirectory(mView) + "\\excel2.xls", mModel.getData());
+                //new ExcelExport(mModel.readCurrentDirectory(mView) + "\\excel2.xls", mModel.getData());
+
+                new ExcelExport("C:\\Users\\Alex Hs\\Desktop\\excel" + new Random().nextInt(10) + ".xls", mModel.getData());
 
             } else if (e.getSource() == mView.getMenuBuscadorIndependiente()) {
 
@@ -107,13 +106,14 @@ public class Controller {
             } else if ( /*e.getSource() == mView.getmSecondComponentsPane().getSeekbutton2() ||*/
                     e.getSource() == mView.getmFirstComponentsPane().getSeekbutton()) { // boton buscar
 
-                  searchThread = new Thread(() -> {  // override the run() for the running behaviors
+                searchThread = new Thread(() -> {  // override the run() for the running behaviors
 
                     String textToSearch = mView.getmFirstComponentsPane().getTextField1().getText();
 
                     Boolean isSecondPane = e.getSource() == mView.getmSecondComponentsPane().getSeekbutton2();
+                    String currentDirectory = mModel.readCurrentDirectory(mView);
 
-                    if (mModel.readCurrentDirectory(mView) == null) {  //set location if there is nothing else
+                    if (currentDirectory ==null){  //set location if there is nothing else
 
                         try {
                             mModel.saveNewCurrentDirectory(mModel.changeFolderLocation(), mView);
@@ -121,8 +121,8 @@ public class Controller {
                             ex.printStackTrace();
                             System.out.println("error4 " + ex);
                         }
-                    } else {
-                        System.out.println("si hay directorio");
+                    } else{
+                        System.out.println("si hay directorio: "+currentDirectory);
                         if (textToSearch != null)
                             mModel.directoriesFinder(mModel.readCurrentDirectory(mView));
                         // else JOptionPane.showMessageDialog(this,"Eggs are not supposed to be green.");
@@ -145,10 +145,6 @@ public class Controller {
                         System.out.println("exepcion " + ex);
                         ex.printStackTrace();
                     }
-                    //eliminar
-                    //  if (isSecondPane)
-                    //      mView.addNewRow2(mModel.getData());
-                    //  else
 
                     if (areThereSynonimum(textToSearch)) {
 
@@ -164,8 +160,6 @@ public class Controller {
 
                 });
                 searchThread.start();
-
-
             }
         }
     }
@@ -202,8 +196,8 @@ public class Controller {
         return true;
     }
 
-    private void setLocation(int x, int y){
-        mView.setLocation(   x,y);
+    private void setLocation(int x, int y) {
+        mView.setLocation(x, y);
     }
 
     public View getmView() {

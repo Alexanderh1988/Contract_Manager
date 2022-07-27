@@ -2,6 +2,7 @@ package Model;
 
 import View.View;
 import com.sun.istack.NotNull;
+import javafx.stage.FileChooser;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import javax.swing.*;
@@ -93,8 +94,16 @@ public class Model {
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         fileChooser.showOpenDialog(null);
 
-        System.out.println(fileChooser.getSelectedFile());
+        https:
+//www.javatpoint.com/javafx-filechooser
 
+        //FileChooser fileChooser = new FileChooser();
+//                fileChooser.showOpenDialog(mainStage);
+
+        // System.out.println(fileChooser.getInitialDirectory());
+
+        // System.out.println(fileChooser.getSelectedFile());
+//return null;
         return fileChooser.getSelectedFile() != null ? fileChooser.getSelectedFile().toString() : null;
     }
 
@@ -112,7 +121,8 @@ public class Model {
             wordsToCheck = textToFindCheck;
         } else {   //palabra especifica a buscar
             wordsToCheck.add(word1);
-            //if (!word2.equals(""))
+             if (!word2.equals(""))
+                 wordsToCheck.add(word2);
             //swapRule.add(word2);
         }
 
@@ -133,21 +143,9 @@ public class Model {
             }
 
             Integer IndexSwap = 1;
-            //ordenar por palabra adicional contenida:
-            //if (swapRule.size() != 0)
-            if (word2 != "")
-                for (int j = 0; j < data.size(); j++) {
-                    for (int i = 0; i < data.size(); i++) {
-                        if (data.get(i).getText().contains(word2)) {
-                            IndexSwap = i;
-                        }
-                    }
-                    Collections.swap(data, j, IndexSwap);
-                    data.get(j).setId(String.valueOf(j));
-                }
 
             //ordenar por pagina:
-            if (false) {        //deje el de arriba, mas importante ponderar por palabra buscada que por pagina
+            if (true) {        //deje el de arriba, mas importante ponderar por palabra buscada que por pagina
                 int Minimo = 900000;
                 Integer Index = 1;
                 for (int j = 0; j < data.size(); j++) {
@@ -163,10 +161,27 @@ public class Model {
                     Minimo = 900000;
                 }
             }
+
+            //ordenar por palabra adicional contenida:
+            if (word2 != "")
+                for (int j = 0; j < data.size(); j++) {
+                    for (int i = 0; i < data.size(); i++) {
+                        if (data.get(i).getText().contains(word2)) {
+                            IndexSwap = i;
+                        }
+                    }
+                    Collections.swap(data, j, IndexSwap);
+                    data.get(j).setId(String.valueOf(j));
+                }
+
         }
     }
 
     public String readCurrentDirectory(View mView) {
+
+        // String customDir = mView.mFirstComponentsPane.getChoosePathSearch().getText();
+
+        String selectedDirectory = mView.getmFirstComponentsPane().getSelectedDirectory();
 
         boolean dir1 = mView.getmFirstComponentsPane().getDir1().isSelected();
         boolean dir2 = mView.getmFirstComponentsPane().getDir2().isSelected();
@@ -179,10 +194,12 @@ public class Model {
         try {
             p.load(new FileReader("custom.properties"));
             //   System.out.println(p.getProperty("workingDirectory"));
-            if (dir1) pathName = p.getProperty("workingDirectory1");
-            if (dir2) pathName = p.getProperty("workingDirectory2");
-            if (dir3) pathName = p.getProperty("workingDirectory3");
-            if (dir4) pathName = p.getProperty("workingDirectory4");
+            if (dir1) pathName = p.getProperty("Dir1");
+            if (dir2) pathName = p.getProperty("Dir2");
+            if (dir3) pathName = p.getProperty("Dir3");
+            if (dir4) pathName = p.getProperty("Dir4");
+
+            pathName = p.getProperty(selectedDirectory) != null ? p.getProperty(selectedDirectory) : null;
         } catch (Exception e) {
             System.out.println("error5 " + e);
         }
@@ -195,18 +212,23 @@ public class Model {
         if (currentDirectory != null) {
 
             Properties defaultProps = new Properties();
+            String selectedDirectory = mView.getmFirstComponentsPane().getSelectedDirectory();
 
-            boolean dir1 = mView.getmFirstComponentsPane().getDir1().isSelected();
-            boolean dir2 = mView.getmFirstComponentsPane().getDir2().isSelected();
-            boolean dir3 = mView.getmFirstComponentsPane().getDir3().isSelected();
-            boolean dir4 = mView.getmFirstComponentsPane().getDir4().isSelected();
+           //boolean dir1 = mView.getmFirstComponentsPane().getDir1().isSelected();
+         //   boolean dir2 = mView.getmFirstComponentsPane().getDir2().isSelected();
+         //   boolean dir3 = mView.getmFirstComponentsPane().getDir3().isSelected();
+         //   boolean dir4 = mView.getmFirstComponentsPane().getDir4().isSelected();
 
             defaultProps.load(new FileReader("custom.properties"));
 
-            defaultProps.setProperty("workingDirectory1", dir1 ? currentDirectory : defaultProps.getProperty("workingDirectory1"));
-            defaultProps.setProperty("workingDirectory2", dir2 ? currentDirectory : defaultProps.getProperty("workingDirectory2"));
-            defaultProps.setProperty("workingDirectory3", dir3 ? currentDirectory : defaultProps.getProperty("workingDirectory3"));
-            defaultProps.setProperty("workingDirectory4", dir4 ? currentDirectory : defaultProps.getProperty("workingDirectory4"));
+       //     if (selectedDirectory != null) {
+       //         defaultProps.setProperty("Dir1", dir1 ? currentDirectory : defaultProps.getProperty("Dir1"));
+        //        defaultProps.setProperty("Dir2", dir2 ? currentDirectory : defaultProps.getProperty("Dir2"));
+        //        defaultProps.setProperty("Dir3", dir3 ? currentDirectory : defaultProps.getProperty("Dir3"));
+        //        defaultProps.setProperty("Dir4", dir4 ? currentDirectory : defaultProps.getProperty("Dir4"));
+        //    }
+            defaultProps.setProperty(selectedDirectory, selectedDirectory != null ? currentDirectory : defaultProps.getProperty(selectedDirectory));
+
 
             defaultProps.store(new FileWriter("custom.properties"), "no comment");
             System.out.println("Se grabo: " + currentDirectory);

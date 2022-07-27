@@ -12,8 +12,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Properties;
 import java.util.logging.Handler;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -23,7 +27,7 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
     Container componentsContainer;
 
-    private TextField textField1, textField2, textField3;
+    private TextField textField1, textField2, textField3, choosePathSearch;
     private JButton Seekbutton, StopButton, btnExportar, selectLocation, borrar;
     private DefaultTableModel model;
     private JCheckBox dir1, dir2, dir3, dir4;
@@ -31,6 +35,8 @@ public class firstPaneComponents extends JFrame implements ActionListener {
     private JScrollPane sp;
     private Boolean showControlNav = true;
     private JLabel dir2Label, dir3Label, dir4Label, dir1Label;
+    Font f4 = new Font(Font.DIALOG_INPUT, Font.BOLD, 12);
+    private String selectedDirectory;
 
     public static void main(String[] args) {
         new firstPaneComponents();
@@ -66,17 +72,13 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         JLabel ExluirLabel = new JLabel("Excluir:");
         //   JLabel mJLabel3 = new JLabel("Estricto:");
 
+        subconstraints.ipadx = 35;
         textField1 = new TextField("");
         textField2 = new TextField("");
         textField3 = new TextField("");
 
-       // searchPanel.setSize(new Dimension(20, 20));
-
         subconstraints.gridx = 0;
         subconstraints.gridy = 1;
-        // subconstraints.gridwidth = 1;
-
-        subconstraints.ipadx = 30;
 
         searchPanel.add(BuscarLabel, subconstraints);
         subconstraints.gridx = 1;
@@ -97,15 +99,18 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
         subconstraints.gridx = 1;
         subconstraints.gridx = 3;
-         constraints.ipadx = 10;
+        constraints.ipadx = 30;
 
         subconstraints.gridx = 0;
         subconstraints.gridy = 1;
         pane.add(searchPanel, subconstraints);
         subconstraints.gridx = 4;
 
-        StopButton = new JButton("Parar Busqueda");
-     Seekbutton = new JButton("Buscar");
+        subconstraints.ipadx = 25;
+        StopButton = new JButton("Detener");
+        StopButton.setFont(f4);
+        Seekbutton = new JButton("Buscar");
+        Seekbutton.setFont(f4);
         searchPanel.add(Seekbutton, subconstraints);
         subconstraints.gridx = 5;
         subconstraints.ipadx = 10;
@@ -113,7 +118,8 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         subconstraints.gridx = 4;
 
         subconstraints.gridy = 2;
-        selectLocation = new JButton("Cambiar Directorio");
+        selectLocation = new JButton("Directorio");
+        selectLocation.setFont(f4);
         searchPanel.add(selectLocation, subconstraints);
         //cambio de directorio:
         Container cone1 = new Container();
@@ -122,6 +128,7 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         subconstraints.gridy = 2;
 
         btnExportar = new JButton("Exportar");
+        btnExportar.setFont(f4);
         searchPanel.add(btnExportar, subconstraints);
 
         subconstraints.gridx = 7;
@@ -167,9 +174,39 @@ public class firstPaneComponents extends JFrame implements ActionListener {
         dir4 = new JCheckBox();
         dir4.setSelected(false);
         searchPanel.add(dir4, subconstraints);
+
+        JLabel mDirSearch = new JLabel("Buscar dir");
+        subconstraints.gridx = 11;
+        subconstraints.gridy = 1;
+        searchPanel.add(mDirSearch, subconstraints);
+        choosePathSearch = new TextField();
+        subconstraints.gridy = 2;
+
+        String[] optionsToChoose = new String[0];
+        try {
+            optionsToChoose = loadPaths().toArray(new String[loadPaths().size()]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        JComboBox<String> jComboBox = new JComboBox<>(optionsToChoose);
+
+        jComboBox.addActionListener(e -> {
+            selectedDirectory = jComboBox.getItemAt(jComboBox.getSelectedIndex());
+            System.out.println("se eligio " + selectedDirectory);
+        });
+
+        //jComboBox.setBounds(20, 50, 10, 20);
+        //jComboBox.setSize(10,5);
+        subconstraints.ipadx = 5;
+        searchPanel.add(jComboBox, subconstraints);
+
+        searchPanel.add(choosePathSearch, subconstraints);
+
+
         buttonGroup.add(dir4);
 
-           pane.add(cone1, subconstraints);
+        pane.add(cone1, subconstraints);
         //  }
 
         subconstraints.gridx = 0;
@@ -260,6 +297,26 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
         //pane.add(scrollPane);
         return pane;
+    }
+
+    private ArrayList<String> loadPaths() throws IOException {
+
+        Properties defaultProps = new Properties();
+        defaultProps.load(new FileReader("custom.properties"));
+
+        ArrayList<String> directories = new ArrayList<>();
+
+        //System.out.println(defaultProps.size());
+
+        directories.add("-");
+
+        for (int i = 1; i < 15; i++) {
+            //directories.add(defaultProps.getProperty("workingDirectory" + i));
+            directories.add("Dir" + i);
+        }
+        //  directories.add("+Dir");
+
+        return directories;
     }
     //   }
 
@@ -461,5 +518,13 @@ public class firstPaneComponents extends JFrame implements ActionListener {
 
     public JCheckBox getDir4() {
         return dir4;
+    }
+
+    public TextField getChoosePathSearch() {
+        return choosePathSearch;
+    }
+
+    public String getSelectedDirectory() {
+        return selectedDirectory;
     }
 }
